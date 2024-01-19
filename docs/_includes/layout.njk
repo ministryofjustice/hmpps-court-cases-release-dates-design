@@ -1,0 +1,64 @@
+{% extends "govuk/template.njk" %}
+
+{% from "moj/components/header/macro.njk" import mojHeader %}
+{% from "moj/components/primary-navigation/macro.njk" import mojPrimaryNavigation %}
+
+{% block pageTitle %}{{pageTitle | default("Digital Warrant Folder Design System")}}{% endblock %}
+
+{% block head %}
+    <link href="{{ '/assets/stylesheets/application.css' | url }}" rel="stylesheet">
+    <link href="https://unpkg.com/prismjs@v1.x/themes/prism.css" rel="stylesheet">
+    <style>
+        pre[class*="language-"] {
+            font-size: 0.85em;
+        }
+    </style>
+{% endblock %}
+
+{% block header %}
+    {{ mojHeader({
+        organisationLabel: {
+            text: 'HMPPS',
+            href: '/'
+        },
+        serviceLabel: {
+            text: 'Digital Warrant Folder Design System',
+            href: '/'
+        }
+    }) }}
+
+    {{ mojPrimaryNavigation({
+        label: 'Primary navigation',
+        items: [
+            {
+                text: 'Get started',
+                href: '/get-started',
+                active: activeMainNav === 'get-started'
+            },
+            {
+                text: 'Components',
+                href: '/components',
+                active: activeMainNav === 'components'
+            }
+        ]
+    }) }}
+{% endblock %}
+
+{% block main %}
+    <div class="govuk-width-container">
+        <main class="govuk-main-wrapper govuk-body" id="main-content" role="main">
+            {% block content %}
+                {{ content | safe }}
+            {% endblock %}
+        </main>
+    </div>
+{% endblock %}
+
+{% block bodyEnd %}
+    <script type="module" src="/assets/javascript/govukFrontendInit.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="/assets/javascript/moj/all.js"></script>
+    <script src="/assets/javascript/mojFrontendInit.js"></script>
+    {% block javascripts %}
+    {% endblock %}
+{% endblock %}

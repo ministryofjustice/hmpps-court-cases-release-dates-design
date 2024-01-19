@@ -1,0 +1,120 @@
+{
+  "name": "hmpps-design-system-frontend",
+  "version": "1.0.0",
+  "description": "A shared UI component library for the HMPPS Legal and Custodial Information services",
+  "author": "HMPPS Digital Studio",
+  "license": "MIT",
+  "scripts": {
+    "prepare": "husky install",
+    "copy:static": "cp src/package/*.* dist && cp src/hmpps/*.* dist/hmpps && cp -r src/hmpps/assets src/hmpps/components src/hmpps/filters dist/hmpps",
+    "sass": "sass --quiet-deps --no-source-map --load-path=node_modules/govuk-frontend/dist --load-path=node_modules/@ministryofjustice/frontend --load-path=. src/hmpps/all.scss:./dist/hmpps/assets/stylesheets/all.css src/hmpps/application.scss:./dist/hmpps/assets/stylesheets/application.css --style compressed",
+    "watch:ts": "tsc -w",
+    "watch:static": "nodemon --watch src -e png,js,njk --delay 50ms -x npm run copy:static",
+    "watch:sass": "npm run sass -- --watch",
+    "watch:docs": "eleventy --input=./docs --serve --port=3010",
+    "build": "npm run build:package && npm run build:docs",
+    "build:package": "tsc && npm run copy:static && npm run sass",
+    "build:docs": "eleventy --input=./docs",
+    "dev": "concurrently -k -p \"[{name}]\" -n \"Views,TypeScript,Node,Sass\" -c \"yellow.bold,cyan.bold,green.bold,blue.bold\" \"npm run watch:ts\" \"npm run watch:static\" \"npm run watch:sass\" \"npm run watch:docs\"",
+    "lint": "eslint . --cache --max-warnings 0",
+    "lint:fix": "eslint . --cache --max-warnings 0 --fix",
+    "typecheck": "tsc",
+    "test": "jest",
+    "test:ci": "jest --runInBand",
+    "clean": "rm -rf _site dist node_modules",
+    "publish": "npm run clean && npm install && npm run build && npm publish ./dist --access public"
+  },
+  "engines": {
+    "node": "^20",
+    "npm": "^10"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": [
+        "ts-jest",
+        {
+          "isolatedModules": true
+        }
+      ]
+    },
+    "collectCoverageFrom": [
+      "src/**/*.{ts,js,jsx,mjs}"
+    ],
+    "testMatch": [
+      "<rootDir>/(src|job)/**/?(*.)(cy|test).{ts,js,jsx,mjs}"
+    ],
+    "testEnvironment": "node",
+    "reporters": [
+      "default",
+      [
+        "jest-junit",
+        {
+          "outputDirectory": "test_results/jest/"
+        }
+      ],
+      [
+        "./node_modules/jest-html-reporter",
+        {
+          "outputPath": "test_results/unit-test-reports.html"
+        }
+      ]
+    ],
+    "moduleFileExtensions": [
+      "web.js",
+      "js",
+      "json",
+      "node",
+      "ts"
+    ]
+  },
+  "nodemonConfig": {
+    "ignore": [
+      ".circleci/*",
+      "migrations/*",
+      "node_modules/*",
+      "test/*",
+      "integration_tests/*"
+    ],
+    "delay": 2500,
+    "ext": "js,json,html,njk"
+  },
+  "lint-staged": {
+    "*.{ts,js,css}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.json": [
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "date-fns": "^3.2.0",
+    "govuk-prototype-kit": "^13.16.0"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
+    "@ministryofjustice/frontend": "^2.0.0",
+    "@types/jest": "^29.5.11",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.56.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-no-only-tests": "^3.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "govuk-frontend": "^5.0.0",
+    "husky": "^8.0.3",
+    "jest-html-reporter": "^3.10.2",
+    "jest-junit": "^16.0.0",
+    "lint-staged": "^15.2.0",
+    "nodemon": "^3.0.3",
+    "open": "^10.0.3",
+    "sass": "^1.69.7",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.3.3"
+  }
+}
