@@ -1,10 +1,10 @@
-# HMPPS Legal Information Frontend Components
+# HMPPS Design System Frontend Components
 
 ## Add to prototype
 
 Install the package:
 
-`npm install hmpps-legal-information`
+`npm install hmpps-design-system-frontend`
 
 Add the macro to your template.html file:
 

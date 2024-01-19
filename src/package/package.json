@@ -1,7 +1,7 @@
 {
   "name": "hmpps-design-system-frontend",
   "description": "A shared UI component library for HMPPS services",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "HMPPS Digital Studio",
   "license": "MIT",
   "dependencies": {
