@@ -2,6 +2,6 @@
 layout: layout.njk
 ---
 
-# Digital Warrant Folder Design System
+# HMPPS Design System
 
-A set of components and patterns for building digital services for the Digital Warrant Folder.
+A set of components and patterns for building HMPPS digital services.
