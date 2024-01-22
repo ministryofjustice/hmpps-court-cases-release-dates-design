@@ -9,10 +9,10 @@ spec:
   ingressClassName: default
   tls:
     - hosts:
-        - ${NAMESPACE}.apps.live.cloud-platform.service.justice.gov.uk
+        - design-system.hmpps.service.justice.gov.uk
       secretName: hmpps-design-system-frontend-cert
   rules:
-    - host: ${NAMESPACE}.apps.live.cloud-platform.service.justice.gov.uk
+    - host: design-system.hmpps.service.justice.gov.uk
       http:
         paths:
           - path: /
