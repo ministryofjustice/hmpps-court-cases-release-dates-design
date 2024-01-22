@@ -1,0 +1,77 @@
+{% extends "component.njk" %}
+
+{% from "govuk/components/tabs/macro.njk" import govukTabs %}
+{% from "hmpps/components/mini-profile/macro.njk" import miniProfile %}
+
+{% set pageTitle = 'Mini profile' %}
+{% set activeSideNav = 'mini-profile' %}
+
+{% set person = {
+    firstName: 'First',
+    lastName: 'Last',
+    prisonerNumber: 'A1234BC',
+    dateOfBirth: '1998-09-27',
+    status: 'Active In',
+    prisonName: 'HMP Prison',
+    cellLocation: 'A-1-1'
+} %}
+
+{% set htmlCode %}
+    {% highlight "html" %}
+{{ miniProfile(person, '/assets/images/prisoner-profile-image.png', '#') }}
+    {% endhighlight %}
+{% endset %}
+
+{% set nunjucksCode %}
+    {% highlight "njk" %}
+        {% raw %}
+{% from "hmpps/components/mini-profile/macro.njk" import miniProfile %}
+
+{% set person = {
+    firstName: 'First',
+    lastName: 'Last',
+    prisonerNumber: 'A1234BC',
+    dateOfBirth: '1998-09-27',
+    status: 'Active In',
+    prisonName: 'HMP Prison',
+    cellLocation: 'A-1-1'
+} %}
+
+{{ miniProfile(person, '/assets/images/prisoner-profile-image.png', '#') }}
+        {% endraw %}
+    {% endhighlight %}
+{% endset %}
+
+{% block content %}
+    {{ miniProfile(person, '/assets/images/prisoner-profile-image.png', '#') }}
+
+    <p>The mini profile shows key information about a prisoner at the top of a question or transactional service page. This helps to:</p>
+    <ul class="govuk-list govuk-list--bullet">
+        <li>reassure users that they’re looking at the correct record</li>
+        <li>provide relevant key information throughout a journey (such as prison number or location)</li>
+    </ul>
+    <p>The mini profile is a variation of the design used on the DPS prisoner profile.</p>
+
+    <h2>Research on this component</h2>
+    <p><a href="https://dsdmoj.atlassian.net/wiki/spaces/NDSS/pages/4518084609/Mini+profile" class="govuk-link">Full documentation on this component</a></p>
+
+    {{ govukTabs({
+        items: [
+            {
+                label: "HTML",
+                id: "html",
+                panel: {
+                    html: htmlCode
+                }
+            },
+            {
+                label: "Nunjucks",
+                id: "nunjucks",
+                panel: {
+                    html: nunjucksCode
+                }
+            }
+        ]
+    }) }}
+
+{% endblock %}
