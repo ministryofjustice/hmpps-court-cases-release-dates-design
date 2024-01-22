@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hmpps-design-system-frontend-deployment
+  labels:
+    app: hmpps-design-system-frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hmpps-design-system-frontend # this should match the selector in service.yml
+  template:
+    metadata:
+      labels:
+        app: hmpps-design-system-frontend # this should match the selector in service.yml
+    spec:
+      containers:
+        - name: hmpps-design-system-frontend
+          image: ${REGISTRY}/${REPOSITORY}:${IMAGE_TAG}
+          ports:
+            - containerPort: 8080
