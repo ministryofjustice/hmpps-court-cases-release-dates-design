@@ -10,6 +10,7 @@ spec:
   tls:
     - hosts:
         - ${NAMESPACE}.apps.live.cloud-platform.service.justice.gov.uk
+      secretName: hmpps-design-system-frontend-cert
   rules:
     - host: ${NAMESPACE}.apps.live.cloud-platform.service.justice.gov.uk
       http:
