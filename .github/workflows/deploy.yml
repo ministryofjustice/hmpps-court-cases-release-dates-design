@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: lts/*
       - run: npm ci
-      - run: npm run build:docs
+      - run: npm run build
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.ECR_ROLE_TO_ASSUME }}
