@@ -22,7 +22,7 @@
     "test": "jest",
     "test:ci": "jest --runInBand",
     "clean": "rm -rf _site dist node_modules",
-    "publish": "npm run clean && npm install && npm run build && npm publish ./dist --access public"
+    "publish": "npm publish ./dist --access public"
   },
   "engines": {
     "node": "^20",

@@ -74,12 +74,16 @@ Any nunjucks filters used by the component should be added to the `src/hmpps/fil
 ## Publishing components
 
 The component library is published to the node.js package repository as [hmpps-design-system-frontend](https://www.npmjs.com/package/hmpps-design-system-frontend).
-Before publishing a new version, you will need to update the version number in the `src/package/package.json` file. Note that this is not the `package.json` file in the root of the repository.
-You should then raise a PR and have your changes approved and merged. The automated build process will then publish a new version of the package.
+The publish workflow is triggered when a new [release](releases) is created in the repo. A new release should use semantic versioning i.e. major.minor.patch.
 
-To publish a new version manually, you will need to be added as a collaborator to the package. Once added, you can publish a new version using the following command:
+| Version | Description                                                                                                                      |
+|---------|----------------------------------------------------------------------------------------------------------------------------------|
+| major   | Breaking changes to an existing component or from a dependency e.g. [govuk-frontend](https://github.com/alphagov/govuk-frontend) |
+| minor   | New components or new features added to existing components                                                                      |
+| patch   | Bug fixes or minor changes to existing components                                                                                |
 
-```bash
-npm publish
-```
+The publish workflow will automatically update the version number in the package.json file and publish the package to npm.
 
+## Publishing documentation site
+
+The design system documentation site is automatically published whenever a pull request is merged into the `main` branch. No manual steps are required
