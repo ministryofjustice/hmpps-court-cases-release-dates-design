@@ -15,7 +15,7 @@
     "build": "npm run build:package && npm run build:docs",
     "build:package": "tsc && npm run copy:static && npm run sass",
     "build:docs": "eleventy --input=./docs",
-    "dev": "concurrently -k -p \"[{name}]\" -n \"Views,TypeScript,Node,Sass\" -c \"yellow.bold,cyan.bold,green.bold,blue.bold\" \"npm run watch:ts\" \"npm run watch:static\" \"npm run watch:sass\" \"npm run watch:docs\"",
+    "dev": "npm run build && concurrently -k -p \"[{name}]\" -n \"Views,TypeScript,Node,Sass\" -c \"yellow.bold,cyan.bold,green.bold,blue.bold\" \"npm run watch:ts\" \"npm run watch:static\" \"npm run watch:sass\" \"npm run watch:docs\"",
     "lint": "eslint . --cache --max-warnings 0",
     "lint:fix": "eslint . --cache --max-warnings 0 --fix",
     "typecheck": "tsc",
