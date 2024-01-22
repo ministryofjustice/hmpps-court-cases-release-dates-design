@@ -26,6 +26,7 @@
                 <div class="govuk-grid-column-three-quarters">
                     <h1>{{ pageTitle }}</h1>
                     {% block content %}
+                        {{ content | safe }}
                     {% endblock %}
                 </div>
             </div>
