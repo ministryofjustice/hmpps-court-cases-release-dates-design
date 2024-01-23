@@ -12,22 +12,28 @@ module.exports = function (eleventyConfig) {
   })
   eleventyConfig.addPassthroughCopy({ 'dist/hmpps/assets': 'assets' })
 
-  eleventyConfig.addWatchTarget('./dist/')
-
-  eleventyConfig.setUseGitIgnore(false)
+  eleventyConfig.addFilter('formatMiniProfileName', formatMiniProfileName)
+  eleventyConfig.addFilter('formatMiniProfileDateOfBirth', formatMiniProfileDateOfBirth)
 
   const njkEnv = nunjucks.configure([
-    '.',
     'docs/_includes/',
     'node_modules/govuk-frontend/dist/',
     'node_modules/@ministryofjustice/frontend/',
     'dist/',
   ])
 
-  njkEnv.addFilter('formatMiniProfileName', formatMiniProfileName)
-  njkEnv.addFilter('formatMiniProfileDateOfBirth', formatMiniProfileDateOfBirth)
-
   eleventyConfig.setLibrary('njk', njkEnv)
 
   eleventyConfig.addPlugin(syntaxHighlight)
+
+  eleventyConfig.addWatchTarget('./dist/assets/')
+  eleventyConfig.addWatchTarget('./dist/components/')
+
+  eleventyConfig.setUseGitIgnore(false)
+
+  return {
+    dir: {
+      input: "docs"
+    }
+  }
 }
