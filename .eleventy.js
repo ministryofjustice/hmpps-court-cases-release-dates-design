@@ -1,6 +1,12 @@
 const nunjucks = require('nunjucks')
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight')
-const { formatMiniProfileDateOfBirth, formatMiniProfileName } = require('./dist/hmpps/utils/utils')
+const {
+  dayMonthYearForwardSlashSeparator,
+  firstNameLastName,
+  lastNameFirstName,
+  sentenceCase,
+  sentenceCaseHyphenatedWord
+} = require('./dist/hmpps/utils/utils')
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ 'node_modules/govuk-frontend/dist/govuk/assets': 'assets' })
@@ -12,8 +18,11 @@ module.exports = function (eleventyConfig) {
   })
   eleventyConfig.addPassthroughCopy({ 'dist/hmpps/assets': 'assets' })
 
-  eleventyConfig.addFilter('formatMiniProfileName', formatMiniProfileName)
-  eleventyConfig.addFilter('formatMiniProfileDateOfBirth', formatMiniProfileDateOfBirth)
+  eleventyConfig.addFilter('dayMonthYearForwardSlashSeparator', dayMonthYearForwardSlashSeparator)
+  eleventyConfig.addFilter('firstNameLastName', firstNameLastName)
+  eleventyConfig.addFilter('lastNameFirstName', lastNameFirstName)
+  eleventyConfig.addFilter('sentenceCase', sentenceCase)
+  eleventyConfig.addFilter('sentenceCaseHyphenatedWord', sentenceCaseHyphenatedWord)
 
   const njkEnv = nunjucks.configure([
     'docs/_includes/',
@@ -30,6 +39,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addWatchTarget('./dist/components/')
 
   eleventyConfig.setUseGitIgnore(false)
+
+  eleventyConfig.setQuietMode(true)
 
   return {
     dir: {

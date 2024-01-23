@@ -1,19 +1,22 @@
 {
+  "compileOnSave": true,
   "compilerOptions": {
-    /* Base Options: */
-    "target": "es2022",
-    "lib": ["es2022"],
+    "target": "es2018",
     "module": "commonjs",
-    /* "esModuleInterop": true,
-    "skipLibCheck": true,*/
-    /* Strictness */
-    "strict": true,
-    "noImplicitAny": true,
-    /*"noUncheckedIndexedAccess": true,*/
-    /* Transpiling with TypeScript: */
-    "rootDir": "src",
-    "outDir": "dist",
-    "declaration": true,
+    "moduleResolution": "node",
+    "outDir": "./dist",
     "sourceMap": true,
+    "skipLibCheck": true,
+    "noEmit": false,
+    "allowJs": true,
+    "checkJs": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
+    "experimentalDecorators": true,
+    "typeRoots": ["./src/hmpps/@types", "./node_modules/@types"]
   },
+  "exclude": [".eleventy.js", "node_modules", "src/hmpps/assets/**/*.js", "src/hmpps/filters/**/*.js", "dist", "_site"],
+  "include": ["**/*.js", "**/*.ts"]
 }

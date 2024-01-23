@@ -1,4 +1,4 @@
-import { formatMiniProfileDateOfBirth, formatMiniProfileName } from './utils'
+import { dayMonthYearForwardSlashSeparator, lastNameFirstName } from './utils'
 
 describe('format mini profile name', () => {
   it.each([
@@ -12,16 +12,18 @@ describe('format mini profile name', () => {
     ['Trailing spaces', 'RobeRT  ', '', ', Robert'],
     ['Hyphenated', 'Robert-John', 'SmiTH-jONes-WILSON', 'Smith-Jones-Wilson, Robert-John'],
   ])('%s formatMiniProfileName(%s, %s)', (_: string, firstName: string, lastName: string, expected: string) => {
-    expect(formatMiniProfileName({ firstName, lastName })).toEqual(expected)
+    expect(lastNameFirstName({ firstName, lastName })).toEqual(expected)
   })
 })
 
-describe('format mini profile date of birth', () => {
+describe('format day month year forward slash separator', () => {
   it.each([
-    // [null, null],
-    // ['Empty string', ''],
+    [null, ''],
+    ['', ''],
+    ['Empty string', 'Empty string'],
+    ['23/10/1978', '23/10/1978'],
     ['1978-10-23', '23/10/1978'],
-  ])('%s formatMiniProfileDateOfBirth(%s, %s)', (dateOfBirth: string, expected: string) => {
-    expect(formatMiniProfileDateOfBirth(dateOfBirth)).toEqual(expected)
+  ])('%s dayMonthYearForwardSlashSeparator(%s, %s)', (dateString: string, expected: string) => {
+    expect(dayMonthYearForwardSlashSeparator(dateString)).toEqual(expected)
   })
 })
