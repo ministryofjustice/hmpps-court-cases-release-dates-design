@@ -31,7 +31,7 @@ There are a few additional steps when installing the Node package into HMPPS UI 
 
 1. Add `'/node_modules/hmpps-design-system-frontend/hmpps/assets'` and `'/node_modules/hmpps-design-system-frontend'` to the static resources configuration in `setUpStaticResources.ts`
 2. Add `'node_modules/hmpps-design-system-frontend/'` and `'node_modules/hmpps-design-system-frontend/hmpps/components/'` to `nunjucks.configure` in `nunjucksSetup.ts`
-3. Add any Nunjucks filters required for the component to `nunjucksSetup.ts` e.g. `njkEnv.addFilter('formatMiniProfileName', formatMiniProfileName)`
+3. Add any Nunjucks filters required for the component to `nunjucksSetup.ts` e.g. `njkEnv.addFilter('personProfileName', personProfileName)`
 
 ## Contributing to the Design System
 

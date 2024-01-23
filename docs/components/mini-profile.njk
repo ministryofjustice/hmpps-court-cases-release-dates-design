@@ -40,6 +40,18 @@
 {{ miniProfile(person, '/assets/images/prisoner-profile-image.png', '#') }}
         {% endraw %}
     {% endhighlight %}
+
+    <h3>Required Nunjucks filters</h3>
+
+    {% highlight "njk" %}
+        {% raw %}
+import { personDateOfBirth, personProfileName, personStatus } from 'hmpps-design-system-frontend/hmpps/utils/utils'
+
+njkEnv.addFilter('personProfileName', personProfileName)
+njkEnv.addFilter('personDateOfBirth', personDateOfBirth)
+njkEnv.addFilter('personStatus', personStatus)
+        {% endraw %}
+    {% endhighlight %}
 {% endset %}
 
 {% block content %}
