@@ -1,0 +1,92 @@
+{% extends "layout.njk" %}
+
+{% from "govuk/components/table/macro.njk" import govukTable %}
+
+{% set pageTitle = 'Ninjucks filters' %}
+{% set activeMainNav = 'filters' %}
+
+{% block content %}
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <h1>Nunjucks filters</h1>
+
+            <p>
+                The <a href="https://prototype-kit.service.gov.uk/docs/">GOV UK Prototype Kit</a> and HMPPS UI applications based
+                on the <a href="https://github.com/ministryofjustice/hmpps-template-typescript">template</a>
+                both use <a href="https://mozilla.github.io/nunjucks/">Nunjucks</a> as a templating language.
+            </p>
+
+            <p>
+                Nunjucks provides a number of built <a href="https://mozilla.github.io/nunjucks/templating.html#filters">filters</a>
+                commonly used for formatting data. These are particularly useful for consistently displaying common data throughout a service.
+                For example, displaying dates in a consistent format or displaying a person's name in a consistent way.
+            </p>
+
+            <p>
+                There are a large number of microservices across the HMPPS estate. Each microservice currently has its own set of Nunjucks filters, usually based on a copy of a previous service's filters.
+                This means that there are a large number of duplicated filters across the estate.
+                This is not ideal as it means that each service has to maintain its own set of filters, and it is difficult to ensure that the filters are consistent across the estate.
+            </p>
+
+            <p>
+                The <a href="https://www.npmjs.com/package/hmpps-design-system-frontend">HMPPS Design System Node.js package</a>
+                provides a common set of Nunjucks filters that can be used in any HMPPS service. This page lists the available filters and explains how to use them.
+            </p>
+
+            <h2>Using the filters</h2>
+
+            <p>
+                HMPPS UI applications based on the <a href="https://github.com/ministryofjustice/hmpps-template-typescript">template</a> have a `nunjucksSetup.ts` file that configures Nunjucks.
+                Filters can be added in this file by adding the line `njkEnv.addFilter('nameOfFilter', nameOfFilter)` for each filter.
+            </p>
+        </div>
+    </div>
+
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+
+            {{ govukTable({
+                caption: "Available filters",
+                captionClasses: "govuk-table__caption--m",
+                head: [
+                    { text: "Filter" },
+                    { text: "Description" }
+                ],
+                rows: [
+                    [
+                        { text: "sentenceCase(word)" },
+                        { text: "Capitalises the first letter of the first word and lowercases the remaining characters e.g. 'a Sentence' would become 'A sentence'" }
+                    ],
+                    [
+                        { text: "nameCase(name)" },
+                        { text: "Capitalises the first letter of each name component including hyphenated names e.g. 'first LAST-lAst would become 'First Last-Last'" }
+                    ],
+                    [
+                        { text: "firstNameSpaceLastName(person: { firstName, lastName })" },
+                        { text: "Name cases the person's first name and last name with a space inbetween e.g. First Last" }
+                    ],
+                    [
+                        { text: "lastNameCommaFirstName(person: { firstName, lastName })" },
+                        { text: "Name cases the person's last name and first name with a comma inbetween e.g. Last, First" }
+                    ],
+                    [
+                        { text: "dayMonthYearForwardSlashSeparator(dateString)" },
+                        { text: "UK formatted full date with padding zeroes e.g. 09/03/2023" }
+                    ],
+                    [
+                        { text: "personProfileName(person: { firstName, lastName })" },
+                        { text: "The consistent way of displaying a person's name when displaying their profile or linking to it. Currently uses firstNameSpaceLastName" }
+                    ],
+                    [
+                        { text: "personDateOfBirth(dateOfBirth)" },
+                        { text: "The consistent way of displaying a person's date of birth. Currently uses dayMonthYearForwardSlashSeparator" }
+                    ],
+                    [
+                        { text: "personStatus(status)" },
+                        { text: "The consistent way of displaying a person's status e.g. Active in. Currently uses sentenceCase" }
+                    ]
+                ]
+            }) }}
+        </div>
+    </div>
+{% endblock %}

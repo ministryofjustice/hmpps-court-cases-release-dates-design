@@ -4,17 +4,17 @@
             <div class="mini-profile-inner">
                 <div class="govuk-grid-column-one-third govuk-!-padding-left-0">
                     <div class="mini-profile-left">
-                        <img class="mini-profile-person-img" src="{{ personImgUrl }}" alt="Image of {{ person | formatMiniProfileName }}" loading="lazy">
+                        <img class="mini-profile-person-img" src="{{ personImgUrl }}" alt="Image of {{ person | personProfileName }}" loading="lazy">
                     </div>
-                    <p class="govuk-heading-s govuk-!-margin-bottom-1"><a class="govuk-link--no-visited-state" href="{{ personProfileUrl }}" target="_blank">{{ person | formatMiniProfileName }}</a></p>
+                    <p class="govuk-heading-s govuk-!-margin-bottom-1"><a class="govuk-link--no-visited-state" href="{{ personProfileUrl }}" target="_blank">{{ person | personProfileName }}</a></p>
                     <ul class="govuk-list">
                         <li>{{ person.prisonerNumber }}</li>
                     </ul>
                 </div>
                 <div class="govuk-grid-column-two-thirds govuk-!-padding-0">
                     <ul class="mini-profile-info">
-                        <li><span class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-0">Date of birth</span><span class="govuk-body">{{ person.dateOfBirth | formatMiniProfileDateOfBirth }}</span></li>
-                        <li><span class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-0">Status</span><span class="govuk-body">{{ person.status }}</span></li>
+                        <li><span class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-0">Date of birth</span><span class="govuk-body">{{ person.dateOfBirth | personDateOfBirth }}</span></li>
+                        <li><span class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-0">Status</span><span class="govuk-body">{{ person.status | personStatus }}</span></li>
                         <li><span class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-0">Establishment</span><span class="govuk-body">{{ person.prisonName }}</span></li>
                         <li><span class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-0">Cell number</span><span class="govuk-body">{{ person.cellLocation }}</span></li>
                     </ul>

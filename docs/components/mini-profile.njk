@@ -7,11 +7,11 @@
 {% set activeSideNav = 'mini-profile' %}
 
 {% set person = {
-    firstName: 'First',
-    lastName: 'Last',
+    firstName: 'FIRST',
+    lastName: 'LAST',
     prisonerNumber: 'A1234BC',
     dateOfBirth: '1998-09-27',
-    status: 'Active In',
+    status: 'ACTIVE IN',
     prisonName: 'HMP Prison',
     cellLocation: 'A-1-1'
 } %}
@@ -28,16 +28,28 @@
 {% from "hmpps/components/mini-profile/macro.njk" import miniProfile %}
 
 {% set person = {
-    firstName: 'First',
-    lastName: 'Last',
+    firstName: 'FIRST',
+    lastName: 'LAST',
     prisonerNumber: 'A1234BC',
     dateOfBirth: '1998-09-27',
-    status: 'Active In',
+    status: 'ACTIVE IN',
     prisonName: 'HMP Prison',
     cellLocation: 'A-1-1'
 } %}
 
 {{ miniProfile(person, '/assets/images/prisoner-profile-image.png', '#') }}
+        {% endraw %}
+    {% endhighlight %}
+
+    <h3>Required Nunjucks filters</h3>
+
+    {% highlight "njk" %}
+        {% raw %}
+import { personDateOfBirth, personProfileName, personStatus } from 'hmpps-design-system-frontend/hmpps/utils/utils'
+
+njkEnv.addFilter('personProfileName', personProfileName)
+njkEnv.addFilter('personDateOfBirth', personDateOfBirth)
+njkEnv.addFilter('personStatus', personStatus)
         {% endraw %}
     {% endhighlight %}
 {% endset %}

@@ -1,6 +1,6 @@
 const nunjucks = require('nunjucks')
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight')
-const { formatMiniProfileDateOfBirth, formatMiniProfileName } = require('./dist/hmpps/utils/utils')
+const { personDateOfBirth, personProfileName, personStatus } = require('./dist/hmpps/utils/utils')
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ 'node_modules/govuk-frontend/dist/govuk/assets': 'assets' })
@@ -12,22 +12,31 @@ module.exports = function (eleventyConfig) {
   })
   eleventyConfig.addPassthroughCopy({ 'dist/hmpps/assets': 'assets' })
 
-  eleventyConfig.addWatchTarget('./dist/')
-
-  eleventyConfig.setUseGitIgnore(false)
+  eleventyConfig.addFilter('personProfileName', personProfileName)
+  eleventyConfig.addFilter('personDateOfBirth', personDateOfBirth)
+  eleventyConfig.addFilter('personStatus', personStatus)
 
   const njkEnv = nunjucks.configure([
-    '.',
     'docs/_includes/',
     'node_modules/govuk-frontend/dist/',
     'node_modules/@ministryofjustice/frontend/',
     'dist/',
   ])
 
-  njkEnv.addFilter('formatMiniProfileName', formatMiniProfileName)
-  njkEnv.addFilter('formatMiniProfileDateOfBirth', formatMiniProfileDateOfBirth)
-
   eleventyConfig.setLibrary('njk', njkEnv)
 
   eleventyConfig.addPlugin(syntaxHighlight)
+
+  eleventyConfig.addWatchTarget('./dist/assets/')
+  eleventyConfig.addWatchTarget('./dist/components/')
+
+  eleventyConfig.setUseGitIgnore(false)
+
+  eleventyConfig.setQuietMode(true)
+
+  return {
+    dir: {
+      input: "docs"
+    }
+  }
 }

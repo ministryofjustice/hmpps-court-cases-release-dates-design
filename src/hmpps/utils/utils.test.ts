@@ -1,27 +1,95 @@
-import { formatMiniProfileDateOfBirth, formatMiniProfileName } from './utils'
+import {
+  dayMonthYearForwardSlashSeparator,
+  firstNameSpaceLastName,
+  lastNameCommaFirstName,
+  nameCase,
+  sentenceCase,
+} from './utils'
 
-describe('format mini profile name', () => {
+describe('sentence case', () => {
   it.each([
-    // [null, null, null, ''],
-    ['empty string', '', '', ', '],
-    ['Lower case', 'robert', '', ', Robert'],
-    ['Upper case', 'ROBERT', '', ', Robert'],
-    ['Mixed case', 'RoBErT', '', ', Robert'],
-    ['Multiple words', 'RobeRT', 'SMiTH', 'Smith, Robert'],
-    ['Leading spaces', '  RobeRT', '', ', Robert'],
-    ['Trailing spaces', 'RobeRT  ', '', ', Robert'],
-    ['Hyphenated', 'Robert-John', 'SmiTH-jONes-WILSON', 'Smith-Jones-Wilson, Robert-John'],
-  ])('%s formatMiniProfileName(%s, %s)', (_: string, firstName: string, lastName: string, expected: string) => {
-    expect(formatMiniProfileName({ firstName, lastName })).toEqual(expected)
+    [null, null, ''],
+    ['empty string', '', ''],
+    ['whitespace', '   ', ''],
+    ['leading whitespace', '   word', 'Word'],
+    ['trailing whitespace', 'word   ', 'Word'],
+    ['interstitial whitespace', 'word   word  word', 'Word word word'],
+    ['lower case', 'word', 'Word'],
+    ['upper case', 'WORD', 'Word'],
+    ['mixed case', 'WoRd', 'Word'],
+    ['multiple words', 'word WORD WoRd', 'Word word word'],
+    ['hyphenated', 'word-WORD-WoRd', 'Word-word-word'],
+  ])("%s sentenceCase('%s')", (_: string, word: string, expected: string) => {
+    expect(sentenceCase(word)).toEqual(expected)
   })
 })
 
-describe('format mini profile date of birth', () => {
+describe('name case', () => {
   it.each([
-    // [null, null],
-    // ['Empty string', ''],
+    [null, null, ''],
+    ['empty string', '', ''],
+    ['whitespace', '   ', ''],
+    ['leading whitespace', '   name', 'Name'],
+    ['trailing whitespace', 'name   ', 'Name'],
+    ['interstitial whitespace', 'name   name  name', 'Name Name Name'],
+    ['lower case', 'Name', 'Name'],
+    ['upper case', 'NAME', 'Name'],
+    ['mixed case', 'NaMe', 'Name'],
+    ['multiple words', 'Name NAME NaMe', 'Name Name Name'],
+    ['hyphenated', 'Name-NAME-NaMe', 'Name-Name-Name'],
+  ])("%s nameCase('%s')", (_: string, name: string, expected: string) => {
+    expect(nameCase(name)).toEqual(expected)
+  })
+})
+
+describe('format first name last name', () => {
+  it.each([
+    [null, null, null, ''],
+    ['empty string', '', '', ''],
+    ['empty string first name', '', 'last', 'Last'],
+    ['empty string last name', 'first', '', 'First'],
+    ['whitespace', '   ', '  ', ''],
+    ['leading whitespace', '   first', '  last', 'First Last'],
+    ['trailing whitespace', 'first   ', 'last  ', 'First Last'],
+    ['interstitial whitespace', 'first   first', 'last  last', 'First First Last Last'],
+    ['Lower case', 'first', 'last', 'First Last'],
+    ['Upper case', 'FIRST', 'LAST', 'First Last'],
+    ['Mixed case', 'FiRSt', 'LaSt', 'First Last'],
+    ['Multiple words', 'first FIRST FiRSt', 'last LAST LaSt', 'First First First Last Last Last'],
+    ['Hyphenated', 'first-FIRST-FiRSt', 'last-LAST-LaSt', 'First-First-First Last-Last-Last'],
+  ])("%s firstNameSpaceLastName('%s', '%s')", (_: string, firstName: string, lastName: string, expected: string) => {
+    expect(firstNameSpaceLastName({ firstName, lastName })).toEqual(expected)
+  })
+})
+
+describe('format last name, first name', () => {
+  it.each([
+    [null, null, null, ''],
+    ['empty string', '', '', ''],
+    ['empty string first name', '', 'last', 'Last'],
+    ['empty string last name', 'first', '', 'First'],
+    ['whitespace', '   ', '  ', ''],
+    ['leading whitespace', '   first', '  last', 'Last, First'],
+    ['trailing whitespace', 'first   ', 'last  ', 'Last, First'],
+    ['interstitial whitespace', 'first   first', 'last  last', 'Last Last, First First'],
+    ['Lower case', 'first', 'last', 'Last, First'],
+    ['Upper case', 'FIRST', 'LAST', 'Last, First'],
+    ['Mixed case', 'FiRSt', 'LaSt', 'Last, First'],
+    ['Multiple words', 'first FIRST FiRSt', 'last LAST LaSt', 'Last Last Last, First First First'],
+    ['Hyphenated', 'first-FIRST-FiRSt', 'last-LAST-LaSt', 'Last-Last-Last, First-First-First'],
+  ])("%s lastNameCommaFirstName('%s', '%s')", (_: string, firstName: string, lastName: string, expected: string) => {
+    expect(lastNameCommaFirstName({ firstName, lastName })).toEqual(expected)
+  })
+})
+
+describe('format day/month/year', () => {
+  it.each([
+    [null, ''],
+    ['', ''],
+    ['Empty string', 'Empty string'],
+    ['23/10/1978', '23/10/1978'],
     ['1978-10-23', '23/10/1978'],
-  ])('%s formatMiniProfileDateOfBirth(%s, %s)', (dateOfBirth: string, expected: string) => {
-    expect(formatMiniProfileDateOfBirth(dateOfBirth)).toEqual(expected)
+  ])("%s dayMonthYearForwardSlashSeparator('%s', '%s')", (dateString: string, expected: string) => {
+    expect(dayMonthYearForwardSlashSeparator(dateString)).toEqual(expected)
   })
 })
