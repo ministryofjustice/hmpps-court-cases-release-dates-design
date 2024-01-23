@@ -4,6 +4,7 @@
     "target": "es2018",
     "module": "commonjs",
     "moduleResolution": "node",
+    "rootDir": "./src",
     "outDir": "./dist",
     "sourceMap": true,
     "skipLibCheck": true,
@@ -18,5 +19,5 @@
     "typeRoots": ["./src/hmpps/@types", "./node_modules/@types"]
   },
   "exclude": [".eleventy.js", "node_modules", "src/hmpps/assets/**/*.js", "src/hmpps/filters/**/*.js", "dist", "_site"],
-  "include": ["**/*.js", "**/*.ts"]
+  "include": ["src/**/*.js", "src/**/*.ts"]
 }
