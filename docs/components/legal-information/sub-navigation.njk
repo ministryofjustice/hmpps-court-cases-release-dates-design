@@ -1,0 +1,31 @@
+{% extends "legal-information-component.njk" %}
+
+{% from "govuk/components/tabs/macro.njk" import govukTabs %}
+
+{% set pageTitle = 'Legal information sub navigation' %}
+{% set activeSideNav = 'sub-navigation' %}
+
+{% block content %}
+    <p>The legal information product suite is linked together by a shared, tab based sub navigation.</p>
+    <p>This component maintains consistency of tab names, ordering and where they link to across the product set.</p>
+
+    {{ govukTabs({
+        items: [
+            {
+                label: "HTML",
+                id: "html",
+                panel: {
+                    html: htmlCode
+                }
+            },
+            {
+                label: "Nunjucks",
+                id: "nunjucks",
+                panel: {
+                    html: nunjucksCode
+                }
+            }
+        ]
+    }) }}
+
+{% endblock %}
