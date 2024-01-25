@@ -75,7 +75,9 @@
 {% endset %}
 
 {% block content %}
-    {{ subNavigation('dev', navigation, 'A1234BC') }}
+    <div class="app-example">
+        {{ subNavigation('dev', navigation, 'A1234BC') }}
+    </div>
 
     <p>The legal information product suite is linked together by a shared, tab based sub navigation.</p>
     <p>This component maintains consistency of tab names, ordering and where they link to across the product set.</p>

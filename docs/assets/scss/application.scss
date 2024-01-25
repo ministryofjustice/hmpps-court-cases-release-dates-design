@@ -6,4 +6,6 @@ $govuk-page-width: $moj-page-width;
 @import 'govuk/all';
 @import 'moj/all';
 
-@import "components/all";
+@import "src/hmpps/components/all";
+
+@import "components/example";

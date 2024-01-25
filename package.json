@@ -7,7 +7,7 @@
   "scripts": {
     "prepare": "husky",
     "copy:static": "cp src/package/*.* dist && cp src/hmpps/*.* dist/hmpps && cp -r src/hmpps/assets src/hmpps/components src/hmpps/filters dist/hmpps",
-    "sass": "sass --quiet-deps --no-source-map --load-path=node_modules/govuk-frontend/dist --load-path=node_modules/@ministryofjustice/frontend --load-path=. src/hmpps/all.scss:./dist/hmpps/assets/stylesheets/all.css src/hmpps/application.scss:./dist/hmpps/assets/stylesheets/application.css --style compressed",
+    "sass": "sass --quiet-deps --no-source-map --load-path=node_modules/govuk-frontend/dist --load-path=node_modules/@ministryofjustice/frontend --load-path=. src/hmpps/all.scss:./dist/hmpps/assets/stylesheets/all.css docs/assets/scss/application.scss:./docs-assets/stylesheets/application.css --style compressed",
     "watch:ts": "tsc -w",
     "watch:static": "nodemon --watch src -e png,js,njk --delay 50ms -x npm run copy:static",
     "watch:sass": "npm run sass -- --watch",
@@ -21,7 +21,7 @@
     "typecheck": "tsc",
     "test": "jest",
     "test:ci": "jest --runInBand",
-    "clean": "rm -rf _site dist node_modules",
+    "clean": "rm -rf _site dist docs-assets node_modules",
     "publish": "npm publish ./dist --access public"
   },
   "engines": {
