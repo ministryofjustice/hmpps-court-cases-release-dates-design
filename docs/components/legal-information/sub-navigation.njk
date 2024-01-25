@@ -9,12 +9,73 @@
 {% set navigation = {
     activeSubNav: 'overview',
     overview: {
-        href: '/legal-information'
+        href: '#overview'
+    },
+    courtCases: {
+        href: '#court-cases'
+    },
+    adjustments: {
+        href: '#adjustments'
+    },
+    releaseDates: {
+        href: '#release-dates'
+    },
+    documents: {
+        href: '#documents'
     }
 } %}
 
+{% set htmlCode %}
+    {% highlight "html" %}
+        {{ subNavigation('dev', navigation, 'A1234BC') }}
+    {% endhighlight %}
+{% endset %}
+
+{% set nunjucksCode %}
+    {% highlight "njk" %}
+        {% raw %}
+{% from "hmpps/components/legal-information/sub-navigation/macro.njk" import subNavigation %}
+
+{# selects which set of environment specific service urls to use by default #}
+{# one of; 'dev', 'pre' or 'prod' #}
+{% set environment = 'dev' %}
+
+{# activeSubNav selects which tab is highlighted as active #}
+{# it is required and should be one of; 'overview', 'court-cases', 'adjustments', 'release-dates' or 'documents' #}
+{# all the other properties are optional and support overriding the environment specific service urls and removing tabs #}
+{% set navigation = {
+    activeSubNav: 'overview',
+    overview: {
+        href: '',
+        enabled: true
+    },
+    courtCases: {
+        href: '',
+        enabled: true
+    },
+    adjustments: {
+        href: '',
+        enabled: true
+    },
+    releaseDates: {
+        href: '',
+        enabled: true
+    },
+    documents: {
+        href: '',
+        enabled: true
+    }
+} %}
+
+{% set prisonNumber = 'A1234BC' %}
+
+{{ subNavigation(environment, navigation, prisonNumber) }}
+        {% endraw %}
+    {% endhighlight %}
+{% endset %}
+
 {% block content %}
-    {{ subNavigation(navigation) }}
+    {{ subNavigation('dev', navigation, 'A1234BC') }}
 
     <p>The legal information product suite is linked together by a shared, tab based sub navigation.</p>
     <p>This component maintains consistency of tab names, ordering and where they link to across the product set.</p>
