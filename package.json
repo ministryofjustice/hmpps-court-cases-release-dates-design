@@ -5,7 +5,7 @@
   "author": "HMPPS Digital Studio",
   "license": "MIT",
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky",
     "copy:static": "cp src/package/*.* dist && cp src/hmpps/*.* dist/hmpps && cp -r src/hmpps/assets src/hmpps/components src/hmpps/filters dist/hmpps",
     "sass": "sass --quiet-deps --no-source-map --load-path=node_modules/govuk-frontend/dist --load-path=node_modules/@ministryofjustice/frontend --load-path=. src/hmpps/all.scss:./dist/hmpps/assets/stylesheets/all.css src/hmpps/application.scss:./dist/hmpps/assets/stylesheets/application.css --style compressed",
     "watch:ts": "tsc -w",
