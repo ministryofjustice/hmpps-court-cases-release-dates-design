@@ -60,17 +60,17 @@
         text: 'Court cases',
         href: navigation.courtCases.href,
         active: navigation.activeSubNav === 'court-cases'
-    }, {
+    } if navigation.courtCases.enabled, {
         text: 'Adjustments',
         href: navigation.adjustments.href,
         active: navigation.activeSubNav === 'adjustments'
-    }, {
+    } if navigation.adjustments.enabled, {
         text: 'Calculations and release dates',
         href: navigation.releaseDates.href,
         active: navigation.activeSubNav === 'release-dates'
-    }, {
+    } if navigation.releaseDates.enabled, {
         text: 'Documents',
         href: navigation.documents.href,
         active: navigation.activeSubNav === 'documents'
-    }]
+    } if navigation.documents.enabled]
 }) }}
