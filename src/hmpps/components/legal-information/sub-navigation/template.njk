@@ -3,6 +3,13 @@
 {% set environment = environment if environment else 'dev' %}
 
 {% set environmentHrefs = {
+    local: {
+        overview: 'http://localhost:3000/prisoner/' + prisonNumber + '/overview',
+        courtCases: 'http://localhost:3000/person/' + prisonNumber,
+        adjustments: 'http://localhost:3000/' + prisonNumber,
+        releaseDates: 'http://localhost:3000/?prisonId=' + prisonNumber,
+        documents: 'http://localhost:3000/prisoner/' + prisonNumber + '/documents'
+    },
     dev: {
         overview: 'https://custody-manager-dev.hmpps.service.justice.gov.uk/prisoner/' + prisonNumber + '/overview',
         courtCases: 'https://remand-and-sentencing-dev.hmpps.service.justice.gov.uk/person/' + prisonNumber,
