@@ -1,11 +1,21 @@
 {% extends "legal-information-component.njk" %}
 
 {% from "govuk/components/tabs/macro.njk" import govukTabs %}
+{% from "hmpps/components/legal-information/sub-navigation/macro.njk" import subNavigation %}
 
 {% set pageTitle = 'Legal information sub navigation' %}
 {% set activeSideNav = 'sub-navigation' %}
 
+{% set navigation = {
+    activeSubNav: 'overview',
+    overview: {
+        href: '/legal-information'
+    }
+} %}
+
 {% block content %}
+    {{ subNavigation(navigation) }}
+
     <p>The legal information product suite is linked together by a shared, tab based sub navigation.</p>
     <p>This component maintains consistency of tab names, ordering and where they link to across the product set.</p>
 

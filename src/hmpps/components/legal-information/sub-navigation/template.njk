@@ -1,0 +1,28 @@
+{% from "moj/components/sub-navigation/macro.njk" import mojSubNavigation %}
+
+
+
+{{ mojSubNavigation({
+    label: 'Person navigation',
+    items: [{
+        text: 'Overview',
+        href: navigation.overview.href if navigation.courtCases.href else 'court-cases',
+        active: navigation.activeSubNav === 'overview'
+    }, {
+        text: 'Court cases',
+        href: navigation.courtCases.href if navigation.courtCases.href else 'court-cases',
+        active: navigation.activeSubNav === 'court-cases'
+    }, {
+        text: 'Adjustments',
+        href: 'adjustments',
+        active: navigation.activeSubNav === 'adjustments'
+    }, {
+        text: 'Calculations and release dates',
+        href: 'release-dates',
+        active: navigation.activeSubNav === 'release-dates'
+    }, {
+        text: 'Documents',
+        href: 'release-dates',
+        active: navigation.activeSubNav === 'documents'
+    }]
+}) }}
