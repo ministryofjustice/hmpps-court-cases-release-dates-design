@@ -11,6 +11,7 @@ module.exports = function (eleventyConfig) {
     'node_modules/@ministryofjustice/frontend/moj/all.js': 'assets/javascript/moj/all.js',
   })
   eleventyConfig.addPassthroughCopy({ 'dist/hmpps/assets': 'assets' })
+  eleventyConfig.addPassthroughCopy({ 'docs-assets': 'assets' })
 
   eleventyConfig.addFilter('personProfileName', personProfileName)
   eleventyConfig.addFilter('personDateOfBirth', personDateOfBirth)
@@ -26,9 +27,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.setLibrary('njk', njkEnv)
 
   eleventyConfig.addPlugin(syntaxHighlight)
-
-  eleventyConfig.addWatchTarget('./dist/assets/')
-  eleventyConfig.addWatchTarget('./dist/components/')
 
   eleventyConfig.setUseGitIgnore(false)
 

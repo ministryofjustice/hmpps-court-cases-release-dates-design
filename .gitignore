@@ -132,3 +132,4 @@ integration_tests/screenshots/
 
 # eleventy build output
 _site/
+docs-assets/

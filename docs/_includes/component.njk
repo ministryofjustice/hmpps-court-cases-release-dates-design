@@ -9,19 +9,32 @@
         <main class="govuk-main-wrapper govuk-body" id="main-content" role="main">
             <div class="govuk-grid-row">
                 <div class="govuk-grid-column-one-quarter">
-                    <h2>Components</h2>
+                    {% block sideNavigation %}
+                        <h2>Components</h2>
 
-                    {{ mojSideNavigation({
-                        label: 'Side navigation',
-                        items: [
-                            {
-                                text: 'Mini profile',
-                                href: '/components/mini-profile',
-                                active: activeSideNav === 'mini-profile'
-                            }
-                        ]
-                    }) }}
+                        {{ mojSideNavigation({
+                            label: 'Components side navigation',
+                            items: [
+                                {
+                                    text: 'Mini profile',
+                                    href: '/components/mini-profile',
+                                    active: activeSideNav === 'mini-profile'
+                                }
+                            ]
+                        }) }}
 
+                        <h2>Product set components</h2>
+
+                        {{ mojSideNavigation({
+                            label: 'Product set components side navigation',
+                            items: [
+                                {
+                                    text: 'Legal information',
+                                    href: '/components/legal-information'
+                                }
+                            ]
+                        }) }}
+                    {% endblock %}
                 </div>
                 <div class="govuk-grid-column-three-quarters">
                     <h1>{{ pageTitle }}</h1>

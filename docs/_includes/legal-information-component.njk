@@ -1,0 +1,23 @@
+{% extends "component.njk" %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+
+{% block sideNavigation %}
+    {{ govukBackLink({
+        text: "Back to components",
+        href: "/components"
+    }) }}
+
+    <h2>Legal information components</h2>
+
+    {{ mojSideNavigation({
+        label: 'Components side navigation',
+        items: [
+            {
+                text: 'Sub navigation',
+                href: '/components/legal-information/sub-navigation',
+                active: activeSideNav === 'sub-navigation'
+            }
+        ]
+    }) }}
+{% endblock %}

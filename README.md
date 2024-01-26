@@ -4,13 +4,19 @@ A shared frontend component library and design system for HMPPS services.
 
 ## Getting started
 
-This repository contains the source for both the [frontend component library node.js package]((https://www.npmjs.com/package/hmpps-design-system-frontend)) and the design system documentation site.
+This repository contains the source for both the [frontend component library node.js package]((https://www.npmjs.com/package/hmpps-design-system-frontend)) and the [design system documentation site](https://design-system.hmpps.service.justice.gov.uk/).
+The design system documentation site contains [full instructions](https://design-system.hmpps.service.justice.gov.uk/get-started/) for using the [components](https://design-system.hmpps.service.justice.gov.uk/components/) in your service or prototype.
 
-You can install and use the components via npm:
+## Top level and product set components
 
-```bash
-npm install hmpps-design-system-frontend
-```
+There are two levels of components in the design system:
+
+- Top level components that are recommended for use across all HMPPS services e.g. the [mini profile](https://design-system.hmpps.service.justice.gov.uk/components/mini-profile/)
+- Product set specific components that are targetted at a subset of connected services e.g. the [legal information components](https://design-system.hmpps.service.justice.gov.uk/components/legal-information/)
+
+Components can begin life as a product set component and then be promoted to a top level component if they are used by multiple product sets.
+Components at the top level can also be candidates for the [Ministry of Justice Design System](https://design-patterns.service.justice.gov.uk/) if they are not HMPPS specific.
+Promoting components in this way is actively encouraged. 
 
 ## Developing components
 
@@ -35,7 +41,7 @@ This will start a local server available at http://localhost:3010/ and watch for
 
 ### Adding or updating a component
 
-The source for components can be found in the src/hmpps/components directory. Each component should be in its own directory using the `kebab-cased` component name.
+The source for components can be found in the src/hmpps/components directory or product set specific subdirectory. Each component should be in its own directory using the `kebab-cased` component name.
 At a minimum, a component should have a macro.njk file, which registers the nunjucks macro and a template.njk file which contains the markup for the component.
 
 ### Component documentation
@@ -44,9 +50,10 @@ The design system documentation site source can be found in `docs` and is built 
 It uses a mixture of markdown and nunjucks files to generate the site. Layout files are in the `docs/_includes` directory and components are in the `docs/components` directory.
 Adding documentation for a new component requires a new nunjucks file and additions to two other files:
 
-1. Add `component-name-in-kebab-case.njk` to the `docs/components` directory
-2. Add a link to the component documentation to the components home page `docs/components/index.md`
-3. Add a link to the component documentation to the side navigation in the component layout file `docs/_includes/component.njk`
+1. Add `component-name-in-kebab-case.njk` to the `docs/components` directory or product set specific subdirectory
+2. Add a link to the component documentation to the side navigation in the component layout file `docs/_includes/component.njk` or product set specific layout file
+3. Complete the documentation for the new component including the HTML markup and Nunjucks code as a minimum
+4. Ensure that any required Nunjucks filters are included in the Nunjucks code section
 
 Once added, you can view your component documentation at http://localhost:3010/components/component-name-in-kebab-case/
 
@@ -62,6 +69,8 @@ HMPPS components commonly use nunjucks filters for formatting text, names dates 
 They then need to be registered in the `.eleventy.js` file, so they are available in the design system documentation site.
 
 Start by adding the filter name to the list above `} = require("./dist/hmpps/utils/utils");` near the top of the file. Then register the filter by adding `njkEnv.addFilter('nameOfFilter', nameOfFilter)` towards the bottom of the file.
+
+Ensure that any required Nunjucks filters are included in the Nunjucks code section of the component documentation.
 
 ### Making component available to the prototype toolkit
 

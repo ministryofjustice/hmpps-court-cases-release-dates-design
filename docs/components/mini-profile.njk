@@ -55,7 +55,9 @@ njkEnv.addFilter('personStatus', personStatus)
 {% endset %}
 
 {% block content %}
-    {{ miniProfile(person, '/assets/images/prisoner-profile-image.png', '#') }}
+    <div class="app-example">
+        {{ miniProfile(person, '/assets/images/prisoner-profile-image.png', '#') }}
+    </div>
 
     <p>The mini profile shows key information about a prisoner at the top of a question or transactional service page. This helps to:</p>
     <ul class="govuk-list govuk-list--bullet">

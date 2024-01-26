@@ -1,0 +1,83 @@
+{% from "moj/components/sub-navigation/macro.njk" import mojSubNavigation %}
+
+{% set environment = environment if environment else 'dev' %}
+
+{% set environmentHrefs = {
+    local: {
+        overview: 'http://localhost:3000/prisoner/' + prisonNumber + '/overview',
+        courtCases: 'http://localhost:3000/person/' + prisonNumber,
+        adjustments: 'http://localhost:3000/' + prisonNumber,
+        releaseDates: 'http://localhost:3000/?prisonId=' + prisonNumber,
+        documents: 'http://localhost:3000/prisoner/' + prisonNumber + '/documents'
+    },
+    dev: {
+        overview: 'https://custody-manager-dev.hmpps.service.justice.gov.uk/prisoner/' + prisonNumber + '/overview',
+        courtCases: 'https://remand-and-sentencing-dev.hmpps.service.justice.gov.uk/person/' + prisonNumber,
+        adjustments: 'https://adjust-release-dates-dev.hmpps.service.justice.gov.uk/' + prisonNumber,
+        releaseDates: 'https://calculate-release-dates-dev.hmpps.service.justice.gov.uk/?prisonId=' + prisonNumber,
+        documents: 'https://custody-manager-dev.hmpps.service.justice.gov.uk/prisoner/' + prisonNumber + '/documents'
+    },
+    pre: {
+        overview: 'https://custody-manager-preprod.hmpps.service.justice.gov.uk/prisoner/' + prisonNumber + '/overview',
+        courtCases: 'https://remand-and-sentencing-preprod.hmpps.service.justice.gov.uk/person/' + prisonNumber,
+        adjustments: 'https://adjust-release-dates-preprod.hmpps.service.justice.gov.uk/' + prisonNumber,
+        releaseDates: 'https://calculate-release-dates-preprod.hmpps.service.justice.gov.uk/?prisonId=' + prisonNumber,
+        documents: 'https://custody-manager-preprod.hmpps.service.justice.gov.uk/prisoner/' + prisonNumber + '/documents'
+    },
+    prod: {
+        overview: 'https://custody-manager.hmpps.service.justice.gov.uk/prisoner/' + prisonNumber + '/overview',
+        courtCases: 'https://remand-and-sentencing.hmpps.service.justice.gov.uk/person/' + prisonNumber,
+        adjustments: 'https://adjust-release-dates.hmpps.service.justice.gov.uk/' + prisonNumber,
+        releaseDates: 'https://calculate-release-dates.hmpps.service.justice.gov.uk/?prisonId=' + prisonNumber,
+        documents: 'https://custody-manager.hmpps.service.justice.gov.uk/prisoner/' + prisonNumber + '/documents'
+    }
+} %}
+
+{% set navigation = {
+    activeSubNav: navigation.activeSubNav,
+    overview: {
+        href: navigation.overview.href if navigation.overview.href else environmentHrefs[environment].overview,
+        enabled: false if navigation.overview.enabled === false else true
+    },
+    courtCases: {
+        href: navigation.courtCases.href if navigation.courtCases.href else environmentHrefs[environment].courtCases,
+        enabled: false if navigation.courtCases.enabled === false else true
+    },
+    adjustments: {
+        href: navigation.adjustments.href if navigation.adjustments.href else environmentHrefs[environment].adjustments,
+        enabled: false if navigation.adjustments.enabled === false else true
+    },
+    releaseDates: {
+        href: navigation.releaseDates.href if navigation.releaseDates.href else environmentHrefs[environment].releaseDates,
+        enabled: false if navigation.releaseDates.enabled === false else true
+    },
+    documents: {
+        href: navigation.documents.href if navigation.documents.href else environmentHrefs[environment].documents,
+        enabled: false if navigation.documents.enabled === false else true
+    }
+} %}
+
+{{ mojSubNavigation({
+    label: 'Legal information sub navigation',
+    items: [{
+        text: 'Overview',
+        href: navigation.overview.href,
+        active: navigation.activeSubNav === 'overview'
+    } if navigation.overview.enabled, {
+        text: 'Court cases',
+        href: navigation.courtCases.href,
+        active: navigation.activeSubNav === 'court-cases'
+    } if navigation.courtCases.enabled, {
+        text: 'Adjustments',
+        href: navigation.adjustments.href,
+        active: navigation.activeSubNav === 'adjustments'
+    } if navigation.adjustments.enabled, {
+        text: 'Calculations and release dates',
+        href: navigation.releaseDates.href,
+        active: navigation.activeSubNav === 'release-dates'
+    } if navigation.releaseDates.enabled, {
+        text: 'Documents',
+        href: navigation.documents.href,
+        active: navigation.activeSubNav === 'documents'
+    } if navigation.documents.enabled]
+}) }}
