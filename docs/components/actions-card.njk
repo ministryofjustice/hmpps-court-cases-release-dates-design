@@ -1,0 +1,75 @@
+{% extends "component.njk" %}
+
+{% from "govuk/components/tabs/macro.njk" import govukTabs %}
+{% from "hmpps/components/actions-card/macro.njk" import actionsCard %}
+
+{% set pageTitle = 'Actions card' %}
+{% set activeSideNav = 'actions-card' %}
+
+{% set actions = [
+  {
+    href: 'calculate-release-dates/calculation-reason',
+    title: 'Calculate release dates'
+  },
+  {
+    href: 'calculate-release-dates/select-which-approved-dates',
+    title: 'Enter an approved date'
+  }
+] %}
+
+{% set htmlCode %}
+  {% highlight "html" %}
+    {{ actionsCard(actions) }}
+  {% endhighlight %}
+{% endset %}
+
+{% set nunjucksCode %}
+  {% highlight "njk" %}
+    {% raw %}
+      {% from "hmpps/components/actions/macro.njk" import actionsCard %}
+
+      {% set actions = [
+        {
+        href: 'calculate-release-dates/calculation-reason',
+        title: 'Calculate release dates'
+        },
+        {
+        href: 'calculate-release-dates/select-which-approved-dates',
+        title: 'Enter an approved date'
+        }
+      ] %}
+
+      {{ actionsCard(actions) }}
+    {% endraw %}
+  {% endhighlight %}
+
+{% endset %}
+
+{% block content %}
+  <div class="app-example--with-bottom-padding govuk-grid-column-full">
+    {{ actionsCard(actions) }}
+  </div>
+  <p>The actions card component is a variation of the design from the <a class="govuk-link"
+                                                           href="https://design-system.service.gov.uk/components/summary-list/#summary-cards">summary
+      card</a> on GDS</p>
+
+  {{ govukTabs({
+    items: [
+      {
+        label: "HTML",
+        id: "html",
+        panel: {
+        html: htmlCode
+      }
+      },
+      {
+        label: "Nunjucks",
+        id: "nunjucks",
+        panel: {
+        html: nunjucksCode
+      }
+      }
+    ]
+  }) }}
+
+{% endblock %}
