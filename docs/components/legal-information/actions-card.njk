@@ -26,20 +26,21 @@
 {% set nunjucksCode %}
   {% highlight "njk" %}
     {% raw %}
-      {% from "hmpps/components/actions/macro.njk" import actionsCard %}
+{% from "hmpps/components/actions/macro.njk" import actionsCard %}
 
-      {% set actions = [
-      {
+{% set actions = [
+    {
       href: 'calculate-release-dates/calculation-reason',
       title: 'Calculate release dates'
-      },
-      {
+    },
+    {
       href: 'calculate-release-dates/select-which-approved-dates',
       title: 'Enter an approved date'
-      }
-      ] %}
+    }
+  ]
+%}
 
-      {{ actionsCard(actions) }}
+{{ actionsCard(actions) }}
     {% endraw %}
   {% endhighlight %}
 

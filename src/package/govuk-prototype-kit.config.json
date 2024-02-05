@@ -16,7 +16,7 @@
       "macroName": "subNavigation"
     },
     {
-      "importFrom": "hmpps/components/actions-card/macro.njk",
+      "importFrom": "hmpps/components/legal-information/actions-card/macro.njk",
       "macroName": "actionsCard"
     }
   ]
