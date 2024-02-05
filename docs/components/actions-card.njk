@@ -29,14 +29,14 @@
       {% from "hmpps/components/actions/macro.njk" import actionsCard %}
 
       {% set actions = [
-        {
-        href: 'calculate-release-dates/calculation-reason',
-        title: 'Calculate release dates'
-        },
-        {
-        href: 'calculate-release-dates/select-which-approved-dates',
-        title: 'Enter an approved date'
-        }
+      {
+      href: 'calculate-release-dates/calculation-reason',
+      title: 'Calculate release dates'
+      },
+      {
+      href: 'calculate-release-dates/select-which-approved-dates',
+      title: 'Enter an approved date'
+      }
       ] %}
 
       {{ actionsCard(actions) }}
@@ -46,12 +46,14 @@
 {% endset %}
 
 {% block content %}
-  <div class="app-example--with-bottom-padding govuk-grid-column-full">
+  <div class="app-example app-example--with-bottom-padding govuk-grid-column-full">
     {{ actionsCard(actions) }}
   </div>
-  <p>The actions card component is a variation of the design from the <a class="govuk-link"
-                                                           href="https://design-system.service.gov.uk/components/summary-list/#summary-cards">summary
-      card</a> on GDS</p>
+  <div class="govuk-grid-column-full govuk-!-padding-left-0">
+    <p>The actions card component is a variation of the design from the <a class="govuk-link"
+                                                                           href="https://design-system.service.gov.uk/components/summary-list/#summary-cards">summary
+        card</a> on GDS</p>
+  </div>
 
   {{ govukTabs({
     items: [
