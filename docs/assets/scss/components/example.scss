@@ -3,4 +3,8 @@
   @include govuk-responsive-padding(4, "top");
   @include govuk-responsive-padding(4, "left");
   @include govuk-responsive-padding(4, "right");
+  &--with-bottom-padding {
+    @extend .app-example;
+    @include govuk-responsive-padding(4, "bottom");
+  }
 }
