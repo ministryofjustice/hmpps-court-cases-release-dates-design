@@ -1,0 +1,80 @@
+{% extends "legal-information-component.njk" %}
+
+{% from "govuk/components/tabs/macro.njk" import govukTabs %}
+{% from "hmpps/components/legal-information/service-header/macro.njk" import serviceHeader %}
+
+
+{% set pageTitle = 'Legal information service header' %}
+{% set activeSideNav = 'service-header' %}
+
+{% set environment = 'dev' %}
+{% set prisonNumber = 'A1234BC' %}
+
+{% set htmlCode %}
+    {% highlight "html" %}
+        {{ serviceHeader({
+            environment: environment,
+            prisonNumber: prisonNumber
+        }) }}
+
+        {{ serviceHeader({ 
+               text: 'Some custom text',
+               href: '/some-path'
+            }) }}
+    {% endhighlight %}
+{% endset %}
+
+{% set nunjucksCode %}
+    {% highlight "njk" %}
+        {% raw %}
+            {% from "hmpps/components/legal-information/service-header/macro.njk" import serviceHeader %}
+            
+            {# selects which set of environment specific service urls to use by default #}
+            {# one of; 'local', 'dev', 'pre' or 'prod' #}
+            {% set environment = 'dev' %}
+            {% set prisonNumber = 'A1234BC' %}
+            {{ serviceHeader({ 
+               environment: environment,
+               prisonNumber: prisonNumber
+            }) }}
+
+            {# the text and href can also be overriden by passing them in as parameters.#}
+            {# if none are supplied like above the text defaults to 'Court cases and release dates'.#}
+            {# the href defaults to the overview page of the hub #}
+            {{ serviceHeader({ 
+               text: 'Some custom text',
+               href: '/some-path'
+            }) }}
+        {% endraw %}
+    {% endhighlight %}
+{% endset %}
+
+{% block content %}
+    <div class="app-example">
+        {{ serviceHeader({ 
+            environment: environment
+        }) }}
+    </div>
+
+    <p>This component allows the user to know they are within the legal information service.</p>
+
+    {{ govukTabs({
+        items: [
+            {
+                label: "HTML",
+                id: "html",
+                panel: {
+                    html: htmlCode
+                }
+            },
+            {
+                label: "Nunjucks",
+                id: "nunjucks",
+                panel: {
+                    html: nunjucksCode
+                }
+            }
+        ]
+    }) }}
+
+{% endblock %}
