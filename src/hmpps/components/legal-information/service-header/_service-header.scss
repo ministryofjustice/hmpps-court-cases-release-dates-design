@@ -15,34 +15,38 @@ align-items: center;
 }
 
 @supports (margin: max(calc(0px))) {
-.service-header__container {
-  margin-right: max(15px, 15px + env(safe-area-inset-right));
-  margin-left: max(15px, 15px + env(safe-area-inset-left));
-}
-}
-@media (min-width: 40.0625em) {
-.service-header__container {
-  margin-right: 30px;
-  margin-left: 30px;
-}
-@supports (margin: max(calc(0px))) {
   .service-header__container {
-    margin-right: max(30px, 15px + env(safe-area-inset-right));
-    margin-left: max(30px, 15px + env(safe-area-inset-left));
+    margin-right: max(15px, 15px + env(safe-area-inset-right));
+    margin-left: max(15px, 15px + env(safe-area-inset-left));
   }
 }
+
+
+@media (min-width: 40.0625em) {
+  .service-header__container {
+    margin-right: 30px;
+    margin-left: 30px;
+  }
+
+  @supports (margin: max(calc(0px))) {
+    .service-header__container {
+      margin-right: max(30px, 15px + env(safe-area-inset-right));
+      margin-left: max(30px, 15px + env(safe-area-inset-left));
+    }
+  }
 }
 @media (min-width: 1230px) {
-.service-header__container {
-  margin-right: auto;
-  margin-left: auto;
-}
-@supports (margin: max(calc(0px))) {
   .service-header__container {
     margin-right: auto;
     margin-left: auto;
   }
-}
+  
+  @supports (margin: max(calc(0px))) {
+    .service-header__container {
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
 }
 
 .service-header__container a {
