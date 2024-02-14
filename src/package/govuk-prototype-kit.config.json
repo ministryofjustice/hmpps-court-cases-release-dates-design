@@ -18,6 +18,10 @@
     {
       "importFrom": "hmpps/components/legal-information/actions-card/macro.njk",
       "macroName": "actionsCard"
+    },
+    {
+      "importFrom": "hmpps/components/legal-information/service-header/macro.njk",
+      "macroName": "serviceHeader"
     }
   ]
 }

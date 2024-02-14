@@ -1,0 +1,23 @@
+
+ {% set environment = params.environment if params.environment else 'dev' %}
+
+{% set environmentHrefs = {
+    'true': {
+        local: 'http://localhost:3000/prisoner/' + params.prisonNumber + '/overview',
+        dev: 'https://custody-manager-dev.hmpps.service.justice.gov.uk/prisoner/' + params.prisonNumber + '/overview',
+        pre: 'https://custody-manager-preprod.hmpps.service.justice.gov.uk/prisoner/' + params.prisonNumber + '/overview',
+        prod: 'https://custody-manager.hmpps.service.justice.gov.uk/prisoner/' + params.prisonNumber + '/overview'
+    },
+    'false': {
+        local: 'http://localhost:3000',
+        dev: 'https://custody-manager-dev.hmpps.service.justice.gov.uk',
+        pre: 'https://custody-manager-preprod.hmpps.service.justice.gov.uk',
+        prod: 'https://custody-manager.hmpps.service.justice.gov.uk'
+    }
+} %}
+
+<div class="service-header">
+    <div class="service-header__container">
+        <a href="{{params.href if params.href else environmentHrefs[(params.prisonNumber is defined)|string][environment] }}"><span class="service-header__service-name">{{ params.text if params.text else 'Court cases and release dates' }}</span></a>
+    </div>
+</div>
