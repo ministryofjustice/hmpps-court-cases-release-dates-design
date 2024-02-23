@@ -5,7 +5,7 @@ import { ServiceHeaderConfig } from '../../../../hmpps/types'
 nunjucks.configure([
   'node_modules/govuk-frontend/dist/',
   'node_modules/@ministryofjustice/frontend/',
-  'src/hmpps/',
+  'src/',
   __dirname,
 ])
 describe('Tests for sub-navigation component', () => {
