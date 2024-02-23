@@ -1,6 +1,6 @@
 import nunjucks from 'nunjucks'
 import * as cheerio from 'cheerio'
-import { ServiceHeaderConfig } from '../../../../hmpps/types'
+import { ServiceHeaderConfig } from '../../../../@types/hmpps'
 
 nunjucks.configure([
   'node_modules/govuk-frontend/dist/',
@@ -10,7 +10,7 @@ nunjucks.configure([
 ])
 describe('Tests for sub-navigation component', () => {
   it('Should display default text and service root links when no prisoner', () => {
-    const config = new ServiceHeaderConfig('dev')
+    const config: ServiceHeaderConfig = { environment: 'dev' }
     const content = nunjucks.render('index.njk', { config })
     const $ = cheerio.load(content)
     expect($('#service-header-heading').text()).toStrictEqual('Court cases and release dates')
@@ -20,7 +20,7 @@ describe('Tests for sub-navigation component', () => {
   })
 
   it('Should display default text and service prisoner specific links when there is a prisoner', () => {
-    const config = new ServiceHeaderConfig('dev', 'ABC123')
+    const config: ServiceHeaderConfig = { environment: 'dev', prisonNumber: 'ABC123' }
     const content = nunjucks.render('index.njk', { config })
     const $ = cheerio.load(content)
     expect($('#service-header-heading').text()).toStrictEqual('Court cases and release dates')
@@ -63,9 +63,24 @@ describe('Tests for sub-navigation component', () => {
     ['pre', 'https://custody-manager-preprod.hmpps.service.justice.gov.uk'],
     ['prod', 'https://custody-manager.hmpps.service.justice.gov.uk'],
   ])('Link for %s should be %s', (env: 'local' | 'dev' | 'pre' | 'prod', expected: string) => {
-    const config = new ServiceHeaderConfig(env)
+    const config: ServiceHeaderConfig = { environment: env }
     const content = nunjucks.render('index.njk', { config })
     const $ = cheerio.load(content)
     expect($('#service-header-heading-link').attr('href')).toStrictEqual(expected)
   })
+
+  it.each([
+    ['local', 'http://localhost:3000/prisoner/ABC123/overview'],
+    ['dev', 'https://custody-manager-dev.hmpps.service.justice.gov.uk/prisoner/ABC123/overview'],
+    ['pre', 'https://custody-manager-preprod.hmpps.service.justice.gov.uk/prisoner/ABC123/overview'],
+    ['prod', 'https://custody-manager.hmpps.service.justice.gov.uk/prisoner/ABC123/overview'],
+  ])(
+    'Link for %s should be %s when there is a prison number',
+    (env: 'local' | 'dev' | 'pre' | 'prod', expected: string) => {
+      const config: ServiceHeaderConfig = { environment: env, prisonNumber: 'ABC123' }
+      const content = nunjucks.render('index.njk', { config })
+      const $ = cheerio.load(content)
+      expect($('#service-header-heading-link').attr('href')).toStrictEqual(expected)
+    },
+  )
 })
