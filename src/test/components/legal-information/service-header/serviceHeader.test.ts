@@ -1,6 +1,6 @@
 import nunjucks from 'nunjucks'
 import * as cheerio from 'cheerio'
-import { ServiceHeaderConfig } from '../../../../@types/hmpps'
+import { ServiceHeaderConfig } from '../../../../hmpps/@types/hmpps'
 
 nunjucks.configure([
   'node_modules/govuk-frontend/dist/',
@@ -41,7 +41,6 @@ describe('Tests for sub-navigation component', () => {
 
   it('Can override the link', () => {
     const config: ServiceHeaderConfig = {
-      environment: 'dev',
       href: '/my-service',
     }
     const content = nunjucks.render('index.njk', { config })
