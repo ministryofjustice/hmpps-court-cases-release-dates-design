@@ -1,6 +1,6 @@
 import nunjucks from 'nunjucks'
 import * as cheerio from 'cheerio'
-import { ServiceHeaderConfig } from '../../../../../src/hmpps/@types/hmpps'
+import { ServiceHeaderConfig } from '../../../../../src/hmpps/@types'
 
 nunjucks.configure([
   'node_modules/govuk-frontend/dist/',
