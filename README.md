@@ -83,7 +83,7 @@ Any nunjucks filters used by the component should be added to the `src/hmpps/fil
 ## Publishing components
 
 The component library is published to the node.js package repository as [hmpps-design-system-frontend](https://www.npmjs.com/package/hmpps-design-system-frontend).
-The publish workflow is triggered when a new [release](releases) is created in the repo. A new release should use semantic versioning i.e. major.minor.patch.
+The publish workflow is triggered when a new [release](https://github.com/ministryofjustice/hmpps-design-system-frontend/releases) is created in the repo. A new release should use semantic versioning i.e. major.minor.patch.
 
 | Version | Description                                                                                                                      |
 |---------|----------------------------------------------------------------------------------------------------------------------------------|
