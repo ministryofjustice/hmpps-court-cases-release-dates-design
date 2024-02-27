@@ -8,7 +8,7 @@ nunjucks.configure([
   'src/',
   __dirname,
 ])
-describe('Tests for sub-navigation component', () => {
+describe('Tests for service header component', () => {
   it('Should display default text and service root links when no prisoner', () => {
     const config: ServiceHeaderConfig = { environment: 'dev' }
     const content = nunjucks.render('index.njk', { config })
