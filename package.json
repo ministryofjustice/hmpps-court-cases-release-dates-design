@@ -41,7 +41,7 @@
       "src/**/*.{ts,js,jsx,mjs}"
     ],
     "testMatch": [
-      "<rootDir>/(src|job)/**/?(*.)(cy|test).{ts,js,jsx,mjs}"
+      "<rootDir>/(src|job|test)/**/?(*.)(cy|test).{ts,js,jsx,mjs}"
     ],
     "testEnvironment": "node",
     "reporters": [
@@ -87,6 +87,8 @@
       "prettier --write"
     ]
   },
+  "module": "./dist/@types/hmpps/index.js",
+  "types": "./dist/@types/hmpps/index.d.ts",
   "dependencies": {
     "date-fns": "^3.2.0",
     "govuk-prototype-kit": "^13.16.0"

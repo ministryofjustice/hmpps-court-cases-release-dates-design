@@ -4,7 +4,7 @@ import {
   lastNameCommaFirstName,
   nameCase,
   sentenceCase,
-} from './utils'
+} from '../../../src/hmpps/utils/utils'
 
 describe('sentence case', () => {
   it.each([
