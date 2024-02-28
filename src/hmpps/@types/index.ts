@@ -28,3 +28,9 @@ export interface MiniProfilePerson {
   cellLocation?: string
   prisonName?: string
 }
+
+export interface Action {
+  title: string
+  href: string
+  dataQa?: string
+}
