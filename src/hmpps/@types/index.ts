@@ -34,3 +34,33 @@ export interface Action {
   href: string
   dataQa?: string
 }
+
+export interface SubNavigationConfig {
+  environment: DesignSystemEnvironment
+  navigation: SubNavigation
+  prisonNumber: string
+}
+
+export interface SubNavigation {
+  activeSubNav: 'overview' | 'court-cases' | 'adjustments' | 'release-dates' | 'documents'
+  overview?: {
+    href?: string
+    enabled?: boolean
+  }
+  courtCases?: {
+    href?: string
+    enabled?: boolean
+  }
+  adjustments?: {
+    href?: string
+    enabled?: boolean
+  }
+  releaseDates?: {
+    href?: string
+    enabled?: boolean
+  }
+  documents?: {
+    href?: string
+    enabled?: boolean
+  }
+}
