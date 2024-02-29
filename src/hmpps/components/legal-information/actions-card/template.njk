@@ -3,7 +3,7 @@
     <ul class="govuk-list actions-list-list">
       <span class="govuk-heading-m actions-list-header">Actions</span>
       {% for action in actions %}
-        <li><a class="govuk-link" href="{{ action.href }}">{{ action.title }}</a></li>
+        <li><a class="govuk-link" {% if action.dataQa %} data-qa="{{ action.dataQa }}" {% endif %}href="{{ action.href }}">{{ action.title }}</a></li>
       {% endfor %}
     </ul>
   </div>
