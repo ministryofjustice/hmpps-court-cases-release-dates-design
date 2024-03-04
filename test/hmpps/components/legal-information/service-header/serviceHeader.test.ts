@@ -15,7 +15,7 @@ describe('Tests for service header component', () => {
     const $ = cheerio.load(content)
     expect($('#service-header-heading').text()).toStrictEqual('Court cases and release dates')
     expect($('#service-header-heading-link').attr('href')).toStrictEqual(
-      'https://custody-manager-dev.hmpps.service.justice.gov.uk',
+      'https://court-cases-release-dates-dev.hmpps.service.justice.gov.uk',
     )
   })
 
@@ -25,7 +25,7 @@ describe('Tests for service header component', () => {
     const $ = cheerio.load(content)
     expect($('#service-header-heading').text()).toStrictEqual('Court cases and release dates')
     expect($('#service-header-heading-link').attr('href')).toStrictEqual(
-      'https://custody-manager-dev.hmpps.service.justice.gov.uk/prisoner/ABC123/overview',
+      'https://court-cases-release-dates-dev.hmpps.service.justice.gov.uk/prisoner/ABC123/overview',
     )
   })
 
@@ -52,15 +52,15 @@ describe('Tests for service header component', () => {
     const content = nunjucks.render('index.njk', { config: {} })
     const $ = cheerio.load(content)
     expect($('#service-header-heading-link').attr('href')).toStrictEqual(
-      'https://custody-manager-dev.hmpps.service.justice.gov.uk',
+      'https://court-cases-release-dates-dev.hmpps.service.justice.gov.uk',
     )
   })
 
   it.each([
     ['local', 'http://localhost:3000'],
-    ['dev', 'https://custody-manager-dev.hmpps.service.justice.gov.uk'],
-    ['pre', 'https://custody-manager-preprod.hmpps.service.justice.gov.uk'],
-    ['prod', 'https://custody-manager.hmpps.service.justice.gov.uk'],
+    ['dev', 'https://court-cases-release-dates-dev.hmpps.service.justice.gov.uk'],
+    ['pre', 'https://court-cases-release-dates-preprod.hmpps.service.justice.gov.uk'],
+    ['prod', 'https://court-cases-release-dates.hmpps.service.justice.gov.uk'],
   ])('Link for %s should be %s', (env: 'local' | 'dev' | 'pre' | 'prod', expected: string) => {
     const config: ServiceHeaderConfig = { environment: env }
     const content = nunjucks.render('index.njk', { config })
@@ -70,9 +70,9 @@ describe('Tests for service header component', () => {
 
   it.each([
     ['local', 'http://localhost:3000/prisoner/ABC123/overview'],
-    ['dev', 'https://custody-manager-dev.hmpps.service.justice.gov.uk/prisoner/ABC123/overview'],
-    ['pre', 'https://custody-manager-preprod.hmpps.service.justice.gov.uk/prisoner/ABC123/overview'],
-    ['prod', 'https://custody-manager.hmpps.service.justice.gov.uk/prisoner/ABC123/overview'],
+    ['dev', 'https://court-cases-release-dates-dev.hmpps.service.justice.gov.uk/prisoner/ABC123/overview'],
+    ['pre', 'https://court-cases-release-dates-preprod.hmpps.service.justice.gov.uk/prisoner/ABC123/overview'],
+    ['prod', 'https://court-cases-release-dates.hmpps.service.justice.gov.uk/prisoner/ABC123/overview'],
   ])(
     'Link for %s should be %s when there is a prison number',
     (env: 'local' | 'dev' | 'pre' | 'prod', expected: string) => {
