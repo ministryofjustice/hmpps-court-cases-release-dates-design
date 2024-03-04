@@ -1,8 +1,8 @@
 name: Build and deploy Design System
 
-on:
-  push:
-    branches: [main]
+#on:
+#  push:
+#    branches: [main]
 
 jobs:
   ecr:

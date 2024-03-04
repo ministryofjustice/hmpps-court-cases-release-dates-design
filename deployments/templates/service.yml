@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: hmpps-design-system-frontend-service
+  name: hmpps-court-cases-release-dates-design-service
 spec:
   selector:
-    app: hmpps-design-system-frontend # this should match the pod label in deployment.yml
+    app: hmpps-court-cases-release-dates-design # this should match the pod label in deployment.yml
   ports:
     - name: https
       port: 8080
