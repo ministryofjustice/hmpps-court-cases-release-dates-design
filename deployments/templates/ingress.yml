@@ -9,10 +9,10 @@ spec:
   ingressClassName: default
   tls:
     - hosts:
-        - design-system.hmpps.service.justice.gov.uk
+        - court-cases-release-dates-design.hmpps.service.justice.gov.uk
       secretName: hmpps-court-cases-release-dates-design-cert
   rules:
-    - host: design-system.hmpps.service.justice.gov.uk
+    - host: court-cases-release-dates-design.hmpps.service.justice.gov.uk
       http:
         paths:
           - path: /
