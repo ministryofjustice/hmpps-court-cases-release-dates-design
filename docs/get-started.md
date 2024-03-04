@@ -18,7 +18,7 @@ Reuse as much as possible and iterate based on user needs.
 
 ## Using the Design System
 
-The [frontend components](/components) detailed in the design system are available as a [Node.js package](https://www.npmjs.com/package/hmpps-design-system-frontend).
+The [frontend components](/components) detailed in the design system are available as a [Node.js package](https://www.npmjs.com/package/hmpps-court-cases-release-dates-design).
 Installing this package is the recommended way to use the Design System in your service. You can then copy the Nunjucks code for a component and include it in your views.
 
 ### GOV UK Prototype Kit
@@ -29,10 +29,10 @@ The Node.js package is fully compatible with the [GOV UK Prototype Kit](https://
 
 There are a few additional steps when installing the Node.js package into HMPPS UI applications based on the [template](https://github.com/ministryofjustice/hmpps-template-typescript):
 
-1. Add `'/node_modules/hmpps-design-system-frontend/hmpps/assets'` and `'/node_modules/hmpps-design-system-frontend'` to the static resources configuration in `setUpStaticResources.ts`
-2. Add `'node_modules/hmpps-design-system-frontend/'` and `'node_modules/hmpps-design-system-frontend/hmpps/components/'` to `nunjucks.configure` in `nunjucksSetup.ts`
+1. Add `'/node_modules/hmpps-court-cases-release-dates-design/hmpps/assets'` and `'/node_modules/hmpps-court-cases-release-dates-design'` to the static resources configuration in `setUpStaticResources.ts`
+2. Add `'node_modules/hmpps-court-cases-release-dates-design/'` and `'node_modules/hmpps-court-cases-release-dates-design/hmpps/components/'` to `nunjucks.configure` in `nunjucksSetup.ts`
 3. Add any Nunjucks filters required for the component to `nunjucksSetup.ts` e.g. `njkEnv.addFilter('personProfileName', personProfileName)`
 
 ## Contributing to the Design System
 
-The [code repository](https://github.com/ministryofjustice/hmpps-design-system-frontend) for the Design System guides you through the steps to improve existing components and add new ones.
+The [code repository](https://github.com/ministryofjustice/hmpps-court-cases-release-dates-design) for the Design System guides you through the steps to improve existing components and add new ones.

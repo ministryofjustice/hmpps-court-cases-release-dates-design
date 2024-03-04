@@ -1,24 +1,24 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: hmpps-design-system-frontend-ingress
+  name: hmpps-court-cases-release-dates-design-ingress
   annotations:
-    external-dns.alpha.kubernetes.io/set-identifier: hmpps-design-system-frontend-ingress-${NAMESPACE}-green
+    external-dns.alpha.kubernetes.io/set-identifier: hmpps-court-cases-release-dates-design-ingress-${NAMESPACE}-green
     external-dns.alpha.kubernetes.io/aws-weight: "100"
 spec:
   ingressClassName: default
   tls:
     - hosts:
-        - design-system.hmpps.service.justice.gov.uk
-      secretName: hmpps-design-system-frontend-cert
+        - court-cases-release-dates-design.hmpps.service.justice.gov.uk
+      secretName: hmpps-court-cases-release-dates-design-cert
   rules:
-    - host: design-system.hmpps.service.justice.gov.uk
+    - host: court-cases-release-dates-design.hmpps.service.justice.gov.uk
       http:
         paths:
           - path: /
             pathType: ImplementationSpecific
             backend:
               service:
-                name: hmpps-design-system-frontend-service # this should match the metadata.name in service.yml
+                name: hmpps-court-cases-release-dates-design-service # this should match the metadata.name in service.yml
                 port:
                   number: 8080

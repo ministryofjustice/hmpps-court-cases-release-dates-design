@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hmpps-design-system-frontend-deployment
+  name: hmpps-court-cases-release-dates-design-deployment
   labels:
-    app: hmpps-design-system-frontend
+    app: hmpps-court-cases-release-dates-design
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: hmpps-design-system-frontend # this should match the selector in service.yml
+      app: hmpps-court-cases-release-dates-design # this should match the selector in service.yml
   template:
     metadata:
       labels:
-        app: hmpps-design-system-frontend # this should match the selector in service.yml
+        app: hmpps-court-cases-release-dates-design # this should match the selector in service.yml
     spec:
       containers:
-        - name: hmpps-design-system-frontend
+        - name: hmpps-court-cases-release-dates-design
           image: ${REGISTRY}/${REPOSITORY}:${IMAGE_TAG}
           ports:
             - containerPort: 8080

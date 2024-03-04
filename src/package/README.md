@@ -4,7 +4,7 @@
 
 Install the package:
 
-`npm install hmpps-design-system-frontend`
+`npm install hmpps-court-cases-release-dates-design`
 
 Add the macro to your template.html file:
 
