@@ -37,3 +37,9 @@ export const personProfileName = (person: { firstName: string; lastName: string 
 export const personDateOfBirth = (dateOfBirth: string): string => dayMonthYearForwardSlashSeparator(dateOfBirth)
 
 export const personStatus = (status: string): string => sentenceCase(status)
+
+export const hmppsFormatDate = (dateString: string, pattern: string): string => {
+  if (!dateString) return ''
+  const date = parse(dateString, 'yyyy-MM-dd', new Date())
+  return date && isValid(date) ? format(date, pattern) : dateString
+}

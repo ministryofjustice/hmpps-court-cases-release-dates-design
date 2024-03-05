@@ -1,0 +1,236 @@
+{% extends "component.njk" %}
+
+{% from "govuk/components/tabs/macro.njk" import govukTabs %}
+{% from "hmpps/components/court-cases-release-dates/latest-calculation-card/macro.njk" import latestCalculationCard %}
+
+{% set pageTitle = 'Latest calculation' %}
+{% set activeSideNav = 'latest-calculation-card' %}
+
+{% set dpsCalculation = {
+    date: "2024-06-01",
+    location: "HMP Kirkham",
+    reason: "Transfer check",
+    source: "DPS",
+    dates: [
+        {
+            id: "SLED",
+            description: "Sentence and licence expiry date",
+            date: "2036-02-19"
+        },
+        {
+            id: "CRD",
+            description: "Conditional release date",
+            date: "2034-02-19",
+            hints: [
+                {
+                    text: "Friday, 17 February 2034 when adjusted to a working day"
+                }
+            ]
+        },
+        {
+            id: "PED",
+            description: "Parole Eligibility Date",
+            date: "2028-04-21",
+            hints: [
+                {
+                    text: "This hint contains a link to some policy",
+                    href: "#"
+                }
+            ]
+        },
+        {
+            id: "ERSED",
+            description: "Early Removal Scheme Eligibility Date",
+            date: "2027-04-21"
+        }
+    ]
+} %}
+
+{% set nomisCalculation = {
+    date: "2024-06-01",
+    reason: "Transfer check",
+    source: "NOMIS",
+    dates: [
+        {
+            id: "SLED",
+            description: "Sentence and licence expiry date",
+            date: "2036-02-19"
+        },
+        {
+            id: "CRD",
+            description: "Conditional release date",
+            date: "2034-02-19",
+            hints: [
+                {
+                    text: "Friday, 17 February 2034 when adjusted to a working day"
+                }
+            ]
+        },
+        {
+            id: "PED",
+            description: "Parole Eligibility Date",
+            date: "2028-04-21"
+        },
+        {
+            id: "ERSED",
+            description: "Early Removal Scheme Eligibility Date",
+            date: "2027-04-21"
+        }
+    ]
+} %}
+
+{% set action = {
+    title: 'View details',
+    href: '#',
+    dataQa: 'my-qa-hook'
+} %}
+
+{% set htmlCode %}
+    {% highlight "html" %}
+    <h3>NOMIS</h3>
+    {{ latestCalculationCard(nomisCalculation) | safe | trim  }}
+
+    <h3>DPS</h3>
+    {{ latestCalculationCard(dpsCalculation) | safe | trim }}
+
+    <h3>DPS with action</h3>
+    {{ latestCalculationCard(dpsCalculation, action) | safe | trim }}
+    {% endhighlight %}
+{% endset %}
+
+{% set nunjucksCode %}
+    {% highlight "njk" %}
+        {% raw %}
+{% set dpsCalculation = {
+    date: "2024-06-01",
+    location: "HMP Kirkham",
+    reason: "Transfer check",
+    source: "DPS",
+    dates: [
+        {
+            id: "SLED",
+            description: "Sentence and licence expiry date",
+            date: "2036-02-19"
+        },
+        {
+            id: "CRD",
+            description: "Conditional release date",
+            date: "2034-02-19",
+            hints: [
+            {
+                text: "Friday, 17 February 2034 when adjusted to a working day"
+            }
+        ]
+        },
+        {
+            id: "PED",
+            description: "Parole Eligibility Date",
+            date: "2028-04-21",
+            hints: [
+                {
+                    text: "This hint contains a link to some policy",
+                    href: "#"
+                }
+            ]
+        },
+        {
+            id: "ERSED",
+            description: "Early Removal Scheme Eligibility Date",
+            date: "2027-04-21"
+        }
+    ]
+} %}
+
+
+{% set nomisCalculation = {
+    date: "2024-06-01",
+    reason: "Transfer check",
+    source: "NOMIS",
+    dates: [
+        {
+            id: "SLED",
+            description: "Sentence and licence expiry date",
+            date: "2036-02-19"
+        },
+        {
+            id: "CRD",
+            description: "Conditional release date",
+            date: "2034-02-19",
+            hints: [
+            {
+                text: "Friday, 17 February 2034 when adjusted to a working day"
+            }
+        ]
+        },
+        {
+            id: "PED",
+            description: "Parole Eligibility Date",
+            date: "2028-04-21"
+        },
+        {
+            id: "ERSED",
+            description: "Early Removal Scheme Eligibility Date",
+            date: "2027-04-21"
+        }
+    ]
+} %}
+
+{% set action = {
+    title: 'View details',
+    href: '#',
+    dataQa: 'my-qa-hook'
+} %}
+
+<h3>NOMIS</h3>
+{{ latestCalculationCard(nomisCalculation, action) }}
+
+<h3>DPS</h3>
+{{ latestCalculationCard(dpsCalculation) }}
+
+<h3>DPS with action</h3>
+{{ latestCalculationCard(dpsCalculation, action) }}
+        {% endraw %}
+    {% endhighlight %}
+{% endset %}
+
+{% block content %}
+    <p>The latest calculation card shows the latest calculated dates for a prisoner. It shows:</p>
+    <ul class="govuk-list govuk-list--bullet">
+        <li>The date the calculation was made</li>
+        <li>The reason for the calculation</li>
+        <li>The location the calculation was made, if available</li>
+        <li>Whether the dates where calculated using NOMIS or CRDS</li>
+        <li>Relevant actions (for DPS calculations only)</li>
+        <li>Any hints about the calculated date and links to relevant policy where necessary</li>
+    </ul>
+    <div class="app-example">
+        <h3>NOMIS</h3>
+        {{ latestCalculationCard(nomisCalculation, action) }}
+
+        <h3>DPS</h3>
+        {{ latestCalculationCard(dpsCalculation) }}
+
+        <h3>DPS with action</h3>
+        {{ latestCalculationCard(dpsCalculation, action) }}
+    </div>
+    <p>For nunjucks you will need to import the hmppsFormatDate filter from 'hmpps-court-cases-release-dates-design/hmpps/utils/utils'</p>
+    {{ govukTabs({
+        items: [
+            {
+                label: "HTML",
+                id: "html",
+                panel: {
+                    html: htmlCode
+                }
+            },
+            {
+                label: "Nunjucks",
+                id: "nunjucks",
+                panel: {
+                    html: nunjucksCode
+                }
+            }
+        ]
+    }) }}
+
+{% endblock %}

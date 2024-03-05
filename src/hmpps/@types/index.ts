@@ -64,3 +64,31 @@ export interface SubNavigation {
     enabled?: boolean
   }
 }
+
+export interface LatestCalculationConfig {
+  /**
+   * Format: date
+   * @example 1975-04-02
+   */
+  date: string
+  location?: string
+  reason: string
+  source: 'NOMIS' | 'DPS'
+  dates: LatestCalculationDate[]
+}
+
+export interface LatestCalculationDate {
+  id: string
+  description: string
+  /**
+   * Format: date
+   * @example 1975-04-02
+   */
+  date: string
+  hints?: LatestCalculationDateHint[]
+}
+
+export interface LatestCalculationDateHint {
+  text: string
+  href?: string
+}

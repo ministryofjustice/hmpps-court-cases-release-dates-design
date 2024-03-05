@@ -1,6 +1,6 @@
 const nunjucks = require('nunjucks')
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight')
-const { personDateOfBirth, personProfileName, personStatus } = require('./dist/hmpps/utils/utils')
+const { personDateOfBirth, personProfileName, personStatus, hmppsFormatDate } = require('./dist/hmpps/utils/utils')
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ 'node_modules/govuk-frontend/dist/govuk/assets': 'assets' })
@@ -16,6 +16,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('personProfileName', personProfileName)
   eleventyConfig.addFilter('personDateOfBirth', personDateOfBirth)
   eleventyConfig.addFilter('personStatus', personStatus)
+  eleventyConfig.addFilter('hmppsFormatDate', hmppsFormatDate)
 
   const njkEnv = nunjucks.configure([
     'docs/_includes/',
@@ -34,7 +35,7 @@ module.exports = function (eleventyConfig) {
 
   return {
     dir: {
-      input: "docs"
-    }
+      input: 'docs',
+    },
   }
 }
