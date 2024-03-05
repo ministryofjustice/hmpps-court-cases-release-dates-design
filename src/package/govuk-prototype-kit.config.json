@@ -1,6 +1,6 @@
 {
   "meta": {
-    "description": "HMPPS Legal and Custodial Information Frontend Components"
+    "description": "HMPPS Court cases and release dates Frontend Components"
   },
   "assets": ["/hmpps/assets"],
   "sass": ["/hmpps/all.scss"],

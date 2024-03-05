@@ -12,7 +12,7 @@ The design system documentation site contains [full instructions](https://court-
 There are two levels of components in the design system:
 
 - Top level components that are recommended for use across all HMPPS services e.g. the [mini profile](https://court-cases-release-dates-design.hmpps.service.justice.gov.uk/components/mini-profile/)
-- Product set specific components that are targetted at a subset of connected services e.g. the [legal information components](https://court-cases-release-dates-design.hmpps.service.justice.gov.uk/components/court-cases-release-dates/)
+- Product set specific components that are targetted at a subset of connected services e.g. the [court cases and release dates components](https://court-cases-release-dates-design.hmpps.service.justice.gov.uk/components/court-cases-release-dates/)
 
 Components can begin life as a product set component and then be promoted to a top level component if they are used by multiple product sets.
 Components at the top level can also be candidates for the [Ministry of Justice Design System](https://design-patterns.service.justice.gov.uk/) if they are not HMPPS specific.

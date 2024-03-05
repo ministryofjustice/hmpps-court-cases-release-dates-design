@@ -3,7 +3,7 @@
 {% from "govuk/components/tabs/macro.njk" import govukTabs %}
 {% from "hmpps/components/court-cases-release-dates/sub-navigation/macro.njk" import subNavigation %}
 
-{% set pageTitle = 'Legal information sub navigation' %}
+{% set pageTitle = 'Court cases and release dates sub navigation' %}
 {% set activeSideNav = 'sub-navigation' %}
 
 {% set navigation = {
@@ -79,7 +79,7 @@
         {{ subNavigation('dev', navigation, 'A1234BC') }}
     </div>
 
-    <p>The legal information product suite is linked together by a shared, tab based sub navigation.</p>
+    <p>The court cases and release dates product suite is linked together by a shared, tab based sub navigation.</p>
     <p>This component maintains consistency of tab names, ordering and where they link to across the product set.</p>
 
     {{ govukTabs({
