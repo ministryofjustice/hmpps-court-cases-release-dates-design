@@ -135,7 +135,7 @@ describe('Tests for sub navigation component', () => {
     expect(links.Documents).toStrictEqual('/my-documents')
   })
 
-  it('enabled = false should hide the court cases tab', () => {
+  it('enabled = false should hide the Court cases tab', () => {
     const config: SubNavigationConfig = {
       environment: 'dev',
       prisonNumber: 'ABC123',

@@ -1,10 +1,10 @@
-# HMPPS Frontend Component Library and Design System
+# HMPPS Court cases and release dates component library
 
-A shared frontend component library and design system for HMPPS services.
+A shared frontend component library and design system for court cases and release dates product set services.
 
 ## Getting started
 
-This repository contains the source for both the [frontend component library node.js package]((https://www.npmjs.com/package/hmpps-design-system-frontend)) and the [design system documentation site](https://design-system.hmpps.service.justice.gov.uk/).
+This repository contains the source for both the [frontend component library node.js package]((https://www.npmjs.com/package/hmpps-court-cases-release-dates-design)) and the [design system documentation site](https://design-system.hmpps.service.justice.gov.uk/).
 The design system documentation site contains [full instructions](https://design-system.hmpps.service.justice.gov.uk/get-started/) for using the [components](https://design-system.hmpps.service.justice.gov.uk/components/) in your service or prototype.
 
 ## Top level and product set components
@@ -12,7 +12,7 @@ The design system documentation site contains [full instructions](https://design
 There are two levels of components in the design system:
 
 - Top level components that are recommended for use across all HMPPS services e.g. the [mini profile](https://design-system.hmpps.service.justice.gov.uk/components/mini-profile/)
-- Product set specific components that are targetted at a subset of connected services e.g. the [legal information components](https://design-system.hmpps.service.justice.gov.uk/components/legal-information/)
+- Product set specific components that are targetted at a subset of connected services e.g. the [legal information components](https://design-system.hmpps.service.justice.gov.uk/components/court-cases-release-dates/)
 
 Components can begin life as a product set component and then be promoted to a top level component if they are used by multiple product sets.
 Components at the top level can also be candidates for the [Ministry of Justice Design System](https://design-patterns.service.justice.gov.uk/) if they are not HMPPS specific.
@@ -82,8 +82,8 @@ Any nunjucks filters used by the component should be added to the `src/hmpps/fil
 
 ## Publishing components
 
-The component library is published to the node.js package repository as [hmpps-design-system-frontend](https://www.npmjs.com/package/hmpps-design-system-frontend).
-The publish workflow is triggered when a new [release](https://github.com/ministryofjustice/hmpps-design-system-frontend/releases) is created in the repo. A new release should use semantic versioning i.e. major.minor.patch.
+The component library is published to the node.js package repository as [hmpps-court-cases-release-dates-design](https://www.npmjs.com/package/hmpps-court-cases-release-dates-design).
+The publish workflow is triggered when a new [release](https://github.com/ministryofjustice/hmpps-court-cases-release-dates-design/releases) is created in the repo. A new release should use semantic versioning i.e. major.minor.patch.
 
 | Version | Description                                                                                                                      |
 |---------|----------------------------------------------------------------------------------------------------------------------------------|
