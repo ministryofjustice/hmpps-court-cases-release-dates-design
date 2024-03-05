@@ -4,15 +4,15 @@ A shared frontend component library and design system for court cases and releas
 
 ## Getting started
 
-This repository contains the source for both the [frontend component library node.js package]((https://www.npmjs.com/package/hmpps-court-cases-release-dates-design)) and the [design system documentation site](https://design-system.hmpps.service.justice.gov.uk/).
-The design system documentation site contains [full instructions](https://design-system.hmpps.service.justice.gov.uk/get-started/) for using the [components](https://design-system.hmpps.service.justice.gov.uk/components/) in your service or prototype.
+This repository contains the source for both the [frontend component library node.js package]((https://www.npmjs.com/package/hmpps-court-cases-release-dates-design)) and the [design system documentation site](https://court-cases-release-dates-design.hmpps.service.justice.gov.uk/).
+The design system documentation site contains [full instructions](https://court-cases-release-dates-design.hmpps.service.justice.gov.uk/get-started/) for using the [components](https://court-cases-release-dates-design.hmpps.service.justice.gov.uk/components/) in your service or prototype.
 
 ## Top level and product set components
 
 There are two levels of components in the design system:
 
-- Top level components that are recommended for use across all HMPPS services e.g. the [mini profile](https://design-system.hmpps.service.justice.gov.uk/components/mini-profile/)
-- Product set specific components that are targetted at a subset of connected services e.g. the [legal information components](https://design-system.hmpps.service.justice.gov.uk/components/court-cases-release-dates/)
+- Top level components that are recommended for use across all HMPPS services e.g. the [mini profile](https://court-cases-release-dates-design.hmpps.service.justice.gov.uk/components/mini-profile/)
+- Product set specific components that are targetted at a subset of connected services e.g. the [legal information components](https://court-cases-release-dates-design.hmpps.service.justice.gov.uk/components/court-cases-release-dates/)
 
 Components can begin life as a product set component and then be promoted to a top level component if they are used by multiple product sets.
 Components at the top level can also be candidates for the [Ministry of Justice Design System](https://design-patterns.service.justice.gov.uk/) if they are not HMPPS specific.
