@@ -1,0 +1,41 @@
+{% macro _actionLink(action) %}
+    <a class="govuk-link" href="{{ action.href }}"{% if action.dataQa %} data-qa="{{ action.dataQa }}"{% endif %}>{{ action.title }}</a>
+{% endmacro %}
+{% macro _summaryCard(latestCalculation, action) %}
+    {% set primaryHeading %}{% if latestCalculation.location %}{{ latestCalculation.date | hmppsFormatDate('dd LLLL yyyy') }} at {{ latestCalculation.location }}{% else %}{{ latestCalculation.date | hmppsFormatDate('dd LLLL yyyy') }}{% endif %}{% endset %}
+    {% set secondaryHeading %}Calculation reason: {{ latestCalculation.reason }}{% endset %}
+    <div class="govuk-summary-card latest-calculation-card">
+        <div class="govuk-summary-card__title-wrapper">
+            <h2 class="govuk-summary-card__title">
+                {{ primaryHeading }}<br>
+                <span class="govuk-body">{{ secondaryHeading }}</span>
+            </h2>
+            <div class="govuk-summary-card__actions">
+                {% if latestCalculation.source == 'NOMIS' %}<div><span class="moj-badge moj-badge--grey">NOMIS</span></div>{% elseif action %}{{ _actionLink(action) }}{% endif %}
+            </div>
+        </div>
+        <div class="govuk-summary-card__content">
+            {{ caller() | trim }}
+        </div>
+    </div>
+{% endmacro %}
+{% macro _hints(hints) %}
+    {% for hint in hints %}{% if hint %}<p class="govuk-!-font-size-16 govuk-hint release-date-hint">{% if hint.href %}<a class="govuk-link release-date-hint-link" rel="noreferrer noopener" target="_blank" href="{{ hint.href }}" target="new">{% endif %}{{ hint.text }}{% if hint.href %} (opens in new tab)</a>{% endif %}</p>{% endif %}{% endfor %}
+{% endmacro %}
+{% macro _summaryRow(releaseDate) %}
+    <div class="govuk-summary-list__row" data-qa="latest-calculation-card-release-date-{{ releaseDate.id }}">
+        <dt class="govuk-summary-list__key release-dates-key govuk-!-font-size-24"><span class="release-dates-id">{{ releaseDate.id }}</span><p class="govuk-!-font-size-16 govuk-hint release-date-description">{{ releaseDate.description }}</p></dt>
+        <dd class="govuk-summary-list__value release-dates-value">
+            <span class="release-date-formatted">{{ releaseDate.date | hmppsFormatDate('cccc, dd LLLL yyyy') }}</span>{% if releaseDate.hints | length %}
+            {{ _hints(releaseDate.hints) | safe | trim }}{% endif %}
+        </dd>
+    </div>
+{%  endmacro %}
+{% set summaryList %}
+    <dl class="govuk-summary-list release-dates-list">
+        {% for row in latestCalculation.dates %}{{ _summaryRow(row) | safe | indent(8) }}{% endfor %}
+    </dl>
+{% endset %}
+{% call _summaryCard(latestCalculation, action) %}
+    {{ summaryList | safe | trim | indent(4) }}
+{% endcall %}
