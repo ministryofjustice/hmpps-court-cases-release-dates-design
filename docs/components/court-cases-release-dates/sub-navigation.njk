@@ -1,9 +1,9 @@
-{% extends "legal-information-component.njk" %}
+{% extends "court-cases-release-dates-component.njk" %}
 
 {% from "govuk/components/tabs/macro.njk" import govukTabs %}
-{% from "hmpps/components/legal-information/sub-navigation/macro.njk" import subNavigation %}
+{% from "hmpps/components/court-cases-release-dates/sub-navigation/macro.njk" import subNavigation %}
 
-{% set pageTitle = 'Legal information sub navigation' %}
+{% set pageTitle = 'Court cases and release dates sub navigation' %}
 {% set activeSideNav = 'sub-navigation' %}
 
 {% set navigation = {
@@ -34,7 +34,7 @@
 {% set nunjucksCode %}
     {% highlight "njk" %}
         {% raw %}
-{% from "hmpps/components/legal-information/sub-navigation/macro.njk" import subNavigation %}
+{% from "hmpps/components/court-cases-release-dates/sub-navigation/macro.njk" import subNavigation %}
 
 {# selects which set of environment specific service urls to use by default #}
 {# one of; 'local', 'dev', 'pre' or 'prod' #}
@@ -79,7 +79,7 @@
         {{ subNavigation('dev', navigation, 'A1234BC') }}
     </div>
 
-    <p>The legal information product suite is linked together by a shared, tab based sub navigation.</p>
+    <p>The court cases and release dates product suite is linked together by a shared, tab based sub navigation.</p>
     <p>This component maintains consistency of tab names, ordering and where they link to across the product set.</p>
 
     {{ govukTabs({

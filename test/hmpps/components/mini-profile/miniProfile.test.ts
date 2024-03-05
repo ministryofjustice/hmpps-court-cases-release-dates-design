@@ -1,8 +1,7 @@
 import nunjucks from 'nunjucks'
 import * as cheerio from 'cheerio'
 import { MiniProfileConfig } from '../../../../src/hmpps/@types'
-import { personProfileName } from '../../../../src/hmpps/utils/utils'
-import { personDateOfBirth, personStatus } from '../../../../dist/hmpps/utils/utils'
+import { personProfileName, personDateOfBirth, personStatus } from '../../../../src/hmpps/utils/utils'
 
 const njkEnv = nunjucks.configure([
   'node_modules/govuk-frontend/dist/',
@@ -94,9 +93,9 @@ describe('Tests for mini profile component', () => {
       formattedStatus: $('[data-qa=mini-profile-status]').text(),
       cellLocation: $('[data-qa=mini-profile-cell-location]').text(),
       prisonName: $('[data-qa=mini-profile-prison-name]').text(),
-      imageUrl: img.attr('src'),
-      imageAltText: img.attr('alt'),
-      profileUrl: profileLink.attr('href'),
+      imageUrl: img.attr('src') as string,
+      imageAltText: img.attr('alt') as string,
+      profileUrl: profileLink.attr('href') as string,
     }
   }
 })

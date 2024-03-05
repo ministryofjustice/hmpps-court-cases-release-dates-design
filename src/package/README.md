@@ -1,4 +1,4 @@
-# HMPPS Design System Frontend Components
+# HMPPS Court cases and release dates frontend
 
 ## Add to prototype
 
@@ -23,5 +23,5 @@ Use the macro:
     cellLocation: 'A-1-1'
 } %}
 
-{{ miniProfile(person, '/plugin-assets/hmpps-design-system-frontend/hmpps/assets/images/prisoner-profile-image.png', '#') }}
+{{ miniProfile(person, '/plugin-assets/hmpps-court-cases-release-dates-design/hmpps/assets/images/prisoner-profile-image.png', '#') }}
 ```

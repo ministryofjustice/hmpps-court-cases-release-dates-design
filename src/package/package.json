@@ -1,7 +1,7 @@
 {
   "name": "hmpps-court-cases-release-dates-design",
-  "description": "A shared UI component library for HMPPS services",
-  "version": "1.0.3",
+  "description": "A shared frontend library for HMPPS Court cases and release dates product set services",
+  "version": "2.0.0",
   "author": "HMPPS Digital Studio",
   "license": "MIT",
   "dependencies": {

@@ -1,10 +1,10 @@
-{% extends "legal-information-component.njk" %}
+{% extends "court-cases-release-dates-component.njk" %}
 
 {% from "govuk/components/tabs/macro.njk" import govukTabs %}
-{% from "hmpps/components/legal-information/service-header/macro.njk" import serviceHeader %}
+{% from "hmpps/components/court-cases-release-dates/service-header/macro.njk" import serviceHeader %}
 
 
-{% set pageTitle = 'Legal information service header' %}
+{% set pageTitle = 'Court cases and release dates service header' %}
 {% set activeSideNav = 'service-header' %}
 
 {% set environment = 'dev' %}
@@ -27,7 +27,7 @@
 {% set nunjucksCode %}
     {% highlight "njk" %}
         {% raw %}
-            {% from "hmpps/components/legal-information/service-header/macro.njk" import serviceHeader %}
+            {% from "hmpps/components/court-cases-release-dates/service-header/macro.njk" import serviceHeader %}
             
             {# selects which set of environment specific service urls to use by default #}
             {# one of; 'local', 'dev', 'pre' or 'prod' #}
@@ -56,7 +56,7 @@
         }) }}
     </div>
 
-    <p>This component allows the user to know they are within the legal information service.</p>
+    <p>This component allows the user to know they are within the court cases and release dates service.</p>
 
     {{ govukTabs({
         items: [

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "description": "HMPPS Legal and Custodial Information Frontend Components"
+    "description": "HMPPS Court cases and release dates Frontend Components"
   },
   "assets": ["/hmpps/assets"],
   "sass": ["/hmpps/all.scss"],
@@ -12,15 +12,15 @@
       "macroName": "miniProfile"
     },
     {
-      "importFrom": "hmpps/components/legal-information/sub-navigation/macro.njk",
+      "importFrom": "hmpps/components/court-cases-release-dates/sub-navigation/macro.njk",
       "macroName": "subNavigation"
     },
     {
-      "importFrom": "hmpps/components/legal-information/actions-card/macro.njk",
+      "importFrom": "hmpps/components/court-cases-release-dates/actions-card/macro.njk",
       "macroName": "actionsCard"
     },
     {
-      "importFrom": "hmpps/components/legal-information/service-header/macro.njk",
+      "importFrom": "hmpps/components/court-cases-release-dates/service-header/macro.njk",
       "macroName": "serviceHeader"
     }
   ]
