@@ -11,7 +11,7 @@ nunjucks.configure([
 describe('Tests for sub navigation component', () => {
   it.each([
     [
-      'local',
+      'local' as DesignSystemEnvironment,
       'http://localhost:3000/prisoner/ABC123/overview',
       'http://localhost:3000/person/ABC123',
       'http://localhost:3000/ABC123',
@@ -19,7 +19,7 @@ describe('Tests for sub navigation component', () => {
       'http://localhost:3000/prisoner/ABC123/documents',
     ],
     [
-      'dev',
+      'dev' as DesignSystemEnvironment,
       'https://court-cases-release-dates-dev.hmpps.service.justice.gov.uk/prisoner/ABC123/overview',
       'https://remand-and-sentencing-dev.hmpps.service.justice.gov.uk/person/ABC123',
       'https://adjust-release-dates-dev.hmpps.service.justice.gov.uk/ABC123',
@@ -27,7 +27,7 @@ describe('Tests for sub navigation component', () => {
       'https://court-cases-release-dates-dev.hmpps.service.justice.gov.uk/prisoner/ABC123/documents',
     ],
     [
-      'pre',
+      'pre' as DesignSystemEnvironment,
       'https://court-cases-release-dates-preprod.hmpps.service.justice.gov.uk/prisoner/ABC123/overview',
       'https://remand-and-sentencing-preprod.hmpps.service.justice.gov.uk/person/ABC123',
       'https://adjust-release-dates-preprod.hmpps.service.justice.gov.uk/ABC123',
@@ -35,7 +35,7 @@ describe('Tests for sub navigation component', () => {
       'https://court-cases-release-dates-preprod.hmpps.service.justice.gov.uk/prisoner/ABC123/documents',
     ],
     [
-      'prod',
+      'prod' as DesignSystemEnvironment,
       'https://court-cases-release-dates.hmpps.service.justice.gov.uk/prisoner/ABC123/overview',
       'https://remand-and-sentencing.hmpps.service.justice.gov.uk/person/ABC123',
       'https://adjust-release-dates.hmpps.service.justice.gov.uk/ABC123',

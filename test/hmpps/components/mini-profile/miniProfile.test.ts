@@ -93,9 +93,9 @@ describe('Tests for mini profile component', () => {
       formattedStatus: $('[data-qa=mini-profile-status]').text(),
       cellLocation: $('[data-qa=mini-profile-cell-location]').text(),
       prisonName: $('[data-qa=mini-profile-prison-name]').text(),
-      imageUrl: img.attr('src'),
-      imageAltText: img.attr('alt'),
-      profileUrl: profileLink.attr('href'),
+      imageUrl: img.attr('src') as string,
+      imageAltText: img.attr('alt') as string,
+      profileUrl: profileLink.attr('href') as string,
     }
   }
 })
