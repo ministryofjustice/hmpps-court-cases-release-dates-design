@@ -1,5 +1,5 @@
 {% macro _actionLink(action) %}
-    <a class="govuk-link" href="{{ action.href }}"{% if action.dataQa %} data-qa="{{ action.dataQa }}"{% endif %}>{{ action.title }}</a>
+    <li><a class="govuk-link" href="{{ action.href }}"{% if action.dataQa %} data-qa="{{ action.dataQa }}"{% endif %}>{{ action.title }}</a></li>
 {% endmacro %}
 {% macro _summaryCard(latestCalculation, action) %}
     {% set primaryHeading %}{% if latestCalculation.location %}{{ latestCalculation.date | hmppsFormatDate('dd LLLL yyyy') }} at {{ latestCalculation.location }}{% else %}{{ latestCalculation.date | hmppsFormatDate('dd LLLL yyyy') }}{% endif %}{% endset %}
@@ -10,9 +10,9 @@
                 {{ primaryHeading }}<br>
                 <span class="govuk-body">{{ secondaryHeading }}</span>
             </h2>
-            <div class="govuk-summary-card__actions">
+            <ul class="govuk-summary-card__actions">
                 {% if latestCalculation.source == 'NOMIS' %}<div><span class="moj-badge moj-badge--grey">NOMIS</span></div>{% elseif action %}{{ _actionLink(action) }}{% endif %}
-            </div>
+            </ul>
         </div>
         <div class="govuk-summary-card__content">
             {{ caller() | trim }}
