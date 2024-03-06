@@ -105,15 +105,17 @@ describe('Tests for sub navigation component', () => {
       },
     }
     const content = nunjucks.render('index.njk', config)
+    const $ = cheerio.load(content)
     const links = extractLinks(content)
     expect(links.Overview).toStrictEqual('/my-overview')
     expect(links['Court cases']).toStrictEqual('/my-courtCases')
     expect(links.Adjustments).toStrictEqual('/my-adjustments')
     expect(links['Calculations and release dates']).toStrictEqual('/my-releaseDates')
     expect(links.Documents).toStrictEqual('/my-documents')
+    expect($('li').length).toStrictEqual(5)
   })
 
-  it('enabled = false should hide the overview tab', () => {
+  it('enabled = false should not render the overview tab', () => {
     const config: SubNavigationConfig = {
       environment: 'dev',
       prisonNumber: 'ABC123',
@@ -127,15 +129,17 @@ describe('Tests for sub navigation component', () => {
       },
     }
     const content = nunjucks.render('index.njk', config)
+    const $ = cheerio.load(content)
     const links = extractLinks(content)
     expect(links.Overview).toBeUndefined()
     expect(links['Court cases']).toStrictEqual('/my-courtCases')
     expect(links.Adjustments).toStrictEqual('/my-adjustments')
     expect(links['Calculations and release dates']).toStrictEqual('/my-releaseDates')
     expect(links.Documents).toStrictEqual('/my-documents')
+    expect($('li').length).toStrictEqual(4)
   })
 
-  it('enabled = false should hide the Court cases tab', () => {
+  it('enabled = false should not render the Court cases tab', () => {
     const config: SubNavigationConfig = {
       environment: 'dev',
       prisonNumber: 'ABC123',
@@ -149,15 +153,17 @@ describe('Tests for sub navigation component', () => {
       },
     }
     const content = nunjucks.render('index.njk', config)
+    const $ = cheerio.load(content)
     const links = extractLinks(content)
     expect(links.Overview).toStrictEqual('/my-overview')
     expect(links['Court cases']).toBeUndefined()
     expect(links.Adjustments).toStrictEqual('/my-adjustments')
     expect(links['Calculations and release dates']).toStrictEqual('/my-releaseDates')
     expect(links.Documents).toStrictEqual('/my-documents')
+    expect($('li').length).toStrictEqual(4)
   })
 
-  it('enabled = false should hide the adjustments tab', () => {
+  it('enabled = false should not render the adjustments tab', () => {
     const config: SubNavigationConfig = {
       environment: 'dev',
       prisonNumber: 'ABC123',
@@ -171,15 +177,17 @@ describe('Tests for sub navigation component', () => {
       },
     }
     const content = nunjucks.render('index.njk', config)
+    const $ = cheerio.load(content)
     const links = extractLinks(content)
     expect(links.Overview).toStrictEqual('/my-overview')
     expect(links['Court cases']).toStrictEqual('/my-courtCases')
     expect(links.Adjustments).toBeUndefined()
     expect(links['Calculations and release dates']).toStrictEqual('/my-releaseDates')
     expect(links.Documents).toStrictEqual('/my-documents')
+    expect($('li').length).toStrictEqual(4)
   })
 
-  it('enabled = false should hide the release dates tab', () => {
+  it('enabled = false should not render the release dates tab', () => {
     const config: SubNavigationConfig = {
       environment: 'dev',
       prisonNumber: 'ABC123',
@@ -193,15 +201,17 @@ describe('Tests for sub navigation component', () => {
       },
     }
     const content = nunjucks.render('index.njk', config)
+    const $ = cheerio.load(content)
     const links = extractLinks(content)
     expect(links.Overview).toStrictEqual('/my-overview')
     expect(links['Court cases']).toStrictEqual('/my-courtCases')
     expect(links.Adjustments).toStrictEqual('/my-adjustments')
     expect(links['Calculations and release dates']).toBeUndefined()
     expect(links.Documents).toStrictEqual('/my-documents')
+    expect($('li').length).toStrictEqual(4)
   })
 
-  it('enabled = false should hide the documents tab', () => {
+  it('enabled = false should not render the documents tab', () => {
     const config: SubNavigationConfig = {
       environment: 'dev',
       prisonNumber: 'ABC123',
@@ -215,12 +225,14 @@ describe('Tests for sub navigation component', () => {
       },
     }
     const content = nunjucks.render('index.njk', config)
+    const $ = cheerio.load(content)
     const links = extractLinks(content)
     expect(links.Overview).toStrictEqual('/my-overview')
     expect(links['Court cases']).toStrictEqual('/my-courtCases')
     expect(links.Adjustments).toStrictEqual('/my-adjustments')
     expect(links['Calculations and release dates']).toStrictEqual('/my-releaseDates')
     expect(links.Documents).toBeUndefined()
+    expect($('li').length).toStrictEqual(4)
   })
 
   it('should highlight the active tab', () => {
