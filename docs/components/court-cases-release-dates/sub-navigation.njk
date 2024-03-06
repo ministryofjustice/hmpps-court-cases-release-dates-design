@@ -12,7 +12,8 @@
         href: '#overview'
     },
     courtCases: {
-        href: '#court-cases'
+        href: '#court-cases',
+        enabled: false
     },
     adjustments: {
         href: '#adjustments'
@@ -21,7 +22,8 @@
         href: '#release-dates'
     },
     documents: {
-        href: '#documents'
+        href: '#documents',
+        enabled: false
     }
 } %}
 
@@ -43,6 +45,7 @@
 {# activeSubNav selects which tab is highlighted as active #}
 {# it is required and should be one of; 'overview', 'court-cases', 'adjustments', 'release-dates' or 'documents' #}
 {# all the other properties are optional and support overriding the environment specific service urls and removing tabs #}
+{# currently court cases and document pages are not released to live so make sure these tabs are set to enabled false #}
 {% set navigation = {
     activeSubNav: 'overview',
     overview: {
@@ -51,7 +54,7 @@
     },
     courtCases: {
         href: '',
-        enabled: true
+        enabled: false
     },
     adjustments: {
         href: '',
@@ -63,7 +66,7 @@
     },
     documents: {
         href: '',
-        enabled: true
+        enabled: false
     }
 } %}
 
