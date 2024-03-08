@@ -33,7 +33,7 @@ describe('Tests for mini profile component', () => {
       prisonerNumber: 'ABC123',
       formattedName: 'Rogers, Steve',
       formattedDob: '15/06/1982',
-      formattedStatus: 'Active in',
+      status: 'ACTIVE IN',
       prisonName: 'HMP Leeds',
       cellLocation: 'A-1-002',
       profileUrl: '/person-profile/ABC123',
@@ -60,7 +60,7 @@ describe('Tests for mini profile component', () => {
       prisonerNumber: 'ABC123',
       formattedName: 'Rogers, Steve',
       formattedDob: '15/06/1982',
-      formattedStatus: 'Active in',
+      status: 'ACTIVE IN',
       prisonName: '',
       cellLocation: '',
       profileUrl: '/person-profile/ABC123',
@@ -74,7 +74,7 @@ describe('Tests for mini profile component', () => {
     prisonerNumber: string
     formattedName: string
     formattedDob: string
-    formattedStatus: string
+    status: string
     cellLocation: string
     prisonName: string
     imageUrl: string
@@ -90,7 +90,7 @@ describe('Tests for mini profile component', () => {
       prisonerNumber: $('[data-qa=mini-profile-prisoner-number]').text(),
       formattedName: profileLink.text(),
       formattedDob: $('[data-qa=mini-profile-dob]').text(),
-      formattedStatus: $('[data-qa=mini-profile-status]').text(),
+      status: $('[data-qa=mini-profile-status]').text(),
       cellLocation: $('[data-qa=mini-profile-cell-location]').text(),
       prisonName: $('[data-qa=mini-profile-prison-name]').text(),
       imageUrl: img.attr('src') as string,

@@ -11,7 +11,7 @@
     lastName: 'LAST',
     prisonerNumber: 'A1234BC',
     dateOfBirth: '1998-09-27',
-    status: 'ACTIVE IN',
+    status: 'Released',
     prisonName: 'HMP Prison',
     cellLocation: 'A-1-1'
 } %}
@@ -32,7 +32,7 @@
     lastName: 'LAST',
     prisonerNumber: 'A1234BC',
     dateOfBirth: '1998-09-27',
-    status: 'ACTIVE IN',
+    status: 'Released',
     prisonName: 'HMP Prison',
     cellLocation: 'A-1-1'
 } %}
@@ -45,11 +45,10 @@
 
     {% highlight "njk" %}
         {% raw %}
-import { personDateOfBirth, personProfileName, personStatus } from 'hmpps-court-cases-release-dates-design/hmpps/utils/utils'
+import { personDateOfBirth, personProfileName } from 'hmpps-court-cases-release-dates-design/hmpps/utils/utils'
 
 njkEnv.addFilter('personProfileName', personProfileName)
 njkEnv.addFilter('personDateOfBirth', personDateOfBirth)
-njkEnv.addFilter('personStatus', personStatus)
         {% endraw %}
     {% endhighlight %}
 {% endset %}
