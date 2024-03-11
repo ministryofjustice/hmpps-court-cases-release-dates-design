@@ -92,3 +92,33 @@ export interface LatestCalculationDateHint {
   text: string
   href?: string
 }
+
+export interface FooterConfig {
+  environment?: DesignSystemEnvironment
+  support?: {
+    href?: string
+    text?: string
+  }
+  feedback?: {
+    href?: string
+    text?: string
+  }
+  accessibilityStatement?: {
+    href?: string
+    text?: string
+  }
+  termsConditions?: {
+    href?: string
+    text?: string
+  }
+  privacyPolicy?: {
+    href?: string
+    text?: string
+  }
+  cookiesPolicy?: {
+    href?: string
+    text?: string
+  }
+  classes?: string
+  attributes?: Record<string, never>
+}

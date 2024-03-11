@@ -1,0 +1,92 @@
+
+
+
+{% set environment = params.environment if params.environment else 'dev' %}
+
+{% set environmentHrefs = {
+    local: {
+        checkMyDiary: 'http://localhost:3000/checkMyDiary',
+        submitIntelligenceReport: 'http://localhost:3000/submitIntelligenceReport',
+        dps: 'http://localhost:3000/dps'
+    },
+    dev: {
+        checkMyDiary: 'https://check-my-diary-dev.prison.service.justice.gov.uk?fromDPS=true',
+        submitIntelligenceReport: 'https://submit-a-mercury-report-dev.hmpps.service.justice.gov.uk',
+        dps: 'https://digital-dev.prison.service.justice.gov.uk'
+    },
+    pre: {
+        checkMyDiary: 'https://check-my-diary-preprod.prison.service.justice.gov.uk?fromDPS=true',
+        submitIntelligenceReport: 'https://submit-a-mercury-report-preprod.hmpps.service.justice.gov.uk',
+        dps: 'https://digital-preprod.prison.service.justice.gov.uk'
+    },
+    prod: {
+        checkMyDiary: 'https://checkmydiary.service.justice.gov.uk?fromDPS=true',
+        submitIntelligenceReport: 'https://submit-a-mercury-report.hmpps.service.justice.gov.uk',
+        dps: 'digital.prison.service.justice.gov.uk'
+    }
+} %}
+
+
+
+
+<footer class="connect-dps-common-footer govuk-!-display-none-print {%- if params.classes %} {{ params.classes }}{% endif %}" role="contentinfo" {%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+    <div class="govuk-width-container">
+        <div class="govuk-grid-row">
+            <div id="connect-dps-common-footer-services" class="govuk-grid-column-three-quarters connect-dps-common-footer__services-menu">
+                <h2>Services</h2>
+                <ul class="govuk-list">
+                        <li><a id="footer-check-my-diary-link" class="connect-dps-common-footer__link" href="{{ environmentHrefs[environment].checkMyDiary }}">Check my diary</a></li>
+                        <li><a id="footer-submit-intelligence-report-link" class="connect-dps-common-footer__link" href="{{ environmentHrefs[environment].submitIntelligenceReport }}">Submit an Intelligence Report</a></li>
+                    
+                </ul>
+            </div>
+            <div class="govuk-grid-column-one-quarter">
+                <div class="connect-dps-common-footer__help">
+                    <h2>Support</h2>
+                    <p><a id="footer-support-link" class="connect-dps-common-footer__link" target="_blank" href="{{ params.support.href if params.support.href else 'mailto:calculatereleasedates@digital.justice.co.uk' }}">{{params.support.text if params.support.text else 'Email the specialist support team' }}</a> for help.</p>
+                </div>
+            </div>
+        </div>
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+                <div class="connect-dps-common-footer__support-links">
+                    <h2 class="govuk-visually-hidden">Support links</h2>
+
+                    <ul class="connect-dps-common-footer__inline-list">
+                        <li class="connect-dps-common-footer__inline-list-item">
+                            <a id="footer-feedback-link" class="connect-dps-common-footer__link" href="{{params.feedback.href if params.feedback.href else 'https://eu.surveymonkey.com/r/Z2MBZZ3' }}" target="_blank" referrerpolicy="no-referrer" rel="noopener">
+                                {{params.feedback.text if params.feedback.text else 'Feedback (opens in a new tab)' }} 
+                            </a>
+                        </li>
+
+                        
+                            <li class="connect-dps-common-footer__inline-list-item">
+                                <a id="footer-accessibility-statement-link" class="connect-dps-common-footer__link" href="{{ params.accessibilityStatement.href if params.accessibilityStatement.href else environmentHrefs[environment].dps + '/accessibility-statement'}}">
+                                    {{params.accessibilityStatement.text if params.accessibilityStatement.text else 'Accessibility' }}
+                                </a>
+                            </li>
+                        
+                            <li class="connect-dps-common-footer__inline-list-item">
+                                <a id="footer-terms-conditions-link" class="connect-dps-common-footer__link" href="{{ params.termsConditions.href if params.termsConditions.href else environmentHrefs[environment].dps + '/terms-and-conditions'}}">
+                                   {{params.termsConditions.text if params.termsConditions.text else 'Terms and conditions'}}
+                                </a>
+                            </li>
+                        
+                            <li class="connect-dps-common-footer__inline-list-item">
+                                <a id="footer-privacy-policy-link" class="connect-dps-common-footer__link" href="{{ params.privacyPolicy.href if params.privacyPolicy.href else environmentHrefs[environment].dps + '/privacy-policy'}}">
+                                    {{params.privacyPolicy.text if params.privacyPolicy.text else 'Privacy policy'}}
+                                </a>
+                            </li>
+                        
+                            <li class="connect-dps-common-footer__inline-list-item">
+                                <a id="footer-cookies-link" class="connect-dps-common-footer__link" href="{{ params.cookiesPolicy.href if params.cookiesPolicy.href else environmentHrefs[environment].dps + '/cookies-policy'}}">
+                                   {{params.cookiesPolicy.text if params.cookiesPolicy.text else 'Cookies policy'}}
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
