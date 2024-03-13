@@ -83,7 +83,7 @@ describe('Tests for footer component', () => {
     const $ = cheerio.load(content)
     expect($('#footer-terms-conditions-link').text().trim()).toStrictEqual('Terms and conditions')
     expect($('#footer-terms-conditions-link').attr('href')).toStrictEqual(
-      'https://digital-dev.prison.service.justice.gov.uk/terms-and-conditions',
+      'https://dps-dev.prison.service.justice.gov.uk/terms-and-conditions',
     )
   })
 
@@ -107,7 +107,7 @@ describe('Tests for footer component', () => {
     const $ = cheerio.load(content)
     expect($('#footer-privacy-policy-link').text().trim()).toStrictEqual('Privacy policy')
     expect($('#footer-privacy-policy-link').attr('href')).toStrictEqual(
-      'https://digital-dev.prison.service.justice.gov.uk/privacy-policy',
+      'https://dps-dev.prison.service.justice.gov.uk/privacy-policy',
     )
   })
 
@@ -131,7 +131,7 @@ describe('Tests for footer component', () => {
     const $ = cheerio.load(content)
     expect($('#footer-cookies-link').text().trim()).toStrictEqual('Cookies policy')
     expect($('#footer-cookies-link').attr('href')).toStrictEqual(
-      'https://digital-dev.prison.service.justice.gov.uk/cookies-policy',
+      'https://dps-dev.prison.service.justice.gov.uk/cookies-policy',
     )
   })
 
