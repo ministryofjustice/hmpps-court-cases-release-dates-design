@@ -36,7 +36,7 @@ describe('Tests for latest calculation date component', () => {
       date: '2024-06-01',
       location: 'HMP Kirkham',
       reason: 'Transfer check',
-      source: 'DPS',
+      source: 'CRDS',
       dates: [],
     }
     const content = nunjucks.render('index.njk', { latestCalculation })
@@ -65,7 +65,7 @@ describe('Tests for latest calculation date component', () => {
     const latestCalculation: LatestCalculationConfig = {
       date: '2024-06-01',
       reason: 'Transfer check',
-      source: 'DPS',
+      source: 'CRDS',
       dates: [],
     }
     const content = nunjucks.render('index.njk', { latestCalculation })
@@ -77,7 +77,7 @@ describe('Tests for latest calculation date component', () => {
     const latestCalculation: LatestCalculationConfig = {
       date: '2024-06-01',
       reason: 'Transfer check',
-      source: 'DPS',
+      source: 'CRDS',
       dates: [],
     }
     const content = nunjucks.render('index.njk', { latestCalculation, action })
@@ -92,7 +92,7 @@ describe('Tests for latest calculation date component', () => {
     const latestCalculation: LatestCalculationConfig = {
       date: '2024-06-01',
       reason: 'Transfer check',
-      source: 'DPS',
+      source: 'CRDS',
       dates: [
         {
           id: 'SLED',
@@ -124,7 +124,7 @@ describe('Tests for latest calculation date component', () => {
     const latestCalculation: LatestCalculationConfig = {
       date: '2024-06-01',
       reason: 'Transfer check',
-      source: 'DPS',
+      source: 'CRDS',
       dates: [
         {
           id: 'SLED',
@@ -157,7 +157,7 @@ describe('Tests for latest calculation date component', () => {
     const latestCalculation: LatestCalculationConfig = {
       date: '2024-06-01',
       reason: 'Transfer check',
-      source: 'DPS',
+      source: 'CRDS',
       dates: [
         {
           id: 'SLED',
