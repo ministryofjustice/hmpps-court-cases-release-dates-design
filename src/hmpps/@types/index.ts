@@ -73,7 +73,7 @@ export interface LatestCalculationConfig {
   date: string
   location?: string
   reason: string
-  source: 'NOMIS' | 'DPS'
+  source: 'NOMIS' | 'CRDS'
   dates: LatestCalculationDate[]
 }
 
