@@ -2,7 +2,7 @@
     <li><a class="govuk-link" href="{{ action.href }}"{% if action.dataQa %} data-qa="{{ action.dataQa }}"{% endif %}>{{ action.title }}</a></li>
 {% endmacro %}
 {% macro _summaryCard(latestCalculation, action) %}
-    {% set primaryHeading %}{% if latestCalculation.location %}{{ latestCalculation.date | hmppsFormatDate('dd LLLL yyyy') }} at {{ latestCalculation.location }}{% else %}{{ latestCalculation.date | hmppsFormatDate('dd LLLL yyyy') }}{% endif %}{% endset %}
+    {% set primaryHeading %}{% if latestCalculation.establishment %}{{ latestCalculation.calculatedAt | hmppsFormatDate('dd LLLL yyyy') }} at {{ latestCalculation.establishment }}{% else %}{{ latestCalculation.calculatedAt | hmppsFormatDate('dd LLLL yyyy') }}{% endif %}{% endset %}
     {% set secondaryHeading %}Calculation reason: {{ latestCalculation.reason }}{% endset %}
     <div class="govuk-summary-card latest-calculation-card">
         <div class="govuk-summary-card__title-wrapper">
@@ -23,8 +23,8 @@
     {% for hint in hints %}{% if hint %}<p class="govuk-!-font-size-16 govuk-hint release-date-hint">{% if hint.href %}<a class="govuk-link release-date-hint-link" rel="noreferrer noopener" target="_blank" href="{{ hint.href }}" target="new">{% endif %}{{ hint.text }}{% if hint.href %} (opens in new tab)</a>{% endif %}</p>{% endif %}{% endfor %}
 {% endmacro %}
 {% macro _summaryRow(releaseDate) %}
-    <div class="govuk-summary-list__row" data-qa="latest-calculation-card-release-date-{{ releaseDate.id }}">
-        <dt class="govuk-summary-list__key release-dates-key govuk-!-font-size-24"><span class="release-dates-id">{{ releaseDate.id }}</span><p class="govuk-!-font-size-16 govuk-hint release-date-description">{{ releaseDate.description }}</p></dt>
+    <div class="govuk-summary-list__row" data-qa="latest-calculation-card-release-date-{{ releaseDate.type }}">
+        <dt class="govuk-summary-list__key release-dates-key govuk-!-font-size-24"><span class="release-dates-type">{{ releaseDate.type }}</span><p class="govuk-!-font-size-16 govuk-hint release-date-description">{{ releaseDate.description }}</p></dt>
         <dd class="govuk-summary-list__value release-dates-value">
             <span class="release-date-formatted">{{ releaseDate.date | hmppsFormatDate('cccc, dd LLLL yyyy') }}</span>{% if releaseDate.hints | length %}
             {{ _hints(releaseDate.hints) | safe | trim }}{% endif %}

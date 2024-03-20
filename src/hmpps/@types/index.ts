@@ -65,30 +65,30 @@ export interface SubNavigation {
   }
 }
 
-export interface LatestCalculationConfig {
+export interface LatestCalculationCardConfig {
   /**
    * Format: date
    * @example 1975-04-02
    */
-  date: string
-  location?: string
+  calculatedAt: string
+  establishment?: string
   reason: string
   source: 'NOMIS' | 'CRDS'
-  dates: LatestCalculationDate[]
+  dates: LatestCalculationCardDate[]
 }
 
-export interface LatestCalculationDate {
-  id: string
+export interface LatestCalculationCardDate {
+  type: string
   description: string
   /**
    * Format: date
    * @example 1975-04-02
    */
   date: string
-  hints?: LatestCalculationDateHint[]
+  hints?: LatestCalculationCardDateHint[]
 }
 
-export interface LatestCalculationDateHint {
+export interface LatestCalculationCardDateHint {
   text: string
   href?: string
 }
