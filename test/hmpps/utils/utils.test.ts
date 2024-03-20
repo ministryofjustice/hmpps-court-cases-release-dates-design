@@ -101,6 +101,7 @@ describe('format using date string', () => {
     ['Not a date', 'dd LLLL yyyy', 'Not a date'],
     ['1978-10-23', 'dd LLLL yyyy', '23 October 1978'],
     ['1982-06-15', 'cccc, dd LLLL yyyy', 'Tuesday, 15 June 1982'],
+    ['1982-06-15T15:30:45', 'cccc, dd LLLL yyyy', 'Tuesday, 15 June 1982'],
     ['1982-06-15', 'dd/MM/yyyy', '15/06/1982'],
   ])("hmppsFormatDate('%s', '%s') returns %s", (dateString: string, format: string, expected: string) => {
     expect(hmppsFormatDate(dateString, format)).toEqual(expected)

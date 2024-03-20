@@ -67,8 +67,8 @@ export interface SubNavigation {
 
 export interface LatestCalculationCardConfig {
   /**
-   * Format: date
-   * @example 1975-04-02
+   * Format: date or timestamp
+   * @example 1975-04-02 or 1975-04-02T10:30:45
    */
   calculatedAt: string
   establishment?: string

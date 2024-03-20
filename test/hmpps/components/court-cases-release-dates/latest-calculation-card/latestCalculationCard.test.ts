@@ -16,7 +16,7 @@ const action: Action = { title: 'My action', href: '/my-action', dataQa: 'my-act
 describe('Tests for latest calculation date component', () => {
   it('Card title should just be the date and reason if there is no establishment (NOMIS or early CRD)', () => {
     const latestCalculation: LatestCalculationCardConfig = {
-      calculatedAt: '2024-06-01',
+      calculatedAt: '2024-06-01T10:30:45',
       reason: 'Transfer check',
       source: 'NOMIS',
       dates: [],
@@ -31,9 +31,26 @@ describe('Tests for latest calculation date component', () => {
     expect(titleLines[0]).toStrictEqual('01 June 2024')
     expect(titleLines[1]).toStrictEqual('Calculation reason: Transfer check')
   })
+  it('Card title should support date only format for calculated at', () => {
+    const latestCalculation: LatestCalculationCardConfig = {
+      calculatedAt: '2024-06-15',
+      reason: 'Transfer check',
+      source: 'NOMIS',
+      dates: [],
+    }
+    const content = nunjucks.render('index.njk', { latestCalculation })
+    const $ = cheerio.load(content)
+    const titleLines = $('.govuk-summary-card__title')
+      .text()
+      .split('\n')
+      .map(str => str.trim())
+      .filter(str => str.length > 0)
+    expect(titleLines[0]).toStrictEqual('15 June 2024')
+    expect(titleLines[1]).toStrictEqual('Calculation reason: Transfer check')
+  })
   it('Card title should include the establishment if there is one', () => {
     const latestCalculation: LatestCalculationCardConfig = {
-      calculatedAt: '2024-06-01',
+      calculatedAt: '2024-06-01T10:30:45',
       establishment: 'HMP Kirkham',
       reason: 'Transfer check',
       source: 'CRDS',
@@ -51,7 +68,7 @@ describe('Tests for latest calculation date component', () => {
   })
   it('NOMIS calculation should NOMIS badge with no action', () => {
     const latestCalculation: LatestCalculationCardConfig = {
-      calculatedAt: '2024-06-01',
+      calculatedAt: '2024-06-01T10:30:45',
       reason: 'Transfer check',
       source: 'NOMIS',
       dates: [],
@@ -63,7 +80,7 @@ describe('Tests for latest calculation date component', () => {
   })
   it('DPS calculation should not show badge even with no action', () => {
     const latestCalculation: LatestCalculationCardConfig = {
-      calculatedAt: '2024-06-01',
+      calculatedAt: '2024-06-01T10:30:45',
       reason: 'Transfer check',
       source: 'CRDS',
       dates: [],
@@ -75,7 +92,7 @@ describe('Tests for latest calculation date component', () => {
   })
   it('DPS calculation should show action if specified', () => {
     const latestCalculation: LatestCalculationCardConfig = {
-      calculatedAt: '2024-06-01',
+      calculatedAt: '2024-06-01T10:30:45',
       reason: 'Transfer check',
       source: 'CRDS',
       dates: [],
@@ -90,7 +107,7 @@ describe('Tests for latest calculation date component', () => {
   })
   it('Should show all dates with their description', () => {
     const latestCalculation: LatestCalculationCardConfig = {
-      calculatedAt: '2024-06-01',
+      calculatedAt: '2024-06-01T10:30:45',
       reason: 'Transfer check',
       source: 'CRDS',
       dates: [
@@ -122,7 +139,7 @@ describe('Tests for latest calculation date component', () => {
   })
   it('Should show hints for a date', () => {
     const latestCalculation: LatestCalculationCardConfig = {
-      calculatedAt: '2024-06-01',
+      calculatedAt: '2024-06-01T10:30:45',
       reason: 'Transfer check',
       source: 'CRDS',
       dates: [
@@ -155,7 +172,7 @@ describe('Tests for latest calculation date component', () => {
   })
   it('Should show hints with a policy link', () => {
     const latestCalculation: LatestCalculationCardConfig = {
-      calculatedAt: '2024-06-01',
+      calculatedAt: '2024-06-01T10:30:45',
       reason: 'Transfer check',
       source: 'CRDS',
       dates: [
