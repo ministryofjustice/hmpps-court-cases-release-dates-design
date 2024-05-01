@@ -43,7 +43,11 @@
             description: "Early Removal Scheme Eligibility Date",
             date: "2027-04-21"
         }
-    ]
+    ],
+    printNotificationSlip: {
+        href: '#',
+        dataQa: 'my-qa-hook'
+    }
 } %}
 
 {% set nomisCalculation = {
@@ -138,7 +142,11 @@
             description: "Early Removal Scheme Eligibility Date",
             date: "2027-04-21"
         }
-    ]
+    ],
+    printNotificationSlip: {
+        href: '#',
+        dataQa: 'my-qa-hook'
+    }
 } %}
 
 {% set nomisCalculation = {
@@ -183,10 +191,10 @@
 <h3>NOMIS</h3>
 {{ latestCalculationCard(nomisCalculation, action) }}
 
-<h3>CRDS</h3>
+<h3>CRDS with notification slip</h3>
 {{ latestCalculationCard(dpsCalculation) }}
 
-<h3>CRDS with action</h3>
+<h3>CRDS with notification slip and action</h3>
 {{ latestCalculationCard(dpsCalculation, action) }}
         {% endraw %}
     {% endhighlight %}
@@ -201,15 +209,16 @@
         <li>Whether the dates where calculated using NOMIS or CRDS</li>
         <li>Relevant actions (for CRDS calculations only)</li>
         <li>Any hints about the calculated date and links to relevant policy where necessary</li>
+        <li>A link to print the notification slip (optional)</li>
     </ul>
     <div class="app-example">
         <h3>NOMIS</h3>
         {{ latestCalculationCard(nomisCalculation, action) }}
 
-        <h3>CRDS</h3>
+        <h3>CRDS with notification slip</h3>
         {{ latestCalculationCard(dpsCalculation) }}
 
-        <h3>CRDS with action</h3>
+        <h3>CRDS with notification slip and action</h3>
         {{ latestCalculationCard(dpsCalculation, action) }}
     </div>
     <p>For nunjucks you will need to import the hmppsFormatDate filter from 'hmpps-court-cases-release-dates-design/hmpps/utils/utils'</p>

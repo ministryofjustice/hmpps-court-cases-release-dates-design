@@ -65,6 +65,11 @@ export interface SubNavigation {
   }
 }
 
+export interface PrintNotificationSlipConfig {
+  dataQa?: string
+  href: string
+}
+
 export interface LatestCalculationCardConfig {
   /**
    * Format: date or timestamp
@@ -75,6 +80,7 @@ export interface LatestCalculationCardConfig {
   reason: string
   source: 'NOMIS' | 'CRDS'
   dates: LatestCalculationCardDate[]
+  printNotificationSlip?: PrintNotificationSlipConfig
 }
 
 export interface LatestCalculationCardDate {

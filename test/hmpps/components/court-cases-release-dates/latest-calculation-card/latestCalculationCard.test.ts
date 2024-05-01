@@ -225,4 +225,34 @@ describe('Tests for latest calculation date component', () => {
       hints,
     }
   }
+
+  describe('Notification slip tests', () => {
+    it('Should show notification slip details if set', () => {
+      const latestCalculation: LatestCalculationCardConfig = {
+        calculatedAt: '2024-06-01T10:30:45',
+        reason: 'Transfer check',
+        source: 'CRDS',
+        dates: [],
+        printNotificationSlip: { href: '/print/notification', dataQa: 'notification-slip' },
+      }
+      const content = nunjucks.render('index.njk', { latestCalculation, action })
+      const $ = cheerio.load(content)
+      const notificationSlipSelector = $('[data-qa=notification-slip]')
+
+      expect(notificationSlipSelector.text()).toStrictEqual('Print notification slip')
+      expect(notificationSlipSelector.attr('href')).toStrictEqual('/print/notification')
+    })
+
+    it('Should not show notification slip text if not set', () => {
+      const latestCalculation: LatestCalculationCardConfig = {
+        calculatedAt: '2024-06-01T10:30:45',
+        reason: 'Transfer check',
+        source: 'CRDS',
+        dates: [],
+      }
+      const content = nunjucks.render('index.njk', { latestCalculation, action })
+
+      expect(content).not.toContain('Print notification slip')
+    })
+  })
 })
