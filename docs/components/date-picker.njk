@@ -1,0 +1,85 @@
+{% extends "component.njk" %}
+
+{% from "govuk/components/tabs/macro.njk" import govukTabs %}
+{% from "hmpps/components/date-picker/macro.njk" import hmppsDatePicker %}
+
+{% set pageTitle = 'Date picker' %}
+{% set activeSideNav = 'date-picker' %}
+
+{% set htmlCode %}
+    {% highlight "html" %}
+{{ hmppsDatePicker({
+    id: "startDate",
+    name: "startDate",
+    label: {
+        text: "Start date",
+        classes: "govuk-!-font-weight-bold"
+    },
+    classes: 'hmpps-datepicker--fixed-width'
+}) }}
+    {% endhighlight %}
+{% endset %}
+
+{% set nunjucksCode %}
+    {% highlight "njk" %}
+        {% raw %}
+{% from "hmpps/components/date-picker/macro.njk" import hmppsDatePicker %}
+
+{{ hmppsDatePicker({
+  id: "startDate",
+  name: "startDate",
+  label: {
+    text: "Start date",
+    classes: "govuk-!-font-weight-bold"
+  },
+  classes: 'hmpps-datepicker--fixed-width'
+}) }}
+
+        {% endraw %}
+    {% endhighlight %}
+
+{% endset %}
+
+{% block content %}
+    <div class="app-example">
+        {{ hmppsDatePicker({
+            id: "startDate",
+            name: "startDate",
+            label: {
+                text: "Start date",
+                classes: "govuk-!-font-weight-bold"
+            },
+            classes: 'hmpps-datepicker--fixed-width'
+        }) }}
+    </div>
+
+    <p>The date picker allows users to select a date or enter one using free text</p>
+    <p>The date picker has been cloned from design used on the DPS prisoner profile.</p>
+
+    <h2>Research on this component</h2>
+    <p><a href="https://dsdmoj.atlassian.net/wiki/spaces/NDSS/pages/4457595211/Date+picker" class="govuk-link">Full documentation on this component</a></p>
+
+    <h2>Pre-requisite javascript</h2>
+    <p>You will need to add the <code>datepicker.js</code> script to your project, as follows:</p>
+    <pre><code>&lt;script src="/assets/datepicker.js"&gt;&lt;/script&gt;</code></pre>
+
+    {{ govukTabs({
+        items: [
+            {
+                label: "HTML",
+                id: "html",
+                panel: {
+                    html: htmlCode
+                }
+            },
+            {
+                label: "Nunjucks",
+                id: "nunjucks",
+                panel: {
+                    html: nunjucksCode
+                }
+            }
+        ]
+    }) }}
+
+{% endblock %}
