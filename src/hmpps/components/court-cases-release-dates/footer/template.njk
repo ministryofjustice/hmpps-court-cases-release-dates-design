@@ -30,7 +30,7 @@
 <footer class="connect-dps-common-footer govuk-!-display-none-print {%- if params.classes %}{{ params.classes }}{% endif %}" role="contentinfo" {%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
     <div class="govuk-width-container">
         <div class="govuk-grid-row">
-            <div id="connect-dps-common-footer-services" class="govuk-grid-column-three-quarters connect-dps-common-footer__services-menu">
+            <div id="connect-dps-common-footer-services" class="govuk-grid-column-two-thirds connect-dps-common-footer__services-menu">
                 <h2>Services</h2>
                 <ul class="govuk-list">
                     <li>
@@ -42,11 +42,10 @@
 
                 </ul>
             </div>
-            <div class="govuk-grid-column-one-quarter">
+            <div class="govuk-grid-column-one-third">
                 <div class="connect-dps-common-footer__help">
                     <h2>Support</h2>
-                    <p>
-                        <a id="footer-support-link" class="connect-dps-common-footer__link" href="{{ params.support.href if params.support.href else 'mailto:calculatereleasedates@digital.justice.co.uk' }}">{{ params.support.text if params.support.text else 'Email the specialist support team' }}</a> for help.</p>
+                    <p id="support-text">To get help, email <a id="footer-support-link" class="connect-dps-common-footer__link" href="{{ params.support.href if params.support.href else 'mailto:calculatereleasedates@digital.justice.co.uk' }}">{{ params.support.text if params.support.text else 'calculatereleasedates@digital.justice.co.uk' }}</a>.</p>
                 </div>
             </div>
         </div>
