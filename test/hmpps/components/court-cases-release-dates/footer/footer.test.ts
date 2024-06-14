@@ -13,8 +13,8 @@ describe('Tests for footer component', () => {
     const config: FooterConfig = { environment: 'dev' }
     const content = nunjucks.render('index.njk', { config })
     const $ = cheerio.load(content)
-    expect($('#support-text').text()).toStrictEqual('Email the specialist support team.')
-    expect($('#footer-support-link').text()).toStrictEqual('Email the specialist support team')
+    expect($('#support-text').text()).toStrictEqual('To get help, email omu.specialistsupportteam@justice.gov.uk.')
+    expect($('#footer-support-link').text()).toStrictEqual('omu.specialistsupportteam@justice.gov.uk')
     expect($('#footer-support-link').attr('href')).toStrictEqual('mailto:omu.specialistsupportteam@justice.gov.uk')
   })
 
