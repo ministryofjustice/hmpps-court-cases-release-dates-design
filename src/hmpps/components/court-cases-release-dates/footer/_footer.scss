@@ -1,6 +1,6 @@
-@import 'govuk/settings/spacing';
-@import 'govuk/helpers/spacing';
-@import 'govuk/objects/width-container';
+@import 'govuk-frontend/dist/govuk/settings/spacing';
+@import 'govuk-frontend/dist/govuk/helpers/spacing';
+@import 'govuk-frontend/dist/govuk/objects/width-container';
 
 .connect-dps-common-footer {
     @include govuk-font($size: 16);
