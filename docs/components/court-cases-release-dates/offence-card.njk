@@ -1,0 +1,179 @@
+{% extends "court-cases-release-dates-component.njk" %}
+
+{% from "govuk/components/tabs/macro.njk" import govukTabs %}
+{% from "hmpps/components/court-cases-release-dates/offence-card/macro.njk" import offenceCard %}
+
+
+{% set pageTitle = 'Court cases and release dates offence card' %}
+{% set activeSideNav = 'offence-card' %}
+
+{% set htmlCode %}
+    {% highlight "html" %}
+        {{ offenceCard({
+            offenceCode: 'OFFENCECODE',
+            offenceName: 'An Offence Name',
+            offenceStartDate: '27 06 2024',
+            offenceEndDate: '27 08 2024',
+            outcome: 'Imprisonment',
+            countNumber: '1',
+            terrorRelated: true,
+            isSentenced: true,
+            custodialSentenceLength: {
+                years: '1',
+                months: '2',
+                weeks: '3',
+                days: '4',
+                periodOrder: ['years', 'months', 'weeks', 'days']
+            },
+            licencePeriodLength: {
+                years: '5',
+                months: '6',
+                weeks: '7',
+                days: '8',
+                periodOrder: ['years', 'months', 'weeks', 'days']
+            },
+            sentenceServeType: 'CONSECUTIVE',
+            consecutiveTo: '3',
+            sentenceType: 'SDS (Standard Determinate Sentence)',
+            actions: {
+                items: [
+                {
+                    text: 'Edit',
+                    href: '/edit'
+                },
+                {
+                    text: 'Delete',
+                    href: '/delete'
+                }
+                ]
+            }
+    }) }}
+
+    {% endhighlight %}
+{% endset %}
+
+{% set nunjucksCode %}
+    {% highlight "njk" %}
+        {% raw %}
+            {% from "hmpps/components/court-cases-release-dates/offence-card/macro.njk" import offenceCard %}
+            
+            {{ offenceCard({
+                offenceCode: 'OFFENCECODE',
+                offenceName: 'An Offence Name',
+                offenceStartDate: '27 06 2024',
+                offenceEndDate: '27 08 2024',
+                outcome: 'Imprisonment',
+                countNumber: '1',
+                terrorRelated: true,
+                isSentenced: true,
+                custodialSentenceLength: {
+                    years: '1',
+                    months: '2',
+                    weeks: '3',
+                    days: '4',
+                    periodOrder: ['years', 'months', 'weeks', 'days']
+                },
+                licencePeriodLength: {
+                    years: '5',
+                    months: '6',
+                    weeks: '7',
+                    days: '8',
+                    periodOrder: ['years', 'months', 'weeks', 'days']
+                },
+                sentenceServeType: 'CONSECUTIVE',
+                consecutiveTo: '3',
+                sentenceType: 'SDS (Standard Determinate Sentence)',
+                actions: {
+                    items: [
+                    {
+                        text: 'Edit',
+                        href: '/edit'
+                    },
+                    {
+                        text: 'Delete',
+                        href: '/delete'
+                    }
+                    ]
+                }
+                }) 
+            }}
+        {% endraw %}
+    {% endhighlight %}
+
+    <h3>Required Nunjucks filters</h3>
+
+    {% highlight "njk" %}
+        {% raw %}
+            import { formatLengths } from 'hmpps-court-cases-release-dates-design/hmpps/utils/utils'
+
+            njkEnv.addFilter('formatLengths', formatLengths)
+        {% endraw %}
+    {% endhighlight %}
+{% endset %}
+
+{% block content %}
+    <div class="app-example">
+        {{ offenceCard({
+            offenceCode: 'OFFENCECODE',
+            offenceName: 'An Offence Name',
+            offenceStartDate: '27 06 2024',
+            offenceEndDate: '27 08 2024',
+            outcome: 'Imprisonment',
+            countNumber: '1',
+            terrorRelated: true,
+            isSentenced: true,
+            custodialSentenceLength: {
+                years: '1',
+                months: '2',
+                weeks: '3',
+                days: '4',
+                periodOrder: ['years', 'months', 'weeks', 'days']
+            },
+            licencePeriodLength: {
+                years: '5',
+                months: '6',
+                weeks: '7',
+                days: '8',
+                periodOrder: ['years', 'months', 'weeks', 'days']
+            },
+            sentenceServeType: 'CONSECUTIVE',
+            consecutiveTo: '3',
+            sentenceType: 'SDS (Standard Determinate Sentence)',
+            actions: {
+                items: [
+                {
+                    text: 'Edit',
+                    href: '/edit'
+                },
+                {
+                    text: 'Delete',
+                    href: '/delete'
+                }
+                ]
+            }
+            }) 
+        }}
+    </div>
+
+    <p>This component is the common offence code used in the court cases release dates services</p>
+
+    {{ govukTabs({
+        items: [
+            {
+                label: "HTML",
+                id: "html",
+                panel: {
+                    html: htmlCode
+                }
+            },
+            {
+                label: "Nunjucks",
+                id: "nunjucks",
+                panel: {
+                    html: nunjucksCode
+                }
+            }
+        ]
+    }) }}
+
+{% endblock %}

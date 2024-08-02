@@ -128,3 +128,34 @@ export interface FooterConfig {
   classes?: string
   attributes?: Record<string, never>
 }
+
+export interface OffenceCardConfig {
+  offenceCode: string
+  offenceName: string
+  offenceStartDate: string
+  offenceEndDate?: string
+  outcome: string
+  countNumber?: string
+  terrorRelated?: boolean
+  isSentenced: boolean
+  custodialSentenceLength?: SentenceLength
+  licencePeriodLength?: SentenceLength
+  sentenceServeType?: string
+  consecutiveTo?: string
+  sentenceType?: string
+  detailsClasses?: string
+  actions?: {
+    items: {
+      href?: string
+      text?: string
+    }[]
+  }
+}
+
+export interface SentenceLength {
+  years?: string
+  months?: string
+  weeks?: string
+  days?: string
+  periodOrder: string[]
+}
