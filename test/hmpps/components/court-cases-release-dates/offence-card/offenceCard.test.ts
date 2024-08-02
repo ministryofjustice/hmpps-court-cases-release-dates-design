@@ -40,6 +40,18 @@ describe('Tests for offence card component', () => {
       consecutiveTo: '3',
       sentenceType: 'SDS (Standard Determinate Sentence)',
       detailsClasses: 'govuk-!-padding-4',
+      actions: {
+        items: [
+          {
+            text: 'Edit',
+            href: '/edit',
+          },
+          {
+            text: 'Delete',
+            href: '/delete',
+          },
+        ],
+      },
     }
     const content = nunjucks.render('index.njk', { offenceCodeConfig })
     const expectedOffenceCard: ExpectedOffenceCard = {
@@ -52,6 +64,7 @@ describe('Tests for offence card component', () => {
         'Sentence length': '1 years 2 months 3 weeks 4 days',
         'Sentence type': 'SDS (Standard Determinate Sentence)',
       },
+      actions: ['Edit', 'Delete'],
     }
     expect(extractOffenceCard(content)).toStrictEqual(expectedOffenceCard)
   })
@@ -61,6 +74,7 @@ describe('Tests for offence card component', () => {
     offenceSummary: {
       [x: string]: string
     }
+    actions: string[]
   }
 
   function extractOffenceCard(html: string): ExpectedOffenceCard {
@@ -80,9 +94,19 @@ describe('Tests for offence card component', () => {
       .reduce((acc, curr) => {
         return { ...acc, ...curr }
       }, {})
+    const actions = $offenceCard
+      .find('.offence-card-actions')
+      .find('.offence-card-actions-list')
+      .find('li')
+      .toArray()
+      .map(actionItem => {
+        return removeNewLinesTrim($(actionItem).text())
+      })
+
     return {
       offenceCardHeader,
       offenceSummary,
+      actions,
     }
   }
 

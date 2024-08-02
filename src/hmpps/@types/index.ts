@@ -144,6 +144,12 @@ export interface OffenceCardConfig {
   consecutiveTo?: string
   sentenceType?: string
   detailsClasses?: string
+  actions?: {
+    items: {
+      href?: string
+      text?: string
+    }[]
+  }
 }
 
 export interface SentenceLength {
