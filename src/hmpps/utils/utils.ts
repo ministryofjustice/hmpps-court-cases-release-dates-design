@@ -1,4 +1,5 @@
 import { format, isValid, parse, parseISO } from 'date-fns'
+import type { SentenceLength } from '../@types'
 
 const uniformWhitespace = (word: string): string => (word ? word.trim().replace(/\s+/g, ' ') : '')
 
@@ -42,4 +43,14 @@ export const hmppsFormatDate = (dateString: string, pattern: string): string => 
   if (!dateString) return ''
   const date = parseISO(dateString)
   return date && isValid(date) ? format(date, pattern) : dateString
+}
+
+export const formatLengths = (lengths: SentenceLength) => {
+  if (lengths) {
+    return lengths.periodOrder.reduce(
+      (prev, current: keyof SentenceLength) => `${prev} ${lengths[current]} ${current}`,
+      '',
+    )
+  }
+  return null
 }
