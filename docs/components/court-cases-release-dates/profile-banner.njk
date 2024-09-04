@@ -1,0 +1,66 @@
+{% extends "court-cases-release-dates-component.njk" %}
+
+{% from "govuk/components/tabs/macro.njk" import govukTabs %}
+{% from "hmpps/components/court-cases-release-dates/profile-banner/macro.njk" import profileBanner %}
+
+{% set pageTitle = 'Profile banner' %}
+{% set activeSideNav = 'profile-banner' %}
+
+{% set params = {
+  dataQa: "personOutsideBanner",
+  heading: "This person has been released",
+  paragraphText: "Some information may be hidden"
+} %}
+
+{% set htmlCode %}
+  {% highlight "html" %}
+    {{ profileBanner(params) }}
+  {% endhighlight %}
+{% endset %}
+
+{% set nunjucksCode %}
+  {% highlight "njk" %}
+    {% raw %}
+{% from "hmpps/components/court-cases-release-dates/profile-banner/macro.njk" import profileBanner %}
+
+{% set params = {
+  dataQa: "personOutsideBanner",
+  heading: "This person has been released",
+  paragraphText: "Some information may be hidden"
+} %}
+
+{{ profileBanner(params) }}
+    {% endraw %}
+  {% endhighlight %}
+
+{% endset %}
+
+{% block content %}
+  <div class="app-example app-example--with-bottom-padding govuk-grid-column-full">
+    {{ profileBanner(params) }}
+  </div>
+  <div class="govuk-grid-column-full govuk-!-padding-left-0">
+    <p>
+      This component is designed to highlight specific information related to a person. The design comes from similar functionality used in the DPS prisoner Profile</p>
+  </div>
+
+  {{ govukTabs({
+    items: [
+      {
+        label: "HTML",
+        id: "html",
+        panel: {
+        html: htmlCode
+      }
+      },
+      {
+        label: "Nunjucks",
+        id: "nunjucks",
+        panel: {
+        html: nunjucksCode
+      }
+      }
+    ]
+  }) }}
+
+{% endblock %}
