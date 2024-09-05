@@ -5,7 +5,14 @@
     <li><a class="govuk-link govuk-!-padding-right-2" href="{{ printNotificationSlip.href }}" {% if printNotificationSlip.dataQa %} data-qa="{{ printNotificationSlip.dataQa }}"{% endif %}>Print notification slip</a></li>
 {% endmacro %}
 {% macro _summaryCard(latestCalculation, action) %}
-    {% set primaryHeading %}{% if latestCalculation.establishment %}{{ latestCalculation.calculatedAt | hmppsFormatDate('dd LLLL yyyy') }} at {{ latestCalculation.establishment }}{% else %}{{ latestCalculation.calculatedAt | hmppsFormatDate('dd LLLL yyyy') }}{% endif %}{% endset %}
+    {% set primaryHeading %}
+        {% if latestCalculation.establishment and latestCalculation.establishment != 'OUT' %}
+            {{ latestCalculation.calculatedAt | hmppsFormatDate('dd LLLL yyyy') }} at {{ latestCalculation.establishment | replace('&amp;', '&') | safe }}
+        {% else %}
+            {{ latestCalculation.calculatedAt | hmppsFormatDate('dd LLLL yyyy') }}
+        {% endif %}
+    {% endset %}
+
     {% set secondaryHeading %}Calculation reason: {{ latestCalculation.reason }}{% endset %}
     <div class="govuk-summary-card latest-calculation-card">
         <div class="govuk-summary-card__title-wrapper">

@@ -66,6 +66,40 @@ describe('Tests for latest calculation date component', () => {
     expect(titleLines[0]).toStrictEqual('01 June 2024 at HMP Kirkham')
     expect(titleLines[1]).toStrictEqual('Calculation reason: Transfer check')
   })
+  it('Establishment value should strip out &amp;', () => {
+    const latestCalculation: LatestCalculationCardConfig = {
+      calculatedAt: '2024-06-01T10:30:45',
+      establishment: 'HMP Kirkham (HMP &amp; YOI)',
+      reason: 'Transfer check',
+      source: 'CRDS',
+      dates: [],
+    }
+    const content = nunjucks.render('index.njk', { latestCalculation })
+    const $ = cheerio.load(content)
+    const titleLines = $('.govuk-summary-card__title')
+      .text()
+      .split('\n')
+      .map(str => str.trim())
+      .filter(str => str.length > 0)
+    expect(titleLines[0]).toStrictEqual('01 June 2024 at HMP Kirkham (HMP & YOI)')
+  })
+  it('Establishment of OUT should not display', () => {
+    const latestCalculation: LatestCalculationCardConfig = {
+      calculatedAt: '2024-06-01T10:30:45',
+      establishment: 'OUT',
+      reason: 'Transfer check',
+      source: 'CRDS',
+      dates: [],
+    }
+    const content = nunjucks.render('index.njk', { latestCalculation })
+    const $ = cheerio.load(content)
+    const titleLines = $('.govuk-summary-card__title')
+      .text()
+      .split('\n')
+      .map(str => str.trim())
+      .filter(str => str.length > 0)
+    expect(titleLines[0]).toStrictEqual('01 June 2024')
+  })
   it('NOMIS calculation should NOMIS badge with no action', () => {
     const latestCalculation: LatestCalculationCardConfig = {
       calculatedAt: '2024-06-01T10:30:45',
