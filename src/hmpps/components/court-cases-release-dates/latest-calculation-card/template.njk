@@ -7,7 +7,7 @@
 {% macro _summaryCard(latestCalculation, action) %}
     {% set primaryHeading %}
         {% if latestCalculation.establishment and latestCalculation.establishment != 'OUT' %}
-            {{ latestCalculation.calculatedAt | hmppsFormatDate('dd LLLL yyyy') }} at {{ latestCalculation.establishment | replace('&amp;', '&') }}
+            {{ latestCalculation.calculatedAt | hmppsFormatDate('dd LLLL yyyy') }} at {{ latestCalculation.establishment | replace('&amp;', '&') | safe }}
         {% else %}
             {{ latestCalculation.calculatedAt | hmppsFormatDate('dd LLLL yyyy') }}
         {% endif %}
