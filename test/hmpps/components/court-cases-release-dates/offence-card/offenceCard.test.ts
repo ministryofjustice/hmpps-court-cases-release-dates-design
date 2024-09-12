@@ -20,6 +20,7 @@ describe('Tests for offence card component', () => {
       offenceEndDate: '27 08 2024',
       outcome: 'Imprisonment',
       countNumber: '1',
+      convictionDate: '12 09 2024',
       terrorRelated: true,
       isSentenced: true,
       custodialSentenceLength: {
@@ -58,6 +59,7 @@ describe('Tests for offence card component', () => {
       offenceCardHeader: 'OFFENCECODE An Offence Name Terror-related',
       offenceSummary: {
         'Committed on': '27 06 2024 to 27 08 2024',
+        'Conviction date': '12 09 2024',
         'Consecutive or concurrent': 'Consecutive to count 3',
         'Licence period': '5 years 6 months 7 weeks 8 days',
         Outcome: 'Imprisonment',
