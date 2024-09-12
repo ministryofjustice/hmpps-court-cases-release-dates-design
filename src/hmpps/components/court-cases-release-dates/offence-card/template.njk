@@ -8,16 +8,28 @@
                     value: {
                         text: params.offenceStartDate + (" to " + params.offenceEndDate if params.offenceEndDate else '')
                     }
+                }
+            ]-%}
+
+{% if params.convictionDate %}
+    {% set summaryListRows = (summaryListRows.push({
+                    key: {
+                    text: "Conviction date"
                 },
-                {
+                    value: {
+                    text: params.convictionDate
+                }
+                }), summaryListRows)%}
+{% endif %}
+
+{% set summaryListRows = (summaryListRows.push({
                     key: {
                     text: "Outcome"
                 },
                     value: {
                     text: params.outcome
                 }
-                }
-            ]-%}
+                }), summaryListRows)%}
 
 {% if params.sentenceType %}
     {% set summaryListRows = (summaryListRows.push({
