@@ -47,10 +47,14 @@ export const hmppsFormatDate = (dateString: string, pattern: string): string => 
 
 export const formatLengths = (lengths: SentenceLength) => {
   if (lengths) {
-    return lengths.periodOrder.reduce(
+    const allTimeUnits = ['years', 'months', 'weeks', 'days']
+    const missingTimeUnits = allTimeUnits.filter(timeUnit => !lengths.periodOrder.includes(timeUnit))
+    const recordedLength = lengths.periodOrder.reduce(
       (prev, current: keyof SentenceLength) => `${prev} ${lengths[current]} ${current}`,
       '',
     )
+    const missingLengths = missingTimeUnits.reduce((prev, current) => `${prev} 0 ${current}`, '')
+    return `${recordedLength}${missingLengths ? ` ${missingLengths}` : ''}`
   }
   return null
 }
