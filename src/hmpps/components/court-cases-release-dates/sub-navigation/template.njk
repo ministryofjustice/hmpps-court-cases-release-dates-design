@@ -1,4 +1,6 @@
 {% from "moj/components/sub-navigation/macro.njk" import mojSubNavigation %}
+{%- from "moj/components/notification-badge/macro.njk" import mojNotificationBadge -%}
+
 
 {% set environment = environment if environment else 'dev' %}
 
@@ -39,32 +41,38 @@
         text: 'Overview',
         href: navigation.overview.href if navigation.overview.href else environmentHrefs[environment].overview,
         enabled: false if navigation.overview.enabled === false else true,
-        activeText: 'overview'
+        activeText: 'overview',
+        thingsToDo: navigation.overview.thingsToDo
     },
     courtCases: {
         text: 'Court cases',
         href: navigation.courtCases.href if navigation.courtCases.href else environmentHrefs[environment].courtCases,
         enabled: false if navigation.courtCases.enabled === false else true,
-        activeText: 'court-cases'
+        activeText: 'court-cases',
+        thingsToDo: navigation.courtCases.thingsToDo
+
     },
     adjustments: {
         text: 'Adjustments',
         href: navigation.adjustments.href if navigation.adjustments.href else environmentHrefs[environment].adjustments,
         enabled: false if navigation.adjustments.enabled === false else true,
-        activeText: 'adjustments'
+        activeText: 'adjustments',
+        thingsToDo: navigation.adjustments.thingsToDo
+
     },
     releaseDates: {
         text: 'Release dates and calculations',
         href: navigation.releaseDates.href if navigation.releaseDates.href else environmentHrefs[environment].releaseDates,
         enabled: false if navigation.releaseDates.enabled === false else true,
-        activeText: 'release-dates'
-
+        activeText: 'release-dates',
+        thingsToDo: navigation.releaseDates.thingsToDo
     },
     documents: {
         text: 'Documents',
         href: navigation.documents.href if navigation.documents.href else environmentHrefs[environment].documents,
         enabled: false if navigation.documents.enabled === false else true,
-        activeText: 'documents'
+        activeText: 'documents',
+        thingsToDo: navigation.documents.thingsToDo
     }
 } %}
 
@@ -72,10 +80,13 @@
 
 {% for navigationKey, navigationValue in navigation %}
     {% if navigationValue.enabled %}
+        {% set ttdIcon = mojNotificationBadge({
+                           text: navigationValue.thingsToDo
+                         }) %}
         {% set navigationItems = navigationItems.concat({
-            text: navigationValue.text,
             href: navigationValue.href,
-            active: navigationValue.activeText === navigation.activeSubNav
+            active: navigationValue.activeText === navigation.activeSubNav,
+            html: navigationValue.text + ttdIcon
         })%}
     {% endif %}
 {% endfor %}
