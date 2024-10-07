@@ -167,17 +167,17 @@ describe('Tests for footer component', () => {
     [
       'dev' as DesignSystemEnvironment,
       'https://check-my-diary-dev.prison.service.justice.gov.uk?fromDPS=true',
-      'https://submit-a-mercury-report-dev.hmpps.service.justice.gov.uk',
+      'https://submit-information-report-dev.hmpps.service.justice.gov.uk',
     ],
     [
       'pre' as DesignSystemEnvironment,
       'https://check-my-diary-preprod.prison.service.justice.gov.uk?fromDPS=true',
-      'https://submit-a-mercury-report-preprod.hmpps.service.justice.gov.uk',
+      'https://submit-information-report-preprod.hmpps.service.justice.gov.uk',
     ],
     [
       'prod' as DesignSystemEnvironment,
       'https://checkmydiary.service.justice.gov.uk?fromDPS=true',
-      'https://submit-a-mercury-report.hmpps.service.justice.gov.uk',
+      'https://submit-information-report.hmpps.service.justice.gov.uk',
     ],
   ])(
     'Link for %s should be %s for check diary and %s for intelligence report',
