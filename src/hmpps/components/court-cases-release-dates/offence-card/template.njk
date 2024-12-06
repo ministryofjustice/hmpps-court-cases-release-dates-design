@@ -42,6 +42,17 @@
                 }), summaryListRows)%}
 {% endif %}
 
+{% if params.fineAmount %}
+  {% set summaryListRows = (summaryListRows.push({
+                    key: {
+                    text: "Fine amount"
+                },
+                    value: {
+                    text: "£" + params.fineAmount
+                }
+                }), summaryListRows)%}
+{% endif %}
+
 {% if params.custodialSentenceLength %}
 
     {% set summaryListRows = (summaryListRows.push({
@@ -86,7 +97,7 @@
 <div class="offence-card{% if params.isSentenced %} sentence-card {% endif %}">
     <div class="offence-card-offence-details{% if params.detailsClasses %} {{ params.detailsClasses }} {% endif %}">
         {% if params.countNumber %}
-            <span class="govuk-body-s">Count {{ params.countNumber }}</span>
+            <span class="govuk-body">Count {{ params.countNumber }}</span>
         {% endif %}
         <h4 class="govuk-heading-s">
             {{ params.offenceCode }} {{ params.offenceName }}
