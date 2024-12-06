@@ -144,6 +144,7 @@ export interface OffenceCardConfig {
   sentenceServeType?: string
   consecutiveTo?: string
   sentenceType?: string
+  fineAmount?: string
   detailsClasses?: string
   actions?: {
     items: {

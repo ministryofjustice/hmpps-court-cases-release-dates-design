@@ -38,6 +38,7 @@ describe('Tests for offence card component', () => {
       sentenceServeType: 'CONSECUTIVE',
       consecutiveTo: '3',
       sentenceType: 'SDS (Standard Determinate Sentence)',
+      fineAmount: '17000',
       detailsClasses: 'govuk-!-padding-4',
       actions: {
         items: [
@@ -63,6 +64,7 @@ describe('Tests for offence card component', () => {
         Outcome: 'Imprisonment',
         'Sentence length': '1 years 2 months 3 weeks 4 days',
         'Sentence type': 'SDS (Standard Determinate Sentence)',
+        'Fine amount': '£17000'
       },
       actions: ['Edit', 'Delete'],
     }
