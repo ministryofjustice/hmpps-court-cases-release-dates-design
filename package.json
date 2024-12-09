@@ -25,7 +25,7 @@
     "publish": "npm publish ./dist --access public"
   },
   "engines": {
-    "node": "^20",
+    "node": "^22",
     "npm": "^10"
   },
   "jest": {
