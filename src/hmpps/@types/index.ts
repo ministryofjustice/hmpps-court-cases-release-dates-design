@@ -42,7 +42,7 @@ export interface SubNavigationConfig {
 }
 
 export interface SubNavigation {
-  activeSubNav: 'overview' | 'court-cases' | 'adjustments' | 'release-dates' | 'documents'
+  activeSubNav: 'overview' | 'court-cases' | 'adjustments' | 'release-dates' | 'recalls' | 'documents'
   overview?: {
     href?: string
     enabled?: boolean
@@ -56,6 +56,10 @@ export interface SubNavigation {
     enabled?: boolean
   }
   releaseDates?: {
+    href?: string
+    enabled?: boolean
+  }
+  recalls?: {
     href?: string
     enabled?: boolean
   }
