@@ -289,4 +289,54 @@ describe('Tests for latest calculation date component', () => {
       expect(content).not.toContain('Print notification slip')
     })
   })
+
+  describe('Hide calculation reason tests', () => {
+    it('should not display calculation reason and date when showCalculationDetail is false', () => {
+      const showCalculationDetail = false
+      const latestCalculation: LatestCalculationCardConfig = {
+        calculatedAt: '2024-06-01T10:30:45',
+        reason: 'Transfer check',
+        source: 'CRDS',
+        dates: [],
+        printNotificationSlip: { href: '/print/notification', dataQa: 'notification-slip' },
+      }
+      const content = nunjucks.render('index.njk', {
+        latestCalculation,
+        action,
+        showCalculationDetail,
+      })
+      const $ = cheerio.load(content)
+      const titleLines = $('.govuk-summary-card__title')
+        .text()
+        .split('\n')
+        .map(str => str.trim())
+        .filter(str => str.length > 0)
+      expect(titleLines[0]).toStrictEqual('Release dates')
+      expect(content).not.toContain('Calculation reason')
+    })
+
+    it('should display calculation reason and date when showCalculationDetail is true', () => {
+      const showCalculationDetail = true
+      const latestCalculation: LatestCalculationCardConfig = {
+        calculatedAt: '2024-06-01T10:30:45',
+        reason: 'Transfer check',
+        source: 'CRDS',
+        dates: [],
+        printNotificationSlip: { href: '/print/notification', dataQa: 'notification-slip' },
+      }
+      const content = nunjucks.render('index.njk', {
+        latestCalculation,
+        action,
+        showCalculationDetail,
+      })
+      const $ = cheerio.load(content)
+      const titleLines = $('.govuk-summary-card__title')
+        .text()
+        .split('\n')
+        .map(str => str.trim())
+        .filter(str => str.length > 0)
+      expect(titleLines[0]).toStrictEqual('01 June 2024')
+      expect(content).toContain('Calculation reason')
+    })
+  })
 })

@@ -89,6 +89,7 @@
     dataQa: 'my-qa-hook'
 } %}
 
+
 {% set htmlCode %}
     {% highlight "html" %}
     <h3>NOMIS</h3>
@@ -200,11 +201,13 @@
     {% endhighlight %}
 {% endset %}
 
+{% set showCalculationDetail = true %}
+
 {% block content %}
     <p>The latest calculation card shows the latest calculated dates for a prisoner. It shows:</p>
     <ul class="govuk-list govuk-list--bullet">
-        <li>The date the calculation was made</li>
-        <li>The reason for the calculation</li>
+        <li>The date the calculation was made (optional)</li>
+        <li>The reason for the calculation (optional)</li>
         <li>The location the calculation was made, if available</li>
         <li>Whether the dates where calculated using NOMIS or CRDS</li>
         <li>Relevant actions (for CRDS calculations only)</li>
@@ -213,13 +216,25 @@
     </ul>
     <div class="app-example">
         <h3>NOMIS</h3>
-        {{ latestCalculationCard(nomisCalculation, action) }}
+
+        {{ latestCalculationCard(nomisCalculation, action, showCalculationDetail) }}
 
         <h3>CRDS with notification slip</h3>
-        {{ latestCalculationCard(dpsCalculation) }}
+        {{ latestCalculationCard(dpsCalculation, null, showCalculationDetail) }}
 
         <h3>CRDS with notification slip and action</h3>
-        {{ latestCalculationCard(dpsCalculation, action) }}
+        {{ latestCalculationCard(dpsCalculation, action, showCalculationDetail) }}
+
+        {% set showCalculationDetail = false %}
+
+        <h3>NOMIS with no calculation reason</h3>
+        {{ latestCalculationCard(nomisCalculation, action, showCalculationDetail) }}
+
+        <h3>CRDS with notification slip with no calculation reason</h3>
+        {{ latestCalculationCard(dpsCalculation, null, showCalculationDetail) }}
+
+        <h3>CRDS with notification slip and action with no calculation reason</h3>
+        {{ latestCalculationCard(dpsCalculation, action, showCalculationDetail) }}
     </div>
     <p>For nunjucks you will need to import the hmppsFormatDate filter from 'hmpps-court-cases-release-dates-design/hmpps/utils/utils'</p>
     {{ govukTabs({
