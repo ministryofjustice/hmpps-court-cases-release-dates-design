@@ -4,21 +4,24 @@
 {% macro _printNotificationSlip(printNotificationSlip) %}
     <li><a class="govuk-link govuk-!-padding-right-2" href="{{ printNotificationSlip.href }}" {% if printNotificationSlip.dataQa %} data-qa="{{ printNotificationSlip.dataQa }}"{% endif %}>Print notification slip</a></li>
 {% endmacro %}
-{% macro _summaryCard(latestCalculation, action) %}
+{% macro _summaryCard(latestCalculation, action, showCalculationDetail) %}
     {% set primaryHeading %}
-        {% if latestCalculation.establishment and latestCalculation.establishment != 'OUT' %}
+        {% if showCalculationDetail == false %}
+            Release dates
+        {% elseif latestCalculation.establishment and latestCalculation.establishment != 'OUT' %}
             {{ latestCalculation.calculatedAt | hmppsFormatDate('dd LLLL yyyy') }} at {{ latestCalculation.establishment | replace('&amp;', '&') | safe }}
         {% else %}
             {{ latestCalculation.calculatedAt | hmppsFormatDate('dd LLLL yyyy') }}
         {% endif %}
     {% endset %}
 
-    {% set secondaryHeading %}Calculation reason: {{ latestCalculation.reason }}{% endset %}
     <div class="govuk-summary-card latest-calculation-card">
         <div class="govuk-summary-card__title-wrapper">
             <h2 class="govuk-summary-card__title">
                 {{ primaryHeading }}<br>
-                <span class="govuk-body">{{ secondaryHeading }}</span>
+                {% if showCalculationDetail == true %}
+                    <span class="govuk-body">Calculation reason: {{ latestCalculation.reason }}</span>
+                {% endif %}
             </h2>
             <ul class="govuk-summary-card__actions">
                 {% if latestCalculation.printNotificationSlip %}
@@ -53,6 +56,6 @@
         {% for row in latestCalculation.dates %}{{ _summaryRow(row) | safe | indent(8) }}{% endfor %}
     </dl>
 {% endset %}
-{% call _summaryCard(latestCalculation, action) %}
+{% call _summaryCard(latestCalculation, action, showCalculationDetail) %}
     {{ summaryList | safe | trim | indent(4) }}
 {% endcall %}
