@@ -1,6 +1,6 @@
 <html>
   <body>
       {% from "hmpps/components/court-cases-release-dates/latest-calculation-card/macro.njk" import latestCalculationCard %}
-      {{ latestCalculationCard(latestCalculation, action) }}
+      {{ latestCalculationCard(latestCalculation, action, showCalculationDetail | default(true)) }}
   </body>
 </html>
