@@ -44,14 +44,14 @@
     overview: {
         text: 'Overview',
         href: navigation.overview.href if navigation.overview.href else environmentHrefs[environment].overview,
-        enabled: false if navigation.overview.enabled === false else true,
+        enabled: true if navigation.overview.enabled === true else false,
         activeText: 'overview',
         thingsToDo: navigation.overview.thingsToDo
     },
     courtCases: {
         text: 'Court cases',
         href: navigation.courtCases.href if navigation.courtCases.href else environmentHrefs[environment].courtCases,
-        enabled: false if navigation.courtCases.enabled === false else true,
+        enabled: true if navigation.courtCases.enabled === true else false,
         activeText: 'court-cases',
         thingsToDo: navigation.courtCases.thingsToDo
 
@@ -59,7 +59,7 @@
     adjustments: {
         text: 'Adjustments',
         href: navigation.adjustments.href if navigation.adjustments.href else environmentHrefs[environment].adjustments,
-        enabled: false if navigation.adjustments.enabled === false else true,
+        enabled: true if navigation.adjustments.enabled === true else false,
         activeText: 'adjustments',
         thingsToDo: navigation.adjustments.thingsToDo
 
@@ -67,21 +67,21 @@
     releaseDates: {
         text: 'Release dates and calculations',
         href: navigation.releaseDates.href if navigation.releaseDates.href else environmentHrefs[environment].releaseDates,
-        enabled: false if navigation.releaseDates.enabled === false else true,
+        enabled: true if navigation.releaseDates.enabled === true else false,
         activeText: 'release-dates',
         thingsToDo: navigation.releaseDates.thingsToDo
     },
     recalls: {
         text: 'Recalls',
         href: navigation.recalls.href if navigation.recalls.href else environmentHrefs[environment].recalls,
-        enabled: false if navigation.recalls.enabled === false else true,
+        enabled: true if navigation.recalls.enabled === true else false,
         activeText: 'recalls',
         thingsToDo: navigation.recalls.thingsToDo
     },
     documents: {
         text: 'Documents',
         href: navigation.documents.href if navigation.documents.href else environmentHrefs[environment].documents,
-        enabled: false if navigation.documents.enabled === false else true,
+        enabled: true if navigation.documents.enabled === true else false,
         activeText: 'documents',
         thingsToDo: navigation.documents.thingsToDo
     }
