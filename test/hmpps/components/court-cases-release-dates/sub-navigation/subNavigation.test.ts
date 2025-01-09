@@ -62,6 +62,12 @@ describe('Tests for sub navigation component', () => {
         prisonNumber: 'ABC123',
         navigation: {
           activeSubNav: 'overview',
+          overview: { enabled: true },
+          courtCases: { enabled: true },
+          adjustments: { enabled: true },
+          releaseDates: { enabled: true },
+          recalls: { enabled: true },
+          documents: { enabled: true },
         },
       }
       const content = nunjucks.render('index.njk', config)
@@ -81,12 +87,12 @@ describe('Tests for sub navigation component', () => {
       prisonNumber: 'ABC123',
       navigation: {
         activeSubNav: 'overview',
-        overview: { href: '/my-overview' },
-        courtCases: { href: '/my-courtCases' },
-        adjustments: { href: '/my-adjustments' },
-        releaseDates: { href: '/my-releaseDates' },
-        recalls: { href: '/my-recalls' },
-        documents: { href: '/my-documents' },
+        overview: { enabled: true, href: '/my-overview' },
+        courtCases: { enabled: true, href: '/my-courtCases' },
+        adjustments: { enabled: true, href: '/my-adjustments' },
+        releaseDates: { enabled: true, href: '/my-releaseDates' },
+        recalls: { enabled: true, href: '/my-recalls' },
+        documents: { enabled: true, href: '/my-documents' },
       },
     }
     const content = nunjucks.render('index.njk', config)
@@ -281,12 +287,39 @@ describe('Tests for sub navigation component', () => {
     expect($('li').length).toStrictEqual(5)
   })
 
+  it('enabled not provided should not render the tabs', () => {
+    const config: SubNavigationConfig = {
+      environment: 'dev',
+      prisonNumber: 'ABC123',
+      navigation: {
+        activeSubNav: 'overview',
+        overview: { href: '/my-overview', enabled: true },
+        courtCases: { href: '/my-courtCases' },
+        adjustments: { href: '/my-adjustments' },
+        releaseDates: { href: '/my-releaseDates' },
+        recalls: { href: '/my-recalls' },
+        documents: { href: '/my-documents' },
+      },
+    }
+    const content = nunjucks.render('index.njk', config)
+    const $ = cheerio.load(content)
+    const links = extractLinks(content)
+    expect(links.Overview).toStrictEqual('/my-overview')
+    expect(links['Court cases']).toBeUndefined()
+    expect(links.Adjustments).toBeUndefined()
+    expect(links['Release dates and calculations']).toBeUndefined()
+    expect(links.Recalls).toBeUndefined()
+    expect(links.Documents).toBeUndefined()
+    expect($('li').length).toStrictEqual(1)
+  })
+
   it('should highlight the active tab', () => {
     const config: SubNavigationConfig = {
       environment: 'dev',
       prisonNumber: 'ABC123',
       navigation: {
         activeSubNav: 'release-dates',
+        releaseDates: { href: '/my-releaseDates', enabled: true },
       },
     }
     const content = nunjucks.render('index.njk', config)
