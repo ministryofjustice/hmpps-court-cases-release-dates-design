@@ -2,104 +2,22 @@
 {%- from "moj/components/notification-badge/macro.njk" import mojNotificationBadge -%}
 
 
-{% set environment = environment if environment else 'dev' %}
-
-{% set environmentHrefs = {
-    local: {
-        overview: 'http://localhost:3000/prisoner/' + prisonNumber + '/overview',
-        courtCases: 'http://localhost:3000/person/' + prisonNumber,
-        adjustments: 'http://localhost:3000/' + prisonNumber,
-        releaseDates: 'http://localhost:3000/?prisonId=' + prisonNumber,
-        recalls: 'http://localhost:3000/person/' + prisonNumber,
-        documents: 'http://localhost:3000/prisoner/' + prisonNumber + '/documents'
-    },
-    dev: {
-        overview: 'https://court-cases-release-dates-dev.hmpps.service.justice.gov.uk/prisoner/' + prisonNumber + '/overview',
-        courtCases: 'https://remand-and-sentencing-dev.hmpps.service.justice.gov.uk/person/' + prisonNumber,
-        adjustments: 'https://adjust-release-dates-dev.hmpps.service.justice.gov.uk/' + prisonNumber,
-        releaseDates: 'https://calculate-release-dates-dev.hmpps.service.justice.gov.uk/?prisonId=' + prisonNumber,
-        recalls: 'https://record-a-recall-dev.hmpps.service.justice.gov.uk/person/' + prisonNumber,
-        documents: 'https://court-cases-release-dates-dev.hmpps.service.justice.gov.uk/prisoner/' + prisonNumber + '/documents'
-    },
-    pre: {
-        overview: 'https://court-cases-release-dates-preprod.hmpps.service.justice.gov.uk/prisoner/' + prisonNumber + '/overview',
-        courtCases: 'https://remand-and-sentencing-preprod.hmpps.service.justice.gov.uk/person/' + prisonNumber,
-        adjustments: 'https://adjust-release-dates-preprod.hmpps.service.justice.gov.uk/' + prisonNumber,
-        releaseDates: 'https://calculate-release-dates-preprod.hmpps.service.justice.gov.uk/?prisonId=' + prisonNumber,
-        recalls: 'https://record-a-recall-preprod.hmpps.service.justice.gov.uk/person/' + prisonNumber,
-        documents: 'https://court-cases-release-dates-preprod.hmpps.service.justice.gov.uk/prisoner/' + prisonNumber + '/documents'
-    },
-    prod: {
-        overview: 'https://court-cases-release-dates.hmpps.service.justice.gov.uk/prisoner/' + prisonNumber + '/overview',
-        courtCases: 'https://remand-and-sentencing.hmpps.service.justice.gov.uk/person/' + prisonNumber,
-        adjustments: 'https://adjust-release-dates.hmpps.service.justice.gov.uk/' + prisonNumber,
-        releaseDates: 'https://calculate-release-dates.hmpps.service.justice.gov.uk/?prisonId=' + prisonNumber,
-        recalls: 'https://record-a-recall.hmpps.service.justice.gov.uk/person/' + prisonNumber,
-        documents: 'https://court-cases-release-dates.hmpps.service.justice.gov.uk/prisoner/' + prisonNumber + '/documents'
-    }
-} %}
-
-{% set navigation = {
-    activeSubNav: navigation.activeSubNav,
-    overview: {
-        text: 'Overview',
-        href: navigation.overview.href if navigation.overview.href else environmentHrefs[environment].overview,
-        enabled: true if navigation.overview.enabled === true else false,
-        activeText: 'overview',
-        thingsToDo: navigation.overview.thingsToDo
-    },
-    courtCases: {
-        text: 'Court cases',
-        href: navigation.courtCases.href if navigation.courtCases.href else environmentHrefs[environment].courtCases,
-        enabled: true if navigation.courtCases.enabled === true else false,
-        activeText: 'court-cases',
-        thingsToDo: navigation.courtCases.thingsToDo
-
-    },
-    adjustments: {
-        text: 'Adjustments',
-        href: navigation.adjustments.href if navigation.adjustments.href else environmentHrefs[environment].adjustments,
-        enabled: true if navigation.adjustments.enabled === true else false,
-        activeText: 'adjustments',
-        thingsToDo: navigation.adjustments.thingsToDo
-
-    },
-    releaseDates: {
-        text: 'Release dates and calculations',
-        href: navigation.releaseDates.href if navigation.releaseDates.href else environmentHrefs[environment].releaseDates,
-        enabled: true if navigation.releaseDates.enabled === true else false,
-        activeText: 'release-dates',
-        thingsToDo: navigation.releaseDates.thingsToDo
-    },
-    recalls: {
-        text: 'Recalls',
-        href: navigation.recalls.href if navigation.recalls.href else environmentHrefs[environment].recalls,
-        enabled: true if navigation.recalls.enabled === true else false,
-        activeText: 'recalls',
-        thingsToDo: navigation.recalls.thingsToDo
-    },
-    documents: {
-        text: 'Documents',
-        href: navigation.documents.href if navigation.documents.href else environmentHrefs[environment].documents,
-        enabled: true if navigation.documents.enabled === true else false,
-        activeText: 'documents',
-        thingsToDo: navigation.documents.thingsToDo
-    }
-} %}
-
+{% set activeSubNav = activeSubNav if activeSubNav else 'overview' %}
 {% set navigationItems = [] %}
 
 {% for navigationKey, navigationValue in navigation %}
-    {% if navigationValue.enabled %}
+    {% set ttdIcon = '' %}
+    {% if navigationValue.thingsToDo.count > 0 %}
         {% set ttdIcon = mojNotificationBadge({
-                           text: navigationValue.thingsToDo
-                         }) %}
-        {% set navigationItems = navigationItems.concat({
-            href: navigationValue.href,
-            active: navigationValue.activeText === navigation.activeSubNav,
-            html: navigationValue.text + ttdIcon
-        })%}
+            text: navigationValue.thingsToDo.count.toString()
+        }) %}
     {% endif %}
+
+    {% set navigationItems = navigationItems.concat({
+        href: navigationValue.href,
+        active: navigationKey === activeSubNav,
+        html: navigationValue.text + ttdIcon
+    })%}
 {% endfor %}
 
 {{ mojSubNavigation({
