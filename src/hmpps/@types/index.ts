@@ -36,37 +36,23 @@ export interface Action {
 }
 
 export interface SubNavigationConfig {
-  environment: DesignSystemEnvironment
-  navigation: SubNavigation
-  prisonNumber: string
+  navigation: SubNavigationServices
+  activeSubNav: string
 }
 
-export interface SubNavigation {
-  activeSubNav: 'overview' | 'court-cases' | 'adjustments' | 'release-dates' | 'recalls' | 'documents'
-  overview?: {
-    href?: string
-    enabled?: boolean
-  }
-  courtCases?: {
-    href?: string
-    enabled?: boolean
-  }
-  adjustments?: {
-    href?: string
-    enabled?: boolean
-  }
-  releaseDates?: {
-    href?: string
-    enabled?: boolean
-  }
-  recalls?: {
-    href?: string
-    enabled?: boolean
-  }
-  documents?: {
-    href?: string
-    enabled?: boolean
-  }
+export interface ThingToDo {
+  /** Format: int64 */
+  count: number
+}
+
+export interface SubNavigationService {
+  href: string
+  text: string
+  thingsToDo: ThingToDo
+}
+
+export interface SubNavigationServices {
+  [key: string]: SubNavigationService
 }
 
 export interface PrintNotificationSlipConfig {
