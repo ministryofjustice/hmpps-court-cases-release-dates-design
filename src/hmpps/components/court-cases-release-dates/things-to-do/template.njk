@@ -1,0 +1,16 @@
+
+{% for serviceKey, serviceConfiguration in serviceDefinitions.services %}
+    {% if serviceKey == service or service == 'all' %}
+        {% for thingToDo in serviceConfiguration.thingsToDo.things %}
+
+            <section class="moj-ticket-panel__content moj-ticket-panel__content--grey govuk-!-margin-bottom-8" aria-label="{{ thingToDo.title }}">
+                <h2 class="govuk-heading-m govuk-!-margin-bottom-2">{{ thingToDo.title }}</h2>
+                <p class="govuk-body">{{ thingToDo.message }}</p>
+                <a href="{{ thingToDo.buttonHref }}" class="govuk-button govuk-!-margin-bottom-1" data-module="govuk-button">
+                {{ thingToDo.buttonText }}
+                </a>
+            </section>
+        {% endfor %}
+    {% endif %}
+{% endfor %}
+

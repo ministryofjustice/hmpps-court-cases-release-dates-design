@@ -40,15 +40,30 @@ export interface SubNavigationConfig {
   activeSubNav: string
 }
 
-export interface ThingToDo {
-  /** Format: int64 */
+export interface ThingsToDoConfig {
+  serviceDefinitions: {
+    services: SubNavigationServices
+  }
+  service: string
+}
+
+export interface ThingsToDo {
   count: number
+  things: ThingToDo[]
+}
+
+export interface ThingToDo {
+  title: string
+  message: string
+  buttonText: string
+  buttonHref: string
+  type: string
 }
 
 export interface SubNavigationService {
   href: string
   text: string
-  thingsToDo: ThingToDo
+  thingsToDo: ThingsToDo
 }
 
 export interface SubNavigationServices {
