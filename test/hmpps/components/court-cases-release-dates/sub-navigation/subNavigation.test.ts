@@ -60,6 +60,7 @@ describe('Tests for sub navigation component', () => {
         text: 'Overview',
         thingsToDo: {
           count: 0,
+          things: [],
         },
       },
       adjustments: {
@@ -67,6 +68,7 @@ describe('Tests for sub navigation component', () => {
         text: 'Adjustments',
         thingsToDo: {
           count: 0,
+          things: [],
         },
       },
       releaseDates: {
@@ -74,6 +76,7 @@ describe('Tests for sub navigation component', () => {
         text: 'Release dates and calculations',
         thingsToDo: {
           count: 0,
+          things: [],
         },
       },
     }
@@ -86,6 +89,7 @@ describe('Tests for sub navigation component', () => {
         text: 'Overview',
         thingsToDo: {
           count: 0,
+          things: [],
         },
       },
       courtCases: {
@@ -93,6 +97,7 @@ describe('Tests for sub navigation component', () => {
         text: 'Court cases',
         thingsToDo: {
           count: 0,
+          things: [],
         },
       },
       adjustments: {
@@ -100,6 +105,7 @@ describe('Tests for sub navigation component', () => {
         text: 'Adjustments',
         thingsToDo: {
           count: 1,
+          things: [],
         },
       },
       recalls: {
@@ -107,6 +113,7 @@ describe('Tests for sub navigation component', () => {
         text: 'Recalls',
         thingsToDo: {
           count: 0,
+          things: [],
         },
       },
       releaseDates: {
@@ -114,6 +121,7 @@ describe('Tests for sub navigation component', () => {
         text: 'Release dates and calculations',
         thingsToDo: {
           count: 0,
+          things: [],
         },
       },
     }
