@@ -144,8 +144,7 @@ export interface OffenceCardConfig {
   convictionDate?: string
   terrorRelated?: boolean
   isSentenced: boolean
-  custodialSentenceLength?: SentenceLength
-  licencePeriodLength?: SentenceLength
+  periodLengths?: SentenceLength[]
   sentenceServeType?: string
   consecutiveTo?: string
   sentenceType?: string
@@ -160,6 +159,7 @@ export interface OffenceCardConfig {
 }
 
 export interface SentenceLength {
+  description?: string
   years?: string
   months?: string
   weeks?: string

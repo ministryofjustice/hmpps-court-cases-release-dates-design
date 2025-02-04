@@ -53,28 +53,17 @@
                 }), summaryListRows)%}
 {% endif %}
 
-{% if params.custodialSentenceLength %}
-
-    {% set summaryListRows = (summaryListRows.push({
+{% if params.periodLengths %}
+    {% for periodLength in params.periodLengths %}
+        {% set summaryListRows = (summaryListRows.push({
                     key: {
-                    text: "Sentence length"
+                    text: periodLength.description
                 },
                     value: {
-                    text: params.custodialSentenceLength | formatLengths
+                    text: periodLength | formatLengths
                 }
                 }), summaryListRows)%}
-{% endif %}
-
-{% if params.licencePeriodLength %}
-
-    {% set summaryListRows = (summaryListRows.push({
-                    key: {
-                    text: "Licence period"
-                },
-                    value: {
-                    text: params.licencePeriodLength | formatLengths
-                }
-                }), summaryListRows)%}
+    {% endfor %}
 {% endif %}
 
 {% if params.sentenceServeType %}

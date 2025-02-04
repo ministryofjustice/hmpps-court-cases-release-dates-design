@@ -4,35 +4,54 @@
 {% from "hmpps/components/court-cases-release-dates/sub-navigation/macro.njk" import subNavigation %}
 
 {% set pageTitle = 'Court cases and release dates sub navigation' %}
-{% set activeSideNav = 'sub-navigation' %}
+{% set activeSubNav = 'overview' %}
 
 {% set navigation = {
-    activeSubNav: 'overview',
-    overview: {
-        href: '#overview'
-    },
-    courtCases: {
-        href: '#court-cases',
-        enabled: false
-    },
-    adjustments: {
-        href: '#adjustments'
-    },
-    releaseDates: {
-        href: '#release-dates'
-    },
-    recalls: {
-        href: '#recalls'
-    },
-    documents: {
-        href: '#documents',
-        enabled: false
-    }
-} %}
+      overview: {
+        href: 'http://localhost:8000/prisoner/AB1234AB/overview',
+        text: 'Overview',
+        thingsToDo: {
+          count: 0,
+          things: []
+        }
+      },
+      courtCases: {
+        href: 'http://localhost:8001/person/AB1234AB',
+        text: 'Court cases',
+        thingsToDo: {
+          count: 0,
+          things: []
+        }
+      },
+      adjustments: {
+        href: 'http://localhost:8002/AB1234AB',
+        text: 'Adjustments',
+        thingsToDo: {
+          count: 1,
+          things: []
+        }
+      },
+      recalls: {
+        href: 'http://localhost:8003/person/AB1234AB',
+        text: 'Recalls',
+        thingsToDo: {
+          count: 0,
+          things: []
+        }
+      },
+      releaseDates: {
+        href: 'http://localhost:8004?prisonId=AB1234AB',
+        text: 'Release dates and calculations',
+        thingsToDo: {
+          count: 0,
+          things: []
+        }
+      }
+    } %}
 
 {% set htmlCode %}
     {% highlight "html" %}
-        {{ subNavigation('dev', navigation, 'A1234BC') }}
+        {{ subNavigation(navigation, activeSubNav) }}
     {% endhighlight %}
 {% endset %}
 
@@ -43,50 +62,63 @@
 
 {# selects which set of environment specific service urls to use by default #}
 {# one of; 'local', 'dev', 'pre' or 'prod' #}
-{% set environment = 'dev' %}
+{% set activeSubNav = 'overview' %}
 
 {# activeSubNav selects which tab is highlighted as active #}
 {# it is required and should be one of; 'overview', 'court-cases', 'adjustments', 'release-dates' or 'documents' #}
 {# all the other properties are optional and support overriding the environment specific service urls and removing tabs #}
 {# currently court cases and document pages are not released to live so make sure these tabs are set to enabled false #}
 {% set navigation = {
-    activeSubNav: 'overview',
-    overview: {
-        href: '',
-        enabled: true
-    },
-    courtCases: {
-        href: '',
-        enabled: false
-    },
-    adjustments: {
-        href: '',
-        enabled: true
-    },
-    releaseDates: {
-        href: '',
-        enabled: true
-    },
-    recalls: {
-        href: '',
-        enabled: true
-    },
-    documents: {
-        href: '',
-        enabled: false
-    }
-} %}
+      overview: {
+        href: 'http://localhost:8000/prisoner/AB1234AB/overview',
+        text: 'Overview',
+        thingsToDo: {
+          count: 0,
+          things: []
+        }
+      },
+      courtCases: {
+        href: 'http://localhost:8001/person/AB1234AB',
+        text: 'Court cases',
+        thingsToDo: {
+          count: 0,
+          things: []
+        }
+      },
+      adjustments: {
+        href: 'http://localhost:8002/AB1234AB',
+        text: 'Adjustments',
+        thingsToDo: {
+          count: 1,
+          things: []
+        }
+      },
+      recalls: {
+        href: 'http://localhost:8003/person/AB1234AB',
+        text: 'Recalls',
+        thingsToDo: {
+          count: 0,
+          things: []
+        }
+      },
+      releaseDates: {
+        href: 'http://localhost:8004?prisonId=AB1234AB',
+        text: 'Release dates and calculations',
+        thingsToDo: {
+          count: 0,
+          things: []
+        }
+      }
+    } %}
 
-{% set prisonNumber = 'A1234BC' %}
-
-{{ subNavigation(environment, navigation, prisonNumber) }}
+            {{ subNavigation(navigation, activeSubNav) }}
         {% endraw %}
     {% endhighlight %}
 {% endset %}
 
 {% block content %}
     <div class="app-example">
-        {{ subNavigation('dev', navigation, 'A1234BC') }}
+        {{ subNavigation(navigation, activeSubNav) }}
     </div>
 
     <p>The court cases and release dates product suite is linked together by a shared, tab based sub navigation.</p>
