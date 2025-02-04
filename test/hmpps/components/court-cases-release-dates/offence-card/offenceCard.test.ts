@@ -23,18 +23,22 @@ describe('Tests for offence card component', () => {
       convictionDate: '12 09 2024',
       terrorRelated: true,
       isSentenced: true,
-      custodialSentenceLength: {
-        years: '1',
-        months: '2',
-        weeks: '3',
-        days: '4',
-        periodOrder: ['years', 'months', 'weeks', 'days'],
-      },
-      licencePeriodLength: {
-        years: '5',
-        months: '6',
-        periodOrder: ['years', 'months'],
-      },
+      periodLengths: [
+        {
+          description: 'Sentence length',
+          years: '1',
+          months: '2',
+          weeks: '3',
+          days: '4',
+          periodOrder: ['years', 'months', 'weeks', 'days'],
+        },
+        {
+          description: 'Licence period',
+          years: '5',
+          months: '6',
+          periodOrder: ['years', 'months'],
+        },
+      ],
       sentenceServeType: 'CONSECUTIVE',
       consecutiveTo: '3',
       sentenceType: 'SDS (Standard Determinate Sentence)',
@@ -59,12 +63,12 @@ describe('Tests for offence card component', () => {
       offenceSummary: {
         'Committed on': '27 06 2024 to 27 08 2024',
         'Conviction date': '12 09 2024',
-        'Consecutive or concurrent': 'Consecutive to count 3',
-        'Licence period': '5 years 6 months 0 weeks 0 days',
         Outcome: 'Imprisonment',
         'Sentence length': '1 years 2 months 3 weeks 4 days',
+        'Licence period': '5 years 6 months 0 weeks 0 days',
         'Sentence type': 'SDS (Standard Determinate Sentence)',
-        'Fine amount': '£17000'
+        'Fine amount': '£17000',
+        'Consecutive or concurrent': 'Consecutive to count 3',
       },
       actions: ['Edit', 'Delete'],
     }
