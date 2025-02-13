@@ -1,3 +1,24 @@
+{% from "../court-cases-release-dates/profile-banner/macro.njk" import profileBanner %}
+
+{% set banners = {
+    'OUT': {
+        dataQa: "personOutsideBanner",
+        heading: "This person has been released",
+        paragraphText: "Some information may be hidden"
+    },
+    'TRN': {
+        dataQa: "personTransferredBanner",
+        heading: "This person has been transferred",
+        paragraphText: "Some information may be hidden"
+    }
+} %}
+
+{% set profileBannerParams = banners[person.prisonId] %}
+
+{% if profileBannerParams %}
+    {{ profileBanner(profileBannerParams) }}
+{% endif %}
+
 <div class="mini-profile govuk-!-margin-top-7" data-qa="mini-profile">
     <div class="mini-profile-inner">
         <div class="mini-profile-left">

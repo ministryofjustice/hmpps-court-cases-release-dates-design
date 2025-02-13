@@ -27,6 +27,7 @@ export interface MiniProfilePerson {
   status: string
   cellLocation?: string
   prisonName?: string
+  prisonId?: string
 }
 
 export interface Action {

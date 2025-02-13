@@ -70,6 +70,27 @@ describe('Tests for mini profile component', () => {
     expect(extractMiniProfile(content)).toStrictEqual(expectedMiniProfile)
   })
 
+  it('shows profile banner when person is out', () => {
+    const miniProfileConfig: MiniProfileConfig = {
+      person: {
+        prisonerNumber: 'ABC123',
+        firstName: 'steve',
+        lastName: 'rogers',
+        dateOfBirth: '1982-06-15',
+        status: 'INACTIVE OUT',
+        prisonId: 'OUT',
+      },
+      profileUrl: '/person-profile/ABC123',
+      imageUrl: '/person-image/ABC123',
+    }
+    const content = nunjucks.render('index.njk', { miniProfileConfig })
+    const expectedProfileBanner = {
+      heading: 'This person has been released',
+      paragraph: 'Some information may be hidden',
+    } as ExpectedProfileBanner
+    expect(extractProfileBanner(content)).toEqual(expectedProfileBanner)
+  })
+
   interface ExpectedMiniProfile {
     prisonerNumber: string
     formattedName: string
@@ -96,6 +117,20 @@ describe('Tests for mini profile component', () => {
       imageUrl: img.attr('src') as string,
       imageAltText: img.attr('alt') as string,
       profileUrl: profileLink.attr('href') as string,
+    }
+  }
+
+  interface ExpectedProfileBanner {
+    heading: string
+    paragraph: string
+  }
+
+  function extractProfileBanner(html: string): ExpectedProfileBanner {
+    const $ = cheerio.load(html)
+    const profileBanner = $('[data-qa=personOutsideBanner]')
+    return {
+      heading: profileBanner.find('.govuk-heading-m').text().trim(),
+      paragraph: profileBanner.find('p').last().text().trim(),
     }
   }
 })
