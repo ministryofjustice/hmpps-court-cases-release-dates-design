@@ -4,7 +4,7 @@
 
 Install the package:
 
-`npm install hmpps-court-cases-release-dates-design`
+`npm install @ministryofjustice/hmpps-court-cases-release-dates-design`
 
 Add the macro to your template.html file:
 
@@ -23,5 +23,5 @@ Use the macro:
     cellLocation: 'A-1-1'
 } %}
 
-{{ miniProfile(person, '/plugin-assets/hmpps-court-cases-release-dates-design/hmpps/assets/images/prisoner-profile-image.png', '#') }}
+{{ miniProfile(person, '/plugin-assets/@ministryofjustice/hmpps-court-cases-release-dates-design/hmpps/assets/images/prisoner-profile-image.png', '#') }}
 ```

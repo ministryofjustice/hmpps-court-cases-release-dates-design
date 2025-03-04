@@ -1,5 +1,5 @@
 {
-  "name": "hmpps-court-cases-release-dates-design",
+  "name": "@ministryofjustice/hmpps-court-cases-release-dates-design",
   "version": "4.4.0",
   "description": "A shared UI component library for the HMPPS Court cases and release dates services",
   "author": "HMPPS Digital Studio",
