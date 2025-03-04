@@ -4,7 +4,7 @@ A shared frontend component library and design system for court cases and releas
 
 ## Getting started
 
-This repository contains the source for both the [frontend component library node.js package]((https://www.npmjs.com/package/hmpps-court-cases-release-dates-design)) and the [design system documentation site](https://court-cases-release-dates-design.hmpps.service.justice.gov.uk/).
+This repository contains the source for both the [frontend component library node.js package]((https://www.npmjs.com/package/@ministryofjustice/hmpps-court-cases-release-dates-design)) and the [design system documentation site](https://court-cases-release-dates-design.hmpps.service.justice.gov.uk/).
 The design system documentation site contains [full instructions](https://court-cases-release-dates-design.hmpps.service.justice.gov.uk/get-started/) for using the [components](https://court-cases-release-dates-design.hmpps.service.justice.gov.uk/components/) in your service or prototype.
 
 ## Top level and product set components
@@ -82,8 +82,8 @@ Any nunjucks filters used by the component should be added to the `src/hmpps/fil
 
 ## Publishing components
 
-The component library is published to the node.js package repository as [hmpps-court-cases-release-dates-design](https://www.npmjs.com/package/hmpps-court-cases-release-dates-design).
-The publish workflow is triggered when a new [release](https://github.com/ministryofjustice/hmpps-court-cases-release-dates-design/releases) is created in the repo. A new release should use semantic versioning i.e. major.minor.patch.
+The component library is published to the node.js package repository as [@ministryofjustice/hmpps-court-cases-release-dates-design](https://www.npmjs.com/package/@ministryofjustice/hmpps-court-cases-release-dates-design).
+The publish workflow is triggered when a new [release](https://github.com/ministryofjustice/@ministryofjustice/hmpps-court-cases-release-dates-design/releases) is created in the repo. A new release should use semantic versioning i.e. major.minor.patch.
 
 | Version | Description                                                                                                                      |
 |---------|----------------------------------------------------------------------------------------------------------------------------------|

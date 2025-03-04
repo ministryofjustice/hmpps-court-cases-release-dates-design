@@ -18,7 +18,7 @@ Reuse as much as possible and iterate based on user needs.
 
 ## Using the component library
 
-The [frontend components](/components) detailed in the library are available as a [Node.js package](https://www.npmjs.com/package/hmpps-court-cases-release-dates-design).
+The [frontend components](/components) detailed in the library are available as a [Node.js package](https://www.npmjs.com/package/@ministryofjustice/hmpps-court-cases-release-dates-design).
 Installing this package is the recommended way to use these components in your service. You can then copy the Nunjucks code for a component and include it in your views.
 
 ### GOV UK Prototype Kit
@@ -29,10 +29,10 @@ The Node.js package is fully compatible with the [GOV UK Prototype Kit](https://
 
 There are a few additional steps when installing the Node.js package into HMPPS UI applications based on the [template](https://github.com/ministryofjustice/hmpps-template-typescript):
 
-1. Add `'/node_modules/hmpps-court-cases-release-dates-design/hmpps/assets'` and `'/node_modules/hmpps-court-cases-release-dates-design'` to the static resources configuration in `setUpStaticResources.ts`
-2. Add `'node_modules/hmpps-court-cases-release-dates-design/'` and `'node_modules/hmpps-court-cases-release-dates-design/hmpps/components/'` to `nunjucks.configure` in `nunjucksSetup.ts`
+1. Add `'/node_modules/@ministryofjustice/hmpps-court-cases-release-dates-design/hmpps/assets'` and `'/node_modules/@ministryofjustice/hmpps-court-cases-release-dates-design'` to the static resources configuration in `setUpStaticResources.ts`
+2. Add `'node_modules/@ministryofjustice/hmpps-court-cases-release-dates-design/'` and `'node_modules/@ministryofjustice/hmpps-court-cases-release-dates-design/hmpps/components/'` to `nunjucks.configure` in `nunjucksSetup.ts`
 3. Add any Nunjucks filters required for the component to `nunjucksSetup.ts` e.g. `njkEnv.addFilter('personProfileName', personProfileName)`
 
 ## Contributing to the component library
 
-The [code repository](https://github.com/ministryofjustice/hmpps-court-cases-release-dates-design) for the frontend kit guides you through the steps to improve existing components and add new ones.
+The [code repository](https://github.com/ministryofjustice/@ministryofjustice/hmpps-court-cases-release-dates-design) for the frontend kit guides you through the steps to improve existing components and add new ones.
