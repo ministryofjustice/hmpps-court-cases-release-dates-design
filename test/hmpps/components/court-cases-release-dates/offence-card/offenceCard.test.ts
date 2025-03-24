@@ -61,7 +61,7 @@ describe('Tests for offence card component', () => {
         classes: 'govuk-!-margin-top-4',
         items: [
           {
-            html: '<a href=/update-outcome>Update outcome</a>',
+            html: '<a href="/update-outcome">Update outcome</a>',
           },
         ],
       },
