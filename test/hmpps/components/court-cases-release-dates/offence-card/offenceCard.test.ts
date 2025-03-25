@@ -19,6 +19,7 @@ describe('Tests for offence card component', () => {
       offenceStartDate: '27 06 2024',
       offenceEndDate: '27 08 2024',
       outcome: 'Imprisonment',
+      outcomeUpdated: true,
       countNumber: '1',
       convictionDate: '12 09 2024',
       terrorRelated: true,
@@ -56,6 +57,14 @@ describe('Tests for offence card component', () => {
           },
         ],
       },
+      listItems: {
+        classes: 'govuk-!-margin-top-4',
+        items: [
+          {
+            html: '<a href="/update-outcome">Update outcome</a>',
+          },
+        ],
+      },
     }
     const content = nunjucks.render('index.njk', { offenceCodeConfig })
     const expectedOffenceCard: ExpectedOffenceCard = {
@@ -63,7 +72,7 @@ describe('Tests for offence card component', () => {
       offenceSummary: {
         'Committed on': '27 06 2024 to 27 08 2024',
         'Conviction date': '12 09 2024',
-        Outcome: 'Imprisonment',
+        Outcome: 'Imprisonment Updated',
         'Sentence length': '1 years 2 months 3 weeks 4 days',
         'Licence period': '5 years 6 months 0 weeks 0 days',
         'Sentence type': 'SDS (Standard Determinate Sentence)',
@@ -71,6 +80,7 @@ describe('Tests for offence card component', () => {
         'Consecutive or concurrent': 'Consecutive to count 3',
       },
       actions: ['Edit', 'Delete'],
+      listItems: ['Update outcome'],
     }
     expect(extractOffenceCard(content)).toStrictEqual(expectedOffenceCard)
   })
@@ -81,6 +91,7 @@ describe('Tests for offence card component', () => {
       [x: string]: string
     }
     actions: string[]
+    listItems: string[]
   }
 
   function extractOffenceCard(html: string): ExpectedOffenceCard {
@@ -108,11 +119,19 @@ describe('Tests for offence card component', () => {
       .map(actionItem => {
         return removeNewLinesTrim($(actionItem).text())
       })
+    const listItems = $offenceCard
+      .find('[data-qa=offenceCardList]')
+      .find('li')
+      .toArray()
+      .map(listItem => {
+        return removeNewLinesTrim($(listItem).text())
+      })
 
     return {
       offenceCardHeader,
       offenceSummary,
       actions,
+      listItems,
     }
   }
 

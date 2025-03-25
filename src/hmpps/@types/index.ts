@@ -141,6 +141,7 @@ export interface OffenceCardConfig {
   offenceStartDate: string
   offenceEndDate?: string
   outcome: string
+  outcomeUpdated?: boolean
   countNumber?: string
   convictionDate?: string
   terrorRelated?: boolean
@@ -154,6 +155,13 @@ export interface OffenceCardConfig {
   actions?: {
     items: {
       href?: string
+      text?: string
+    }[]
+  }
+  listItems?: {
+    classes: string
+    items: {
+      html?: string
       text?: string
     }[]
   }

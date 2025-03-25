@@ -1,4 +1,6 @@
 {% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+{%- from "govuk/components/tag/macro.njk" import govukTag -%}
+
 
 {%- set summaryListRows=[
                 {
@@ -27,7 +29,7 @@
                     text: "Outcome"
                 },
                     value: {
-                    text: params.outcome
+                    html: params.outcome + (" " + govukTag({text: "Updated", classes: "govuk-!-font-size-16 govuk-!-margin-left-1"}) if params.outcomeUpdated)
                 }
                 }), summaryListRows)%}
 
@@ -106,6 +108,13 @@
             }
             }) 
         }}
+        {% if params.listItems %}
+            <ul class="govuk-list{% if params.listItems.classes %} {{params.listItems.classes}}{% endif %}" data-qa="offenceCardList">
+                {% for item in params.listItems.items %}
+                    <li> {{item.html | safe if item.html else item.text }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     </div>
     {% if params.actions %}
        <div class="offence-card-actions">
