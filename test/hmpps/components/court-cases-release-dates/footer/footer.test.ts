@@ -37,7 +37,29 @@ describe('Tests for footer component', () => {
     const content = nunjucks.render('index.njk', { config })
     const $ = cheerio.load(content)
     expect($('#footer-feedback-link').text().trim()).toStrictEqual('Feedback (opens in a new tab)')
-    expect($('#footer-feedback-link').attr('href')).toStrictEqual('https://eu.surveymonkey.com/r/Z2MBZZ3')
+    expect($('#footer-feedback-link').attr('href')).toStrictEqual(
+      'https://court-cases-release-dates-dev.hmpps.service.justice.gov.uk/feedback',
+    )
+  })
+
+  it('should display default text and href for feedback for pre prod', () => {
+    const config: FooterConfig = { environment: 'pre' }
+    const content = nunjucks.render('index.njk', { config })
+    const $ = cheerio.load(content)
+    expect($('#footer-feedback-link').text().trim()).toStrictEqual('Feedback (opens in a new tab)')
+    expect($('#footer-feedback-link').attr('href')).toStrictEqual(
+      'https://court-cases-release-dates-preprod.hmpps.service.justice.gov.uk/feedback',
+    )
+  })
+
+  it('should display default text and href for feedback for prod', () => {
+    const config: FooterConfig = { environment: 'prod' }
+    const content = nunjucks.render('index.njk', { config })
+    const $ = cheerio.load(content)
+    expect($('#footer-feedback-link').text().trim()).toStrictEqual('Feedback (opens in a new tab)')
+    expect($('#footer-feedback-link').attr('href')).toStrictEqual(
+      'https://court-cases-release-dates.hmpps.service.justice.gov.uk/feedback',
+    )
   })
 
   it('Can override default text for feedback', () => {
