@@ -50,7 +50,7 @@ export const formatLengths = (lengths: SentenceLength) => {
     const allTimeUnits = ['years', 'months', 'weeks', 'days']
     const missingTimeUnits = allTimeUnits.filter(timeUnit => !lengths.periodOrder.includes(timeUnit))
     const recordedLength = lengths.periodOrder.reduce(
-      (prev, current: keyof SentenceLength) => `${prev} ${lengths[current]} ${current}`,
+      (prev, current: keyof SentenceLength) => `${prev} ${lengths[current] ?? '0'} ${current}`,
       '',
     )
     const missingLengths = missingTimeUnits.reduce((prev, current) => `${prev} 0 ${current}`, '')
