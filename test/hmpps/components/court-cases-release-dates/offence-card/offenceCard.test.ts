@@ -37,7 +37,7 @@ describe('Tests for offence card component', () => {
           description: 'Licence period',
           years: '5',
           months: '6',
-          periodOrder: ['years', 'months'],
+          periodOrder: ['years', 'months', 'weeks', 'days'],
         },
       ],
       sentenceServeType: 'CONSECUTIVE',
