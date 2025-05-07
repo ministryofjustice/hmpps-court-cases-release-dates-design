@@ -82,7 +82,7 @@ describe('Tests for footer component', () => {
     const $ = cheerio.load(content)
     expect($('#footer-accessibility-statement-link').text().trim()).toStrictEqual('Accessibility')
     expect($('#footer-accessibility-statement-link').attr('href')).toStrictEqual(
-      'https://calculate-release-dates-dev.hmpps.service.justice.gov.uk/accessibility',
+      'https://court-cases-release-dates-dev.hmpps.service.justice.gov.uk/accessibility',
     )
   })
 
