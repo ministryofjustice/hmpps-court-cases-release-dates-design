@@ -58,3 +58,22 @@ export const formatLengths = (lengths: SentenceLength) => {
   }
   return null
 }
+
+export type EmailLinkOptions = {
+  emailAddress?: string
+  linkText: string
+  emailSubjectText?: string
+  prefixText?: string
+  suffixText?: string
+}
+export function createSupportLink({
+  linkText,
+  prefixText = '',
+  suffixText = '',
+  emailAddress = 'omu.specialistsupportteam@justice.gov.uk',
+  emailSubjectText,
+}: EmailLinkOptions): string {
+  const subjectPart = emailSubjectText ? `?subject=${encodeURIComponent(emailSubjectText)}` : ''
+  const contactLink = `<a href="mailto:${emailAddress}${subjectPart}">${linkText}</a>`
+  return `${prefixText}${contactLink}${suffixText}`
+}
