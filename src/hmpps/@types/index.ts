@@ -148,7 +148,7 @@ export interface OffenceCardConfig {
   isSentenced: boolean
   periodLengths?: SentenceLength[]
   sentenceServeType?: string
-  consecutiveTo?: string
+  consecutiveTo?: ConsecutiveToDetails
   sentenceType?: string
   fineAmount?: string
   detailsClasses?: string
@@ -174,4 +174,13 @@ export interface SentenceLength {
   weeks?: string
   days?: string
   periodOrder: string[]
+}
+
+export interface ConsecutiveToDetails {
+  countNumber?: string
+  offenceCode: string
+  offenceDescription: string
+  courtCaseReference?: string
+  courtName?: string
+  warrantDate?: string
 }
