@@ -69,16 +69,16 @@
 {% endif %}
 
 {% if params.sentenceServeType %}
-    {% set sentenceServeTypeValue = params.sentenceServeType | capitalize %}
+    {% set consecutiveOrConcurrentValue = params.sentenceServeType | capitalize %}
     {% if params.consecutiveTo %}
-       {% set sentenceServeTypeValue = sentenceServeTypeValue + " to count " + params.consecutiveTo %} 
+       {% set consecutiveOrConcurrentValue = consecutiveOrConcurrentValue + (params.consecutiveTo | consecutiveToDetailsToDescription) %} 
     {% endif %}
     {% set summaryListRows = (summaryListRows.push({
                     key: {
                     text: "Consecutive or concurrent"
                 },
                     value: {
-                    text: sentenceServeTypeValue
+                    text: consecutiveOrConcurrentValue
                 }
                 }), summaryListRows)%}
 {% endif %}

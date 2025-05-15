@@ -131,9 +131,10 @@
 
     {% highlight "njk" %}
         {% raw %}
-            import { formatLengths } from '@ministryofjustice/hmpps-court-cases-release-dates-design/hmpps/utils/utils'
+            import { formatLengths, consecutiveToDetailsToDescription } from '@ministryofjustice/hmpps-court-cases-release-dates-design/hmpps/utils/utils'
 
             njkEnv.addFilter('formatLengths', formatLengths)
+            njkEnv.addFilter('consecutiveToDetailsToDescription', consecutiveToDetailsToDescription)
         {% endraw %}
     {% endhighlight %}
 {% endset %}

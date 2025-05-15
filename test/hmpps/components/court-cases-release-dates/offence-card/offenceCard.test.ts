@@ -1,7 +1,7 @@
 import nunjucks from 'nunjucks'
 import * as cheerio from 'cheerio'
 import { OffenceCardConfig } from '../../../../../src/hmpps/@types'
-import { formatLengths } from '../../../../../src/hmpps/utils/utils'
+import { consecutiveToDetailsToDescription, formatLengths } from '../../../../../src/hmpps/utils/utils'
 
 const njkEnv = nunjucks.configure([
   'node_modules/govuk-frontend/dist/',
@@ -10,6 +10,7 @@ const njkEnv = nunjucks.configure([
   __dirname,
 ])
 njkEnv.addFilter('formatLengths', formatLengths)
+njkEnv.addFilter('consecutiveToDetailsToDescription', consecutiveToDetailsToDescription)
 
 describe('Tests for offence card component', () => {
   it('can load offence code with correctly formatted fields', () => {
@@ -41,7 +42,11 @@ describe('Tests for offence card component', () => {
         },
       ],
       sentenceServeType: 'CONSECUTIVE',
-      consecutiveTo: '3',
+      consecutiveTo: {
+        countNumber: '3',
+        offenceCode: 'OFF1',
+        offenceDescription: 'Offence Description',
+      },
       sentenceType: 'SDS (Standard Determinate Sentence)',
       fineAmount: '17000',
       detailsClasses: 'govuk-!-padding-4',

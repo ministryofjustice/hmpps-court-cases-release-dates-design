@@ -1,4 +1,6 @@
+import { ConsecutiveToDetails } from '../../../src/hmpps/@types'
 import {
+  consecutiveToDetailsToDescription,
   dayMonthYearForwardSlashSeparator,
   firstNameSpaceLastName,
   hmppsFormatDate,
@@ -105,5 +107,50 @@ describe('format using date string', () => {
     ['1982-06-15', 'dd/MM/yyyy', '15/06/1982'],
   ])("hmppsFormatDate('%s', '%s') returns %s", (dateString: string, format: string, expected: string) => {
     expect(hmppsFormatDate(dateString, format)).toEqual(expected)
+  })
+})
+
+describe('consecutive to details to description', () => {
+  it('only show count number', () => {
+    const config = {
+      countNumber: '5',
+      offenceCode: 'OFF1',
+      offenceDescription: 'Offence description',
+    } as ConsecutiveToDetails
+    const result = consecutiveToDetailsToDescription(config)
+    expect(result).toEqual(' to count 5')
+  })
+
+  it('show offence when no count number', () => {
+    const config = {
+      offenceCode: 'OFF1',
+      offenceDescription: 'Offence description',
+    } as ConsecutiveToDetails
+    const result = consecutiveToDetailsToDescription(config)
+    expect(result).toEqual(' to OFF1 - Offence description')
+  })
+
+  it('show court case reference', () => {
+    const config = {
+      countNumber: '5',
+      offenceCode: 'OFF1',
+      offenceDescription: 'Offence description',
+      courtCaseReference: 'G36895',
+    } as ConsecutiveToDetails
+    const result = consecutiveToDetailsToDescription(config)
+    expect(result).toEqual(' to count 5 on case G36895')
+  })
+
+  it('show all fields', () => {
+    const config = {
+      countNumber: '5',
+      offenceCode: 'OFF1',
+      offenceDescription: 'Offence description',
+      courtCaseReference: 'G36895',
+      courtName: 'A Court',
+      warrantDate: '12/03/2001',
+    } as ConsecutiveToDetails
+    const result = consecutiveToDetailsToDescription(config)
+    expect(result).toEqual(' to count 5 on case G36895 at A Court on 12/03/2001')
   })
 })

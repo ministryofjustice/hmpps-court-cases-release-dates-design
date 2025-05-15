@@ -1,5 +1,5 @@
 import { format, isValid, parse, parseISO } from 'date-fns'
-import type { SentenceLength } from '../@types'
+import type { ConsecutiveToDetails, SentenceLength } from '../@types'
 
 const uniformWhitespace = (word: string): string => (word ? word.trim().replace(/\s+/g, ' ') : '')
 
@@ -76,4 +76,23 @@ export function createSupportLink({
   const subjectPart = emailSubjectText ? `?subject=${encodeURIComponent(emailSubjectText)}` : ''
   const contactLink = `<a href="mailto:${emailAddress}${subjectPart}">${linkText}</a>`
   return `${prefixText}${contactLink}${suffixText}`
+}
+
+export const consecutiveToDetailsToDescription = (consecutiveToDetails: ConsecutiveToDetails) => {
+  let description = ''
+  if (consecutiveToDetails.countNumber) {
+    description = `${description} to count ${consecutiveToDetails.countNumber}`
+  } else {
+    description = `${description} to ${consecutiveToDetails.offenceCode} - ${consecutiveToDetails.offenceDescription}`
+  }
+  if (consecutiveToDetails.courtCaseReference) {
+    description = `${description} on case ${consecutiveToDetails.courtCaseReference}`
+  }
+  if (consecutiveToDetails.courtName) {
+    description = `${description} at ${consecutiveToDetails.courtName}`
+  }
+  if (consecutiveToDetails.warrantDate) {
+    description = `${description} on ${consecutiveToDetails.warrantDate}`
+  }
+  return description
 }
