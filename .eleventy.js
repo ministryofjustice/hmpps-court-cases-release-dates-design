@@ -1,6 +1,7 @@
 const nunjucks = require('nunjucks')
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight')
 const {
+  consecutiveToDetailsToDescription,
   personDateOfBirth,
   personProfileName,
   personStatus,
@@ -24,6 +25,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('personStatus', personStatus)
   eleventyConfig.addFilter('hmppsFormatDate', hmppsFormatDate)
   eleventyConfig.addFilter('formatLengths', formatLengths)
+  eleventyConfig.addFilter('consecutiveToDetailsToDescription', consecutiveToDetailsToDescription)
 
   const njkEnv = nunjucks.configure([
     'docs/_includes/',
