@@ -18,8 +18,8 @@ describe('Tests for mini profile component', () => {
     const miniProfileConfig: MiniProfileConfig = {
       person: {
         prisonerNumber: 'ABC123',
-        firstName: 'steve',
-        lastName: 'rogers',
+        firstName: 'denzel',
+        lastName: 'matthams',
         dateOfBirth: '1982-06-15',
         status: 'ACTIVE IN',
         prisonName: 'HMP Leeds',
@@ -31,14 +31,14 @@ describe('Tests for mini profile component', () => {
     const content = nunjucks.render('index.njk', { miniProfileConfig })
     const expectedMiniProfile: ExpectedMiniProfile = {
       prisonerNumber: 'ABC123',
-      formattedName: 'Rogers, Steve',
+      formattedName: 'Matthams, Denzel',
       formattedDob: '15/06/1982',
       status: 'ACTIVE IN',
       prisonName: 'HMP Leeds',
       cellLocation: 'A-1-002',
       profileUrl: '/person-profile/ABC123',
       imageUrl: '/person-image/ABC123',
-      imageAltText: 'Image of Rogers, Steve',
+      imageAltText: 'Image of Matthams, Denzel',
     }
     expect(extractMiniProfile(content)).toStrictEqual(expectedMiniProfile)
   })
@@ -47,8 +47,8 @@ describe('Tests for mini profile component', () => {
     const miniProfileConfig: MiniProfileConfig = {
       person: {
         prisonerNumber: 'ABC123',
-        firstName: 'steve',
-        lastName: 'rogers',
+        firstName: 'denzel',
+        lastName: 'matthams',
         dateOfBirth: '1982-06-15',
         status: 'ACTIVE IN',
       },
@@ -58,14 +58,14 @@ describe('Tests for mini profile component', () => {
     const content = nunjucks.render('index.njk', { miniProfileConfig })
     const expectedMiniProfile: ExpectedMiniProfile = {
       prisonerNumber: 'ABC123',
-      formattedName: 'Rogers, Steve',
+      formattedName: 'Matthams, Denzel',
       formattedDob: '15/06/1982',
       status: 'ACTIVE IN',
       prisonName: '',
       cellLocation: '',
       profileUrl: '/person-profile/ABC123',
       imageUrl: '/person-image/ABC123',
-      imageAltText: 'Image of Rogers, Steve',
+      imageAltText: 'Image of Matthams, Denzel',
     }
     expect(extractMiniProfile(content)).toStrictEqual(expectedMiniProfile)
   })
@@ -74,8 +74,8 @@ describe('Tests for mini profile component', () => {
     const miniProfileConfig: MiniProfileConfig = {
       person: {
         prisonerNumber: 'ABC123',
-        firstName: 'steve',
-        lastName: 'rogers',
+        firstName: 'denzel',
+        lastName: 'matthams',
         dateOfBirth: '1982-06-15',
         status: 'INACTIVE OUT',
         prisonId: 'OUT',
