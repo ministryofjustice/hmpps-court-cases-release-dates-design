@@ -47,8 +47,8 @@ describe('Tests for mini profile component', () => {
     const miniProfileConfig: MiniProfileConfig = {
       person: {
         prisonerNumber: 'ABC123',
-        firstName: 'steve',
-        lastName: 'rogers',
+        firstName: 'denzel',
+        lastName: 'matthams',
         dateOfBirth: '1982-06-15',
         status: 'ACTIVE IN',
       },
@@ -74,8 +74,8 @@ describe('Tests for mini profile component', () => {
     const miniProfileConfig: MiniProfileConfig = {
       person: {
         prisonerNumber: 'ABC123',
-        firstName: 'steve',
-        lastName: 'rogers',
+        firstName: 'denzel',
+        lastName: 'matthams',
         dateOfBirth: '1982-06-15',
         status: 'INACTIVE OUT',
         prisonId: 'OUT',
