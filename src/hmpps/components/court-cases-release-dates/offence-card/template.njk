@@ -1,6 +1,8 @@
 {% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
 {%- from "govuk/components/tag/macro.njk" import govukTag -%}
 
+{% set hideOutcome = params.hideOutcome | default(false) %}
+
 
 {%- set summaryListRows=[
                 {
@@ -24,14 +26,17 @@
                 }), summaryListRows)%}
 {% endif %}
 
-{% set summaryListRows = (summaryListRows.push({
+{% if params.outcome and not params.hideOutcome %}
+  {% set summaryListRows = (summaryListRows.push({
                     key: {
-                    text: "Outcome"
-                },
+                        text: "Outcome"
+                    },
                     value: {
-                    html: params.outcome + (" " + govukTag({text: "Updated", classes: "govuk-!-font-size-16 govuk-!-margin-left-1"}) if params.outcomeUpdated)
-                }
-                }), summaryListRows)%}
+                        html: params.outcome + (" " + govukTag({ text: "Updated", classes: "govuk-!-font-size-16 govuk-!-margin-left-1" }) if params.outcomeUpdated)
+                    }
+                }), summaryListRows) %}
+{% endif %}
+
 
 {% if params.sentenceType %}
     {% set summaryListRows = (summaryListRows.push({
