@@ -26,7 +26,7 @@
                 }), summaryListRows)%}
 {% endif %}
 
-{% if params.outcome and not hideOutcome %}
+{% if params.outcome and not params.hideOutcome %}
   {% set summaryListRows = (summaryListRows.push({
                     key: {
                         text: "Outcome"
