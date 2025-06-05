@@ -1,8 +1,9 @@
-import { ConsecutiveToDetails } from '../../../src/hmpps/@types'
+import { ConsecutiveToDetails, MergedFromCaseDetails } from '../../../src/hmpps/@types'
 import {
   consecutiveToDetailsToDescription,
   dayMonthYearForwardSlashSeparator,
   firstNameSpaceLastName,
+  formatMergedFromCase,
   hmppsFormatDate,
   lastNameCommaFirstName,
   nameCase,
@@ -152,5 +153,34 @@ describe('consecutive to details to description', () => {
     } as ConsecutiveToDetails
     const result = consecutiveToDetailsToDescription(config)
     expect(result).toEqual(' to count 5 on case G36895 at A Court on 12/03/2001')
+  })
+})
+
+describe('format merged from case details', () => {
+  it('shows case reference when filled out', () => {
+    const config = {
+      caseReference: 'C123',
+      courtCode: 'COURT1',
+      mergedFromDate: '2025-06-05',
+      warrantDate: '2025-03-05',
+    } as MergedFromCaseDetails
+    const courtDetails = {
+      COURT1: 'Court 1 description',
+    }
+    const result = formatMergedFromCase(config, courtDetails)
+    expect(result).toEqual('C123 at Court 1 description')
+  })
+
+  it('shows court name and date when no case reference', () => {
+    const config = {
+      courtCode: 'COURT1',
+      mergedFromDate: '2025-06-05',
+      warrantDate: '2025-03-05',
+    } as MergedFromCaseDetails
+    const courtDetails = {
+      COURT1: 'Court 1 description',
+    }
+    const result = formatMergedFromCase(config, courtDetails)
+    expect(result).toEqual('Court 1 description on 05/03/2025')
   })
 })

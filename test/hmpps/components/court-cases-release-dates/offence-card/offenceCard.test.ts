@@ -1,7 +1,11 @@
 import nunjucks from 'nunjucks'
 import * as cheerio from 'cheerio'
 import { OffenceCardConfig } from '../../../../../src/hmpps/@types'
-import { consecutiveToDetailsToDescription, formatLengths } from '../../../../../src/hmpps/utils/utils'
+import {
+  consecutiveToDetailsToDescription,
+  formatLengths,
+  formatMergedFromCase,
+} from '../../../../../src/hmpps/utils/utils'
 
 const njkEnv = nunjucks.configure([
   'node_modules/govuk-frontend/dist/',
@@ -11,6 +15,7 @@ const njkEnv = nunjucks.configure([
 ])
 njkEnv.addFilter('formatLengths', formatLengths)
 njkEnv.addFilter('consecutiveToDetailsToDescription', consecutiveToDetailsToDescription)
+njkEnv.addFilter('formatMergedFromCase', formatMergedFromCase)
 
 describe('Tests for offence card component', () => {
   it('can load offence code with correctly formatted fields', () => {
@@ -70,6 +75,15 @@ describe('Tests for offence card component', () => {
           },
         ],
       },
+      mergedFromCase: {
+        caseReference: 'C123',
+        courtCode: 'COURT1',
+        mergedFromDate: '2025-06-05',
+        warrantDate: '2025-03-05',
+      },
+      courtDetails: {
+        COURT1: 'Court 1 description',
+      },
     }
     const content = nunjucks.render('index.njk', { offenceCodeConfig })
     const expectedOffenceCard: ExpectedOffenceCard = {
@@ -83,6 +97,7 @@ describe('Tests for offence card component', () => {
         'Sentence type': 'SDS (Standard Determinate Sentence)',
         'Fine amount': '£17000',
         'Consecutive or concurrent': 'Consecutive to count 3',
+        'Merged from': 'C123 at Court 1 description',
       },
       actions: ['Edit', 'Delete'],
       listItems: ['Update outcome'],

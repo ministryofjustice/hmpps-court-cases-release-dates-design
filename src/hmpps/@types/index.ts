@@ -167,6 +167,8 @@ export interface OffenceCardConfig {
       text?: string
     }[]
   }
+  mergedFromCase?: MergedFromCaseDetails
+  courtDetails: { [key: string]: string }
 }
 
 export interface SentenceLength {
@@ -185,4 +187,11 @@ export interface ConsecutiveToDetails {
   courtCaseReference?: string
   courtName?: string
   warrantDate?: string
+}
+
+export interface MergedFromCaseDetails {
+  caseReference?: string
+  courtCode: string
+  warrantDate: string
+  mergedFromDate: string
 }
