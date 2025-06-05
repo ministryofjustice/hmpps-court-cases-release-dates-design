@@ -88,6 +88,17 @@
                 }), summaryListRows)%}
 {% endif %}
 
+{% if params.mergedFromCase %}
+    {% set summaryListRows = (summaryListRows.push({
+                    key: {
+                    text: "Merged from"
+                },
+                    value: {
+                    text: params.mergedFromCase | formatMergedFromCase(params.courtDetails)
+                }
+                }), summaryListRows)%}
+{% endif %}
+
 
 
 <div class="offence-card{% if params.isSentenced %} sentence-card {% endif %}">

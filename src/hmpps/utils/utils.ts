@@ -1,5 +1,5 @@
 import { format, isValid, parse, parseISO } from 'date-fns'
-import type { ConsecutiveToDetails, SentenceLength } from '../@types'
+import type { ConsecutiveToDetails, MergedFromCaseDetails, SentenceLength } from '../@types'
 
 const uniformWhitespace = (word: string): string => (word ? word.trim().replace(/\s+/g, ' ') : '')
 
@@ -55,6 +55,20 @@ export const formatLengths = (lengths: SentenceLength) => {
     )
     const missingLengths = missingTimeUnits.reduce((prev, current) => `${prev} 0 ${current}`, '')
     return `${recordedLength}${missingLengths ? ` ${missingLengths}` : ''}`
+  }
+  return null
+}
+
+export const formatMergedFromCase = (
+  mergedFromCaseDetails: MergedFromCaseDetails,
+  courtDetails: { [key: string]: string },
+): string | undefined => {
+  if (mergedFromCaseDetails) {
+    let description = `${courtDetails[mergedFromCaseDetails.courtCode]} on ${dayMonthYearForwardSlashSeparator(mergedFromCaseDetails.warrantDate)}`
+    if (mergedFromCaseDetails.caseReference) {
+      description = `${mergedFromCaseDetails.caseReference} at ${courtDetails[mergedFromCaseDetails.courtCode]}`
+    }
+    return description
   }
   return null
 }
