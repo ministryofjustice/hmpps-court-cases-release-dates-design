@@ -18,6 +18,7 @@
             outcomeUpdated: true,
             hideOutcome: false,
             countNumber: '1',
+            lineNumber: '5',
             convictionDate: '12 09 2024',
             terrorRelated: true,
             isSentenced: true,
@@ -81,6 +82,7 @@
                 outcomeUpdated: true,
                 hideOutcome: false,
                 countNumber: '1',
+                lineNumber: '5',
                 convictionDate: '12 09 2024',
                 terrorRelated: true,
                 isSentenced: true,
@@ -133,11 +135,17 @@
 
     {% highlight "njk" %}
         {% raw %}
-            import { consecutiveToDetailsToDescription, formatLengths, formatMergedFromCase  } from '@ministryofjustice/hmpps-court-cases-release-dates-design/hmpps/utils/utils'
+            import {
+                consecutiveToDetailsToDescription,
+                formatCountNumber,
+                formatLengths,
+                formatMergedFromCase,
+             } from '@ministryofjustice/hmpps-court-cases-release-dates-design/hmpps/utils/utils'
 
             njkEnv.addFilter('formatLengths', formatLengths)
             njkEnv.addFilter('consecutiveToDetailsToDescription', consecutiveToDetailsToDescription)
             njkEnv.addFilter('formatMergedFromCase', formatMergedFromCase)
+            njkEnv.addFilter('formatCountNumber', formatCountNumber)
         {% endraw %}
     {% endhighlight %}
 {% endset %}
@@ -153,6 +161,7 @@
                 outcomeUpdated: true,
                 hideOutcome: false,
                 countNumber: '1',
+                lineNumber: '5',
                 convictionDate: '12 09 2024',
                 terrorRelated: true,
                 isSentenced: true,

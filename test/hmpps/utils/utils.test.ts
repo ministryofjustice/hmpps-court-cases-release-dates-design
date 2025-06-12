@@ -3,6 +3,7 @@ import {
   consecutiveToDetailsToDescription,
   dayMonthYearForwardSlashSeparator,
   firstNameSpaceLastName,
+  formatCountNumber,
   formatMergedFromCase,
   hmppsFormatDate,
   lastNameCommaFirstName,
@@ -182,5 +183,22 @@ describe('format merged from case details', () => {
     }
     const result = formatMergedFromCase(config, courtDetails)
     expect(result).toEqual('Court 1 description on 05/03/2025')
+  })
+})
+
+describe('format count number', () => {
+  it('show nomis line number when count is null', () => {
+    const result = formatCountNumber(null, '1')
+    expect(result).toEqual('NOMIS line number 1')
+  })
+
+  it('return null when count number is -1', () => {
+    const result = formatCountNumber('-1', '5')
+    expect(result).toBeNull()
+  })
+
+  it('show count number when entered', () => {
+    const result = formatCountNumber('66', '2')
+    expect(result).toEqual('Count 66')
   })
 })
