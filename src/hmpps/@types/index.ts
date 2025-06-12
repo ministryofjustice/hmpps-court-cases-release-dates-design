@@ -145,6 +145,7 @@ export interface OffenceCardConfig {
   outcomeUpdated?: boolean
   hideLicencePeriod?: boolean
   countNumber?: string
+  lineNumber?: string
   convictionDate?: string
   terrorRelated?: boolean
   isSentenced: boolean

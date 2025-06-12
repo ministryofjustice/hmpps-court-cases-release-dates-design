@@ -3,6 +3,7 @@ import * as cheerio from 'cheerio'
 import { OffenceCardConfig } from '../../../../../src/hmpps/@types'
 import {
   consecutiveToDetailsToDescription,
+  formatCountNumber,
   formatLengths,
   formatMergedFromCase,
 } from '../../../../../src/hmpps/utils/utils'
@@ -16,6 +17,7 @@ const njkEnv = nunjucks.configure([
 njkEnv.addFilter('formatLengths', formatLengths)
 njkEnv.addFilter('consecutiveToDetailsToDescription', consecutiveToDetailsToDescription)
 njkEnv.addFilter('formatMergedFromCase', formatMergedFromCase)
+njkEnv.addFilter('formatCountNumber', formatCountNumber)
 
 describe('Tests for offence card component', () => {
   it('can load offence code with correctly formatted fields', () => {
@@ -155,6 +157,9 @@ describe('Tests for offence card component', () => {
             html: '<a href="/update-outcome">Update outcome</a>',
           },
         ],
+      },
+      courtDetails: {
+        COURT1: 'Court 1 description',
       },
     }
     const content = nunjucks.render('index.njk', { offenceCodeConfig })

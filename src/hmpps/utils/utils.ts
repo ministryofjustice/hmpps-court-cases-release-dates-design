@@ -73,6 +73,19 @@ export const formatMergedFromCase = (
   return null
 }
 
+export const formatCountNumber = (countNumber?: string | null, lineNumber?: string | null): string | undefined => {
+  if (countNumber) {
+    if (countNumber === '-1') {
+      return null
+    }
+    return `Count ${countNumber}`
+  }
+  if (lineNumber) {
+    return `NOMIS line number ${lineNumber}`
+  }
+  return null
+}
+
 export type EmailLinkOptions = {
   emailAddress?: string
   linkText: string
