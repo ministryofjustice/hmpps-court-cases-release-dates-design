@@ -8,6 +8,7 @@ const {
   hmppsFormatDate,
   formatLengths,
   formatCountNumber,
+  formatMergedFromCase,
 } = require('./dist/hmpps/utils/utils')
 
 module.exports = function (eleventyConfig) {
@@ -28,6 +29,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('formatLengths', formatLengths)
   eleventyConfig.addFilter('consecutiveToDetailsToDescription', consecutiveToDetailsToDescription)
   eleventyConfig.addFilter('formatCountNumber', formatCountNumber)
+  eleventyConfig.addFilter('formatMergedFromCase', formatMergedFromCase)
 
   const njkEnv = nunjucks.configure([
     'docs/_includes/',
