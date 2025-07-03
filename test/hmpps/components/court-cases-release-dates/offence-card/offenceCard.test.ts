@@ -178,6 +178,49 @@ describe('Tests for offence card component', () => {
     expect(extractOffenceCard(content)).toStrictEqual(expectedOffenceCard)
   })
 
+  it('shows consecutive or current link when no sentence serve type and link provided', () => {
+    const offenceCodeConfig: OffenceCardConfig = {
+      offenceCode: 'OFFENCECODE',
+      offenceName: 'An Offence Name',
+      offenceStartDate: '27 06 2024',
+      offenceEndDate: '27 08 2024',
+      outcome: 'Imprisonment',
+      countNumber: '1',
+      convictionDate: '12 09 2024',
+      isSentenced: true,
+      periodLengths: [
+        {
+          description: 'Sentence length',
+          years: '1',
+          months: '2',
+          weeks: '3',
+          days: '4',
+          periodOrder: ['years', 'months', 'weeks', 'days'],
+        },
+      ],
+      sentenceType: 'SDS (Standard Determinate Sentence)',
+      consecutiveConcurrentLink: {
+        href: '/select-consecutive-concurrent',
+        text: 'Select consecutive or current',
+      },
+    }
+    const content = nunjucks.render('index.njk', { offenceCodeConfig })
+    const expectedOffenceCard: ExpectedOffenceCard = {
+      offenceCardHeader: 'OFFENCECODE An Offence Name',
+      offenceSummary: {
+        'Committed on': '27 06 2024 to 27 08 2024',
+        'Conviction date': '12 09 2024',
+        Outcome: 'Imprisonment',
+        'Sentence length': '1 years 2 months 3 weeks 4 days',
+        'Sentence type': 'SDS (Standard Determinate Sentence)',
+        'Consecutive or concurrent': 'Select consecutive or current',
+      },
+      actions: [],
+      listItems: [],
+    }
+    expect(extractOffenceCard(content)).toStrictEqual(expectedOffenceCard)
+  })
+
   interface ExpectedOffenceCard {
     offenceCardHeader: string
     offenceSummary: {

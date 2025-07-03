@@ -73,7 +73,8 @@
     {% endfor %}
 {% endif %}
 
-{% if params.sentenceServeType %}
+{% if params.sentenceServeType or params.consecutiveConcurrentLink %}
+    {% if params.sentenceServeType%}
     {% set consecutiveOrConcurrentValue = params.sentenceServeType | capitalize %}
     {% if params.consecutiveTo %}
        {% set consecutiveOrConcurrentValue = consecutiveOrConcurrentValue + (params.consecutiveTo | consecutiveToDetailsToDescription) %} 
@@ -86,6 +87,19 @@
                     text: consecutiveOrConcurrentValue
                 }
                 }), summaryListRows)%}
+    {% else %}
+        {% set consecutiveOrCurrentHtml %}
+            <a class="govuk-link--no-visited-state" href="{{params.consecutiveConcurrentLink.href}}">{{params.consecutiveConcurrentLink.text}}</a>
+        {% endset %}
+        {% set summaryListRows = (summaryListRows.push({
+                    key: {
+                    text: "Consecutive or concurrent"
+                },
+                    value: {
+                    html: consecutiveOrCurrentHtml
+                }
+                }), summaryListRows)%}
+    {% endif %}
 {% endif %}
 
 {% if params.mergedFromCase %}

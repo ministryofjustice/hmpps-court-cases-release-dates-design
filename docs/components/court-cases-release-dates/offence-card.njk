@@ -39,7 +39,11 @@
                 }
             ],
             sentenceServeType: 'CONSECUTIVE',
-            consecutiveTo: '3',
+            consecutiveTo: {
+                countNumber: '3',
+                offenceCode: 'OFF1',
+                offenceDescription: 'Offence Description',
+            },
             sentenceType: 'SDS (Standard Determinate Sentence)',
             fineAmount: '17000',
             detailsClasses: 'govuk-!-padding-4',
@@ -62,6 +66,19 @@
                         html: '<a href="/update-outcome">Update outcome</a>'
                     }
                 ]
+            },
+            mergedFromCase: {
+                caseReference: 'C123',
+                courtCode: 'COURT1',
+                mergedFromDate: '2025-06-05',
+                warrantDate: '2025-03-05',
+            },
+            courtDetails: {
+                COURT1: 'Court 1 description',
+            },
+            consecutiveConcurrentLink: {
+                href: '/select-consecutive-concurrent',
+                text: 'Select consecutive or current',
             }
     }) }}
 
@@ -103,7 +120,11 @@
                     }
                 ],
                 sentenceServeType: 'CONSECUTIVE',
-                consecutiveTo: '3',
+                consecutiveTo: {
+                    countNumber: '3',
+                    offenceCode: 'OFF1',
+                    offenceDescription: 'Offence Description',
+                },
                 sentenceType: 'SDS (Standard Determinate Sentence)',
                 fineAmount: '17000',
                 detailsClasses: 'govuk-!-padding-4',
@@ -126,8 +147,21 @@
                             html: '<a href="/update-outcome">Update outcome</a>'
                         }
                     ]
+                },
+                mergedFromCase: {
+                    caseReference: 'C123',
+                    courtCode: 'COURT1',
+                    mergedFromDate: '2025-06-05',
+                    warrantDate: '2025-03-05',
+                },
+                courtDetails: {
+                    COURT1: 'Court 1 description',
+                },
+                consecutiveConcurrentLink: {
+                    href: '/select-consecutive-concurrent',
+                    text: 'Select consecutive or current',
                 }
-            }) }}
+        }) }}
         {% endraw %}
     {% endhighlight %}
 
@@ -153,60 +187,77 @@
 {% block content %}
     <div class="app-example">
         {{ offenceCard({
-                offenceCode: 'OFFENCECODE',
-                offenceName: 'An Offence Name',
-                offenceStartDate: '27 06 2024',
-                offenceEndDate: '27 08 2024',
-                outcome: 'Imprisonment',
-                outcomeUpdated: true,
-                hideOutcome: false,
-                countNumber: '1',
-                lineNumber: '5',
-                convictionDate: '12 09 2024',
-                terrorRelated: true,
-                isSentenced: true,
-                periodLengths: [
-                    {
-                        description: 'Sentence length',
-                        years: '1',
-                        months: '2',
-                        weeks: '3',
-                        days: '4',
-                        periodOrder: ['years', 'months', 'weeks', 'days']
-                    },
-                    {
-                        description: 'Licence period',
-                        years: '5',
-                        months: '6',
-                        periodOrder: ['years', 'months']
-                    }
-                ],
-                sentenceServeType: 'CONSECUTIVE',
-                consecutiveTo: '3',
-                sentenceType: 'SDS (Standard Determinate Sentence)',
-                fineAmount: '17000',
-                detailsClasses: 'govuk-!-padding-4',
-                actions: {
-                    items: [
-                    {
-                        text: 'Edit',
-                        href: '/edit'
-                    },
-                    {
-                        text: 'Delete',
-                        href: '/delete'
-                    }
-                    ]
+            offenceCode: 'OFFENCECODE',
+            offenceName: 'An Offence Name',
+            offenceStartDate: '27 06 2024',
+            offenceEndDate: '27 08 2024',
+            outcome: 'Imprisonment',
+            outcomeUpdated: true,
+            hideOutcome: false,
+            countNumber: '1',
+            lineNumber: '5',
+            convictionDate: '12 09 2024',
+            terrorRelated: true,
+            isSentenced: true,
+            periodLengths: [
+                {
+                    description: 'Sentence length',
+                    years: '1',
+                    months: '2',
+                    weeks: '3',
+                    days: '4',
+                    periodOrder: ['years', 'months', 'weeks', 'days']
                 },
-                listItems: {
-                    classes: 'govuk-!-margin-top-4',
-                    items: [
-                        {
-                            html: '<a href="/update-outcome">Update outcome</a>'
-                        }
-                    ]
+                {
+                    description: 'Licence period',
+                    years: '5',
+                    months: '6',
+                    periodOrder: ['years', 'months']
                 }
-            })  }}
+            ],
+            sentenceServeType: 'CONSECUTIVE',
+            consecutiveTo: {
+                countNumber: '3',
+                offenceCode: 'OFF1',
+                offenceDescription: 'Offence Description',
+            },
+            sentenceType: 'SDS (Standard Determinate Sentence)',
+            fineAmount: '17000',
+            detailsClasses: 'govuk-!-padding-4',
+            actions: {
+                items: [
+                {
+                    text: 'Edit',
+                    href: '/edit'
+                },
+                {
+                    text: 'Delete',
+                    href: '/delete'
+                }
+                ]
+            },
+            listItems: {
+                classes: 'govuk-!-margin-top-4',
+                items: [
+                    {
+                        html: '<a href="/update-outcome">Update outcome</a>'
+                    }
+                ]
+            },
+            mergedFromCase: {
+                caseReference: 'C123',
+                courtCode: 'COURT1',
+                mergedFromDate: '2025-06-05',
+                warrantDate: '2025-03-05',
+            },
+            courtDetails: {
+                COURT1: 'Court 1 description',
+            },
+            consecutiveConcurrentLink: {
+                href: '/select-consecutive-concurrent',
+                text: 'Select consecutive or current',
+            }
+        })  }}
     </div>
 
     <p>This component is the common offence code used in the court cases release dates services</p>

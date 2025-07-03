@@ -169,7 +169,11 @@ export interface OffenceCardConfig {
     }[]
   }
   mergedFromCase?: MergedFromCaseDetails
-  courtDetails: { [key: string]: string }
+  courtDetails?: { [key: string]: string }
+  consecutiveConcurrentLink?: {
+    href?: string
+    text?: string
+  }
 }
 
 export interface SentenceLength {
