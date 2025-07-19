@@ -90,7 +90,7 @@
   "module": "./dist/@types/hmpps/index.js",
   "types": "./dist/@types/hmpps/index.d.ts",
   "dependencies": {
-    "date-fns": "^3.2.0",
+    "date-fns": "^3.6.0",
     "govuk-prototype-kit": "^13.16.2",
     "govuk-frontend": "^5.7.1"
   },
