@@ -136,6 +136,7 @@ export interface FooterConfig {
 }
 
 export interface OffenceCardConfig {
+  id?: string
   offenceCode: string
   offenceName: string
   offenceStartDate: string
@@ -173,6 +174,9 @@ export interface OffenceCardConfig {
   consecutiveConcurrentLink?: {
     href?: string
     text?: string
+  }
+  errorMessage?: {
+    text: string
   }
 }
 

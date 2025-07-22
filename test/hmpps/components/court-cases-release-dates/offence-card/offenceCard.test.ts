@@ -221,6 +221,83 @@ describe('Tests for offence card component', () => {
     expect(extractOffenceCard(content)).toStrictEqual(expectedOffenceCard)
   })
 
+  it('shows error message when provided', () => {
+    const offenceCodeConfig: OffenceCardConfig = {
+      offenceCode: 'OFFENCECODE',
+      offenceName: 'An Offence Name',
+      offenceStartDate: '27 06 2024',
+      offenceEndDate: '27 08 2024',
+      outcome: 'Imprisonment',
+      outcomeUpdated: true,
+      countNumber: '1',
+      convictionDate: '12 09 2024',
+      terrorRelated: true,
+      isSentenced: true,
+      periodLengths: [
+        {
+          description: 'Sentence length',
+          years: '1',
+          months: '2',
+          weeks: '3',
+          days: '4',
+          periodOrder: ['years', 'months', 'weeks', 'days'],
+        },
+        {
+          description: 'Licence period',
+          years: '5',
+          months: '6',
+          periodOrder: ['years', 'months', 'weeks', 'days'],
+        },
+      ],
+      sentenceServeType: 'CONSECUTIVE',
+      consecutiveTo: {
+        countNumber: '3',
+        offenceCode: 'OFF1',
+        offenceDescription: 'Offence Description',
+      },
+      sentenceType: 'SDS (Standard Determinate Sentence)',
+      fineAmount: '17000',
+      detailsClasses: 'govuk-!-padding-4',
+      actions: {
+        items: [
+          {
+            text: 'Edit',
+            href: '/edit',
+          },
+          {
+            text: 'Delete',
+            href: '/delete',
+          },
+        ],
+      },
+      listItems: {
+        classes: 'govuk-!-margin-top-4',
+        items: [
+          {
+            html: '<a href="/update-outcome">Update outcome</a>',
+          },
+        ],
+      },
+      mergedFromCase: {
+        caseReference: 'C123',
+        courtCode: 'COURT1',
+        mergedFromDate: '2025-06-05',
+        warrantDate: '2025-03-05',
+      },
+      courtDetails: {
+        COURT1: 'Court 1 description',
+      },
+      errorMessage: {
+        text: 'An offence error',
+      },
+      id: 'offenceId1',
+    }
+    const content = nunjucks.render('index.njk', { offenceCodeConfig })
+    const $ = cheerio.load(content)
+    const errorMessage = removeNewLinesTrim($('.govuk-error-message').text())
+    expect(errorMessage).toStrictEqual(`Error: ${offenceCodeConfig.errorMessage?.text}`)
+  })
+
   interface ExpectedOffenceCard {
     offenceCardHeader: string
     offenceSummary: {
