@@ -1,5 +1,6 @@
 {% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
 {%- from "govuk/components/tag/macro.njk" import govukTag -%}
+{% from "govuk/components/error-message/macro.njk" import govukErrorMessage %}
 
 {% set hideOutcome = params.hideOutcome | default(false) %}
 
@@ -112,10 +113,22 @@
                 }
                 }), summaryListRows)%}
 {% endif %}
+{%- set id = params.id if params.id else params.name -%}
+{% if params.errorMessage %}
+    <div class="govuk-form-group govuk-form-group--error{%- if params.formGroup.classes %} {{ params.formGroup.classes }}{% endif %}">
+        {% set errorId = id + '-error' %}
+        {{ govukErrorMessage({
+            id: errorId,
+            classes: params.errorMessage.classes,
+            attributes: params.errorMessage.attributes,
+            html: params.errorMessage.html,
+            text: params.errorMessage.text,
+            visuallyHiddenText: params.errorMessage.visuallyHiddenText
+        }) | trim | indent(2) }}
+{% endif %}
 
 
-
-<div class="offence-card{% if params.isSentenced %} sentence-card {% endif %}">
+<div class="offence-card{% if params.isSentenced %} sentence-card {% endif %}" {% if id %}id="{{ id }}"{% endif %}>
     <div class="offence-card-offence-details{% if params.detailsClasses %} {{ params.detailsClasses }} {% endif %}">
         {% set countNumberDescription = params.countNumber | formatCountNumber(params.lineNumber) %}
         {% if countNumberDescription %}
@@ -162,3 +175,7 @@
         </div>
     {% endif %}
 </div>
+
+{% if params.errorMessage %}
+</div>
+{% endif %}
