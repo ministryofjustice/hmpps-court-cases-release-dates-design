@@ -113,12 +113,10 @@
                 }
                 }), summaryListRows)%}
 {% endif %}
-{% set describedBy = params.describedBy if params.describedBy else undefined -%}
 {%- set id = params.id if params.id else params.name -%}
 {% if params.errorMessage %}
     <div class="govuk-form-group govuk-form-group--error{%- if params.formGroup.classes %} {{ params.formGroup.classes }}{% endif %}">
         {% set errorId = id + '-error' %}
-        {% set describedBy = describedBy + ' ' + errorId if describedBy else errorId %}
         {{ govukErrorMessage({
             id: errorId,
             classes: params.errorMessage.classes,
