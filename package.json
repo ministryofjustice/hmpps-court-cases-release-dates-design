@@ -97,7 +97,7 @@
   "devDependencies": {
     "@11ty/eleventy": "^2.0.1",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.1",
-    "@ministryofjustice/eslint-config-hmpps": "^0.0.1-beta.1",
+    "@ministryofjustice/eslint-config-hmpps": "^0.0.1",
     "@ministryofjustice/frontend": "^5.1.5",
     "@types/jest": "^29.5.14",
     "@types/nunjucks": "^3.2.6",
