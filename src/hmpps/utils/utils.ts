@@ -166,6 +166,6 @@ export const consecutiveToDetailsToDescription = (details: ConsecutiveToDetails)
   }
 
   // Fallback — shouldn't happen
-  return 'to unknown sentence'
+  return ' to unknown sentence'
 }
 
