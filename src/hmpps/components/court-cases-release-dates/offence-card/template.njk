@@ -6,177 +6,176 @@
 
 
 {%- set summaryListRows=[
-    {
-        key: {
-        text: "Committed on"
-    },
-        value: {
-        text: params.offenceStartDate + (" to " + params.offenceEndDate if params.offenceEndDate else '')
-    }
-    }
-] -%}
+                {
+                    key: {
+                        text: "Committed on"
+                    },
+                    value: {
+                        text: params.offenceStartDate + (" to " + params.offenceEndDate if params.offenceEndDate else '')
+                    }
+                }
+            ]-%}
 
 {% if params.convictionDate %}
     {% set summaryListRows = (summaryListRows.push({
-        key: {
-            text: "Conviction date"
-        },
-        value: {
-            text: params.convictionDate
-        }
-    }), summaryListRows) %}
+                    key: {
+                    text: "Conviction date"
+                },
+                    value: {
+                    text: params.convictionDate
+                }
+                }), summaryListRows)%}
 {% endif %}
 
 {% if params.outcome and not params.hideOutcome %}
-    {% set summaryListRows = (summaryListRows.push({
-        key: {
-            text: "Outcome"
-        },
-        value: {
-            html: params.outcome + (" " + govukTag({ text: "Updated", classes: "govuk-!-font-size-16 govuk-!-margin-left-1" }) if params.outcomeUpdated)
-        }
-    }), summaryListRows) %}
+  {% set summaryListRows = (summaryListRows.push({
+                    key: {
+                        text: "Outcome"
+                    },
+                    value: {
+                        html: params.outcome + (" " + govukTag({ text: "Updated", classes: "govuk-!-font-size-16 govuk-!-margin-left-1" }) if params.outcomeUpdated)
+                    }
+                }), summaryListRows) %}
 {% endif %}
 
 
 {% if params.sentenceType %}
     {% set summaryListRows = (summaryListRows.push({
-        key: {
-            text: "Sentence type"
-        },
-        value: {
-            text: params.sentenceType
-        }
-    }), summaryListRows) %}
+                    key: {
+                    text: "Sentence type"
+                },
+                    value: {
+                    text: params.sentenceType
+                }
+                }), summaryListRows)%}
 {% endif %}
 
 {% if params.fineAmount %}
-    {% set summaryListRows = (summaryListRows.push({
-        key: {
-            text: "Fine amount"
-        },
-        value: {
-            text: "£" + params.fineAmount
-        }
-    }), summaryListRows) %}
+  {% set summaryListRows = (summaryListRows.push({
+                    key: {
+                    text: "Fine amount"
+                },
+                    value: {
+                    text: "£" + params.fineAmount
+                }
+                }), summaryListRows)%}
 {% endif %}
 
 {% if params.periodLengths %}
     {% for periodLength in params.periodLengths %}
         {% set summaryListRows = (summaryListRows.push({
-            key: {
-                text: periodLength.description
-            },
-            value: {
-                text: periodLength | formatLengths
-            }
-        }), summaryListRows) %}
+                    key: {
+                    text: periodLength.description
+                },
+                    value: {
+                    text: periodLength | formatLengths
+                }
+                }), summaryListRows)%}
     {% endfor %}
 {% endif %}
 
 {% if params.sentenceServeType or params.consecutiveConcurrentLink %}
-    {% if params.sentenceServeType %}
-        {% set consecutiveOrConcurrentValue = params.sentenceServeType | capitalize %}
-        {% if params.consecutiveTo %}
-            {% set consecutiveOrConcurrentValue = consecutiveOrConcurrentValue + (params.consecutiveTo | consecutiveToDetailsToDescription) %}
-        {% endif %}
-        {% set summaryListRows = (summaryListRows.push({
-            key: {
-                text: "Consecutive or concurrent"
-            },
-            value: {
-                text: consecutiveOrConcurrentValue
-            }
-        }), summaryListRows) %}
+    {% if params.sentenceServeType%}
+    {% set consecutiveOrConcurrentValue = params.sentenceServeType | capitalize %}
+    {% if params.consecutiveTo %}
+       {% set consecutiveOrConcurrentValue = consecutiveOrConcurrentValue + (params.consecutiveTo | consecutiveToDetailsToDescription) %} 
+    {% endif %}
+    {% set summaryListRows = (summaryListRows.push({
+                    key: {
+                    text: "Consecutive or concurrent"
+                },
+                    value: {
+                    text: consecutiveOrConcurrentValue
+                }
+                }), summaryListRows)%}
     {% else %}
         {% set consecutiveOrCurrentHtml %}
-            <a class="govuk-link--no-visited-state"
-               href="{{ params.consecutiveConcurrentLink.href }}">{{ params.consecutiveConcurrentLink.text }}</a>
+            <a class="govuk-link--no-visited-state" href="{{params.consecutiveConcurrentLink.href}}">{{params.consecutiveConcurrentLink.text}}</a>
         {% endset %}
         {% set summaryListRows = (summaryListRows.push({
-            key: {
-                text: "Consecutive or concurrent"
-            },
-            value: {
-                html: consecutiveOrCurrentHtml
-            }
-        }), summaryListRows) %}
+                    key: {
+                    text: "Consecutive or concurrent"
+                },
+                    value: {
+                    html: consecutiveOrCurrentHtml
+                }
+                }), summaryListRows)%}
     {% endif %}
 {% endif %}
 
 {% if params.mergedFromCase %}
     {% set summaryListRows = (summaryListRows.push({
-        key: {
-            text: "Merged from"
-        },
-        value: {
-            text: params.mergedFromCase | formatMergedFromCase(params.courtDetails)
-        }
-    }), summaryListRows) %}
+                    key: {
+                    text: "Merged from"
+                },
+                    value: {
+                    text: params.mergedFromCase | formatMergedFromCase(params.courtDetails)
+                }
+                }), summaryListRows)%}
 {% endif %}
 {%- set id = params.id if params.id else params.name -%}
 {% if params.errorMessage %}
-<div class="govuk-form-group govuk-form-group--error{%- if params.formGroup.classes %} {{ params.formGroup.classes }}{% endif %}">
-    {% set errorId = id + '-error' %}
-    {{ govukErrorMessage({
-        id: errorId,
-        classes: params.errorMessage.classes,
-        attributes: params.errorMessage.attributes,
-        html: params.errorMessage.html,
-        text: params.errorMessage.text,
-        visuallyHiddenText: params.errorMessage.visuallyHiddenText
-    }) | trim | indent(2) }}
-    {% endif %}
+    <div class="govuk-form-group govuk-form-group--error{%- if params.formGroup.classes %} {{ params.formGroup.classes }}{% endif %}">
+        {% set errorId = id + '-error' %}
+        {{ govukErrorMessage({
+            id: errorId,
+            classes: params.errorMessage.classes,
+            attributes: params.errorMessage.attributes,
+            html: params.errorMessage.html,
+            text: params.errorMessage.text,
+            visuallyHiddenText: params.errorMessage.visuallyHiddenText
+        }) | trim | indent(2) }}
+{% endif %}
 
 
-    <div class="offence-card{% if params.isSentenced %} sentence-card {% endif %}" {% if id %}id="{{ id }}"{% endif %}>
-        <div class="offence-card-offence-details{% if params.detailsClasses %} {{ params.detailsClasses }} {% endif %}">
-            {% set countNumberDescription = params.countNumber | formatCountNumber(params.lineNumber) %}
-            {% if countNumberDescription %}
-                <span class="govuk-body">{{ countNumberDescription }}</span>
+<div class="offence-card{% if params.isSentenced %} sentence-card {% endif %}" {% if id %}id="{{ id }}"{% endif %}>
+    <div class="offence-card-offence-details{% if params.detailsClasses %} {{ params.detailsClasses }} {% endif %}">
+        {% set countNumberDescription = params.countNumber | formatCountNumber(params.lineNumber) %}
+        {% if countNumberDescription %}
+            <span class="govuk-body">{{ countNumberDescription }}</span>
+        {% endif %}
+        <h4 class="govuk-heading-s">
+            {{ params.offenceCode }} {{ params.offenceName }}
+            {% if params.terrorRelated %}
+                <br>
+                <strong class="govuk-tag govuk-!-margin-top-2">
+                    Terror-related
+                </strong>
             {% endif %}
-            <h4 class="govuk-heading-s">
-                {{ params.offenceCode }} {{ params.offenceName }}
-                {% if params.terrorRelated %}
-                    <br>
-                    <strong class="govuk-tag govuk-!-margin-top-2">
-                        Terror-related
-                    </strong>
-                {% endif %}
-            </h4>
+        </h4>
 
-            {{ govukSummaryList({
-                classes: "govuk-summary-list--no-border",
-                rows: summaryListRows,
-                attributes: {
-                    "data-qa": "offenceSummaryList"
-                }
-            }) }}
-            {% if params.listItems %}
-                <ul class="govuk-list{% if params.listItems.classes %} {{ params.listItems.classes }}{% endif %}"
-                    data-qa="offenceCardList">
-                    {% for item in params.listItems.items %}
-                        <li> {{ item.html | safe if item.html else item.text }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        </div>
-        {% if params.actions %}
-            <div class="offence-card-actions">
-                <ul class="offence-card-actions-list">
-                    {% for item in params.actions.items %}
-                        <li class="offence-card-action-link">
-                            <a href="{{ item.href }}" class="govuk-link">{{ item.text }}</a>
-                            {%- if item.visuallyHiddenText -%}
-                                <span class="govuk-visually-hidden"> {{ item.visuallyHiddenText }}</span>
-                            {% endif -%}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
+        {{ govukSummaryList({
+            classes: "govuk-summary-list--no-border",
+            rows: summaryListRows,
+            attributes: {
+                "data-qa": "offenceSummaryList"
+            }
+            }) 
+        }}
+        {% if params.listItems %}
+            <ul class="govuk-list{% if params.listItems.classes %} {{params.listItems.classes}}{% endif %}" data-qa="offenceCardList">
+                {% for item in params.listItems.items %}
+                    <li> {{item.html | safe if item.html else item.text }}</li>
+                {% endfor %}
+            </ul>
         {% endif %}
     </div>
+    {% if params.actions %}
+       <div class="offence-card-actions">
+            <ul class="offence-card-actions-list"> 
+                {% for item in params.actions.items %}
+                    <li class="offence-card-action-link">
+                        <a href="{{ item.href }}" class="govuk-link">{{ item.text }}</a>  
+                        {%- if item.visuallyHiddenText -%}
+                            <span class="govuk-visually-hidden"> {{ item.visuallyHiddenText }}</span>
+                        {% endif -%}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</div>
 
-    {% if params.errorMessage %}
+{% if params.errorMessage %}
 </div>
 {% endif %}
