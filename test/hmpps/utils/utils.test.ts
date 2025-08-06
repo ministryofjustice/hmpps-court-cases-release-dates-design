@@ -127,10 +127,10 @@ describe('consecutive to details to description', () => {
       countNumber: '-1',
       offenceCode: 'OFF002',
       offenceDescription: 'Another offence',
-      offenceStartDate: '2025-01-01',
-      offenceEndDate: '2025-01-10',
+      offenceStartDate: '01/01/2025',
+      offenceEndDate: '10/01/2025',
     })
-    expect(result).toEqual(' to OFF002 - Another offence committed on 2025-01-01 to 2025-01-10')
+    expect(result).toEqual(' to OFF002 - Another offence committed on 01/01/2025 to 10/01/2025')
   })
 
   it('Case 3: valid count, not same case, with case reference', () => {
@@ -140,9 +140,9 @@ describe('consecutive to details to description', () => {
       offenceDescription: 'Different offence',
       courtCaseReference: 'C123',
       courtName: 'Leeds Crown Court',
-      warrantDate: '2025-02-02',
+      warrantDate: '02/02/2025',
     })
-    expect(result).toEqual(' to count 5 on case C123 at Leeds Crown Court on 2025-02-02')
+    expect(result).toEqual(' to count 5 on case C123 at Leeds Crown Court on 02/02/2025')
   })
 
   it('Case 4: valid count, not same case, no case reference', () => {
@@ -151,9 +151,9 @@ describe('consecutive to details to description', () => {
       offenceCode: 'OFF004',
       offenceDescription: 'No ref offence',
       courtName: 'Liverpool Court',
-      warrantDate: '2025-03-03',
+      warrantDate: '03/03/2025',
     })
-    expect(result).toEqual(' to count 6 at Liverpool Court on 2025-03-03')
+    expect(result).toEqual(' to count 6 at Liverpool Court on 03/03/2025')
   })
 
   it('Case 5: no valid count, not same case, with case reference', () => {
@@ -163,12 +163,12 @@ describe('consecutive to details to description', () => {
       offenceDescription: 'Big offence',
       courtCaseReference: 'X999',
       courtName: 'Old Bailey',
-      warrantDate: '2025-04-04',
-      offenceStartDate: '2025-04-01',
-      offenceEndDate: '2025-04-02',
+      warrantDate: '04/04/2025',
+      offenceStartDate: '01/04/2025',
+      offenceEndDate: '02/04/2025',
     })
     expect(result).toEqual(
-        ' to OFF005 - Big offence committed on 2025-04-01 to 2025-04-02 on case X999 at Old Bailey on 2025-04-04'
+        ' to OFF005 - Big offence committed on 01/04/2025 to 02/04/2025 on case X999 at Old Bailey on 04/04/2025'
     )
   })
 
@@ -178,12 +178,12 @@ describe('consecutive to details to description', () => {
       offenceCode: 'OFF006',
       offenceDescription: 'Minor offence',
       courtName: 'Sheffield Court',
-      warrantDate: '2025-05-05',
-      offenceStartDate: '2025-05-01',
-      offenceEndDate: '2025-05-03',
+      warrantDate: '05/05/2025',
+      offenceStartDate: '01/05/2025',
+      offenceEndDate: '03/05/2025',
     })
     expect(result).toEqual(
-        ' to OFF006 - Minor offence committed on 2025-05-01 to 2025-05-03 at Sheffield Court on 2025-05-05'
+        ' to OFF006 - Minor offence committed on 01/05/2025 to 03/05/2025 at Sheffield Court on 05/05/2025'
     )
   })
 
