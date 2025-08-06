@@ -105,21 +105,67 @@ export function createSupportLink({
   return `${prefixText}${contactLink}${suffixText}`
 }
 
-export const consecutiveToDetailsToDescription = (consecutiveToDetails: ConsecutiveToDetails) => {
-  let description = ''
-  if (consecutiveToDetails.countNumber) {
-    description = `${description} to count ${consecutiveToDetails.countNumber}`
-  } else {
-    description = `${description} to ${consecutiveToDetails.offenceCode} - ${consecutiveToDetails.offenceDescription}`
+export const consecutiveToDetailsToDescription = (details: ConsecutiveToDetails): string => {
+  const {
+    countNumber,
+    offenceCode,
+    offenceDescription,
+    courtCaseReference,
+    courtName,
+    warrantDate,
+    offenceStartDate,
+    offenceEndDate,
+  } = details
+
+  const isValidCount = countNumber && countNumber !== '-1'
+  const isSameCase = !courtName
+
+  // These cases come from a decision table provided by the analysts
+  // Case 1: Valid count, same case
+  if (isValidCount && isSameCase) {
+    return ` to count ${countNumber}`
   }
-  if (consecutiveToDetails.courtCaseReference) {
-    description = `${description} on case ${consecutiveToDetails.courtCaseReference}`
+
+  // Case 2: No valid count, same case
+  if (!isValidCount && isSameCase) {
+    const offencePart = ` to ${offenceCode} - ${offenceDescription}`
+    const datePart = offenceStartDate
+        ? ` committed on ${offenceStartDate}${offenceEndDate ? ` to ${offenceEndDate}` : ''}`
+        : ''
+    return offencePart + datePart
   }
-  if (consecutiveToDetails.courtName) {
-    description = `${description} at ${consecutiveToDetails.courtName}`
+
+  // Case 3: Valid count, not same case + case ref
+  if (isValidCount && courtCaseReference) {
+    return ` to count ${countNumber} on case ${courtCaseReference} at ${courtName} on ${warrantDate}`
   }
-  if (consecutiveToDetails.warrantDate) {
-    description = `${description} on ${consecutiveToDetails.warrantDate}`
+
+  // Case 4: Valid count, not same case, no case ref
+  if (isValidCount && !isSameCase && !courtCaseReference) {
+    return ` to count ${countNumber} at ${courtName} on ${warrantDate}`
   }
-  return description
+
+  // Case 5: No valid count, not same case, with case ref
+  if (!isValidCount && !isSameCase && courtCaseReference) {
+    const offencePart = ` to ${offenceCode} - ${offenceDescription}`
+    const datePart = offenceStartDate
+        ? ` committed on ${offenceStartDate}${offenceEndDate ? ` to ${offenceEndDate}` : ''}`
+        : ''
+    const locationPart = ` on case ${courtCaseReference} at ${courtName} on ${warrantDate}`
+    return offencePart + datePart + locationPart
+  }
+
+  // Case 6: No valid count, not same case, no case ref
+  if (!isValidCount  && !isSameCase && !courtCaseReference) {
+    const offencePart = ` to ${offenceCode} - ${offenceDescription}`
+    const datePart = offenceStartDate
+        ? ` committed on ${offenceStartDate}${offenceEndDate ? ` to ${offenceEndDate}` : ''}`
+        : ''
+    const locationPart = ` at ${courtName} on ${warrantDate}`
+    return offencePart + datePart + locationPart
+  }
+
+  // Fallback — shouldn't happen
+  return 'to unknown sentence'
 }
+

@@ -20,6 +20,28 @@ njkEnv.addFilter('formatMergedFromCase', formatMergedFromCase)
 njkEnv.addFilter('formatCountNumber', formatCountNumber)
 
 describe('Tests for offence card component', () => {
+  const baseConfig: OffenceCardConfig = {
+    offenceCode: 'OFFCODE',
+    offenceName: 'Test Offence',
+    offenceStartDate: '01 01 2024',
+    offenceEndDate: '01 02 2024',
+    outcome: 'Imprisonment',
+    countNumber: '1',
+    convictionDate: '12 09 2024',
+    isSentenced: true,
+    periodLengths: [
+      {
+        description: 'Sentence length',
+        years: '1',
+        months: '2',
+        weeks: '3',
+        days: '4',
+        periodOrder: ['years', 'months', 'weeks', 'days'],
+      },
+    ],
+    sentenceType: 'SDS (Standard Determinate Sentence)',
+  }
+
   it('can load offence code with correctly formatted fields', () => {
     const offenceCodeConfig: OffenceCardConfig = {
       offenceCode: 'OFFENCECODE',
@@ -296,6 +318,120 @@ describe('Tests for offence card component', () => {
     const $ = cheerio.load(content)
     const errorMessage = removeNewLinesTrim($('.govuk-error-message').text())
     expect(errorMessage).toStrictEqual(`Error: ${offenceCodeConfig.errorMessage?.text}`)
+  })
+
+
+  describe('Tests from decision table of all permutations', () => {
+  it('Case 1: Valid count and same case', () => {
+    const config: OffenceCardConfig = {
+      ...baseConfig,
+      sentenceServeType: 'CONSECUTIVE',
+      consecutiveTo: {
+        countNumber: '3',
+        offenceCode: 'OFF1',
+        offenceDescription: 'Offence Desc',
+      },
+    }
+
+    const content = nunjucks.render('index.njk', { offenceCodeConfig: config })
+    expect(extractOffenceCard(content).offenceSummary['Consecutive or concurrent']).toBe('Consecutive to count 3')
+  })
+
+  it('Case 2: No valid count, same case', () => {
+    const config: OffenceCardConfig = {
+      ...baseConfig,
+      sentenceServeType: 'CONSECUTIVE',
+      consecutiveTo: {
+        countNumber: '-1',
+        offenceCode: 'OFF1',
+        offenceDescription: 'Offence Desc',
+        offenceStartDate: '01 01 2024',
+        offenceEndDate: '01 02 2024',
+      },
+    }
+
+    const content = nunjucks.render('index.njk', { offenceCodeConfig: config })
+    expect(extractOffenceCard(content).offenceSummary['Consecutive or concurrent'])
+        .toBe('Consecutive to OFF1 - Offence Desc committed on 01 01 2024 to 01 02 2024')
+  })
+
+  it('Case 3: Valid count, not same case + case ref', () => {
+    const config: OffenceCardConfig = {
+      ...baseConfig,
+      sentenceServeType: 'CONSECUTIVE',
+      consecutiveTo: {
+        countNumber: '2',
+        offenceCode: 'OFF2',
+        offenceDescription: 'Another Offence',
+        courtCaseReference: 'CASE123',
+        courtName: 'Big Court',
+        warrantDate: '05 07 2025',
+      },
+    }
+
+    const content = nunjucks.render('index.njk', { offenceCodeConfig: config })
+    expect(extractOffenceCard(content).offenceSummary['Consecutive or concurrent'])
+        .toBe('Consecutive to count 2 on case CASE123 at Big Court on 05 07 2025')
+  })
+
+  it('Case 4: Valid count, not same case, no case ref', () => {
+    const config: OffenceCardConfig = {
+      ...baseConfig,
+      sentenceServeType: 'CONSECUTIVE',
+      consecutiveTo: {
+        countNumber: '4',
+        offenceCode: 'OFF3',
+        offenceDescription: 'Example Offence',
+        courtName: 'Small Court',
+        warrantDate: '15 08 2025',
+      },
+    }
+
+    const content = nunjucks.render('index.njk', { offenceCodeConfig: config })
+    expect(extractOffenceCard(content).offenceSummary['Consecutive or concurrent'])
+        .toBe('Consecutive to count 4 at Small Court on 15 08 2025')
+  })
+
+  it('Case 5: No valid count, not same case, with case ref', () => {
+    const config: OffenceCardConfig = {
+      ...baseConfig,
+      sentenceServeType: 'CONSECUTIVE',
+      consecutiveTo: {
+        countNumber: '-1',
+        offenceCode: 'OFF4',
+        offenceDescription: 'Serious Offence',
+        offenceStartDate: '10 01 2024',
+        offenceEndDate: '11 02 2024',
+        courtCaseReference: 'CASE456',
+        courtName: 'Magistrates',
+        warrantDate: '01 03 2025',
+      },
+    }
+
+    const content = nunjucks.render('index.njk', { offenceCodeConfig: config })
+    expect(extractOffenceCard(content).offenceSummary['Consecutive or concurrent'])
+        .toBe('Consecutive to OFF4 - Serious Offence committed on 10 01 2024 to 11 02 2024 on case CASE456 at Magistrates on 01 03 2025')
+  })
+
+  it('Case 6: No valid count, not same case, no case ref', () => {
+    const config: OffenceCardConfig = {
+      ...baseConfig,
+      sentenceServeType: 'CONSECUTIVE',
+      consecutiveTo: {
+        countNumber: '-1',
+        offenceCode: 'OFF5',
+        offenceDescription: 'Lesser Offence',
+        offenceStartDate: '20 01 2024',
+        offenceEndDate: '25 01 2024',
+        courtName: 'Court of Law',
+        warrantDate: '02 02 2025',
+      },
+    }
+
+    const content = nunjucks.render('index.njk', { offenceCodeConfig: config })
+    expect(extractOffenceCard(content).offenceSummary['Consecutive or concurrent'])
+        .toBe('Consecutive to OFF5 - Lesser Offence committed on 20 01 2024 to 25 01 2024 at Court of Law on 02 02 2025')
+  })
   })
 
   interface ExpectedOffenceCard {
