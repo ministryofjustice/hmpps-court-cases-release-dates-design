@@ -118,7 +118,7 @@ export const consecutiveToDetailsToDescription = (details: ConsecutiveToDetails)
   } = details
 
   const isValidCount = countNumber && countNumber !== '-1'
-  const isSameCase = !courtName
+  const isSameCase = !courtName && !courtCaseReference && !warrantDate // if any of these are passed the implication is that it's consec to another case
 
   // These cases come from a decision table provided by the analysts
   // Case 1: Valid count, same case
