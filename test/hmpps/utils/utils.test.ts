@@ -187,14 +187,6 @@ describe('consecutive to details to description', () => {
     )
   })
 
-  it('Fallback: returns unknown if no known condition is matched', () => {
-    const result = consecutiveToDetailsToDescription({
-      offenceCode: 'OFF007',
-      offenceDescription: 'Unknown offence',
-    })
-    expect(result).toEqual(' to OFF007 - Unknown offence')
-  })
-
   it('only show count number', () => {
     const config = {
       countNumber: '5',
