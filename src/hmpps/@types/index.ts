@@ -196,6 +196,8 @@ export interface ConsecutiveToDetails {
   courtCaseReference?: string
   courtName?: string
   warrantDate?: string
+  offenceStartDate?: string
+  offenceEndDate?: string
 }
 
 export interface MergedFromCaseDetails {

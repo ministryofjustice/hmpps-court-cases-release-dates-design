@@ -113,6 +113,80 @@ describe('format using date string', () => {
 })
 
 describe('consecutive to details to description', () => {
+  it('Case 1: valid count, same case', () => {
+    const result = consecutiveToDetailsToDescription({
+      countNumber: '3',
+      offenceCode: 'OFF001',
+      offenceDescription: 'Test offence',
+    })
+    expect(result).toEqual(' to count 3')
+  })
+
+  it('Case 2: no valid count, same case', () => {
+    const result = consecutiveToDetailsToDescription({
+      countNumber: '-1',
+      offenceCode: 'OFF002',
+      offenceDescription: 'Another offence',
+      offenceStartDate: '01/01/2025',
+      offenceEndDate: '10/01/2025',
+    })
+    expect(result).toEqual(' to OFF002 - Another offence committed on 01/01/2025 to 10/01/2025')
+  })
+
+  it('Case 3: valid count, not same case, with case reference', () => {
+    const result = consecutiveToDetailsToDescription({
+      countNumber: '5',
+      offenceCode: 'OFF003',
+      offenceDescription: 'Different offence',
+      courtCaseReference: 'C123',
+      courtName: 'Leeds Crown Court',
+      warrantDate: '02/02/2025',
+    })
+    expect(result).toEqual(' to count 5 on case C123 at Leeds Crown Court on 02/02/2025')
+  })
+
+  it('Case 4: valid count, not same case, no case reference', () => {
+    const result = consecutiveToDetailsToDescription({
+      countNumber: '6',
+      offenceCode: 'OFF004',
+      offenceDescription: 'No ref offence',
+      courtName: 'Liverpool Court',
+      warrantDate: '03/03/2025',
+    })
+    expect(result).toEqual(' to count 6 at Liverpool Court on 03/03/2025')
+  })
+
+  it('Case 5: no valid count, not same case, with case reference', () => {
+    const result = consecutiveToDetailsToDescription({
+      countNumber: '-1',
+      offenceCode: 'OFF005',
+      offenceDescription: 'Big offence',
+      courtCaseReference: 'X999',
+      courtName: 'Old Bailey',
+      warrantDate: '04/04/2025',
+      offenceStartDate: '01/04/2025',
+      offenceEndDate: '02/04/2025',
+    })
+    expect(result).toEqual(
+        ' to OFF005 - Big offence committed on 01/04/2025 to 02/04/2025 on case X999 at Old Bailey on 04/04/2025'
+    )
+  })
+
+  it('Case 6: no valid count, not same case, no case reference', () => {
+    const result = consecutiveToDetailsToDescription({
+      countNumber: '-1',
+      offenceCode: 'OFF006',
+      offenceDescription: 'Minor offence',
+      courtName: 'Sheffield Court',
+      warrantDate: '05/05/2025',
+      offenceStartDate: '01/05/2025',
+      offenceEndDate: '03/05/2025',
+    })
+    expect(result).toEqual(
+        ' to OFF006 - Minor offence committed on 01/05/2025 to 03/05/2025 at Sheffield Court on 05/05/2025'
+    )
+  })
+
   it('only show count number', () => {
     const config = {
       countNumber: '5',
@@ -138,9 +212,11 @@ describe('consecutive to details to description', () => {
       offenceCode: 'OFF1',
       offenceDescription: 'Offence description',
       courtCaseReference: 'G36895',
+      courtName: 'Hull',
+      warrantDate: '01/01/2025'
     } as ConsecutiveToDetails
     const result = consecutiveToDetailsToDescription(config)
-    expect(result).toEqual(' to count 5 on case G36895')
+    expect(result).toEqual(' to count 5 on case G36895 at Hull on 01/01/2025')
   })
 
   it('show all fields', () => {
