@@ -62,6 +62,9 @@ describe('Tests for offence card component', () => {
           {
             text: 'Edit',
             href: '/edit',
+            attributes: {
+              'data-qa': 'edit-link'
+            }
           },
           {
             text: 'Delete',
