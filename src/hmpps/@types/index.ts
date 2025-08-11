@@ -160,6 +160,7 @@ export interface OffenceCardConfig {
     items: {
       href?: string
       text?: string
+      attributes?: Record<string, string>
     }[]
   }
   listItems?: {
