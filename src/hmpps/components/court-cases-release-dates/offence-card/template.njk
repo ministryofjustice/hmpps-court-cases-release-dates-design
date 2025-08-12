@@ -51,6 +51,17 @@
                 }), summaryListRows)%}
 {% endif %}
 
+{% if params.sentenceDate %}
+    {% set summaryListRows = (summaryListRows.push({
+                    key: {
+                    text: "Sentence date"
+                },
+                    value: {
+                    text: params.sentenceDate
+                }
+                }), summaryListRows)%}
+{% endif %}
+
 {% if params.fineAmount %}
   {% set summaryListRows = (summaryListRows.push({
                     key: {

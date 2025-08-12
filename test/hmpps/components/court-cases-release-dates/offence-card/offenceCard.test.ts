@@ -55,6 +55,7 @@ describe('Tests for offence card component', () => {
         offenceDescription: 'Offence Description',
       },
       sentenceType: 'SDS (Standard Determinate Sentence)',
+      sentenceDate: '2024-09-22',
       fineAmount: '17000',
       detailsClasses: 'govuk-!-padding-4',
       actions: {
@@ -100,6 +101,7 @@ describe('Tests for offence card component', () => {
         'Sentence length': '1 years 2 months 3 weeks 4 days',
         'Licence period': '5 years 6 months 0 weeks 0 days',
         'Sentence type': 'SDS (Standard Determinate Sentence)',
+        'Sentence date': '2024-09-22',
         'Fine amount': '£17000',
         'Consecutive or concurrent': 'Consecutive to count 3',
         'Merged from': 'C123 at Court 1 description',
@@ -202,6 +204,7 @@ describe('Tests for offence card component', () => {
         },
       ],
       sentenceType: 'SDS (Standard Determinate Sentence)',
+      sentenceDate: '2024-09-22',
       consecutiveConcurrentLink: {
         href: '/select-consecutive-concurrent',
         text: 'Select consecutive or current',
@@ -216,6 +219,7 @@ describe('Tests for offence card component', () => {
         Outcome: 'Imprisonment',
         'Sentence length': '1 years 2 months 3 weeks 4 days',
         'Sentence type': 'SDS (Standard Determinate Sentence)',
+        'Sentence date': '2024-09-22',
         'Consecutive or concurrent': 'Select consecutive or current',
       },
       actions: [],
