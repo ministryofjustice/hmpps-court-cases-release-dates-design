@@ -74,7 +74,8 @@
 {% endif %}
 
 {% if params.periodLengths %}
-    {% for periodLength in params.periodLengths %}
+    {% set periods = params.periodLengths | sortPeriodLengths %}
+    {% for periodLength in periods %}
         {% set summaryListRows = (summaryListRows.push({
                     key: {
                     text: periodLength.description

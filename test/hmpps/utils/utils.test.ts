@@ -1,4 +1,4 @@
-import { ConsecutiveToDetails, MergedFromCaseDetails } from '../../../src/hmpps/@types'
+import { ConsecutiveToDetails, MergedFromCaseDetails, PeriodLengthType, SentenceLength } from '../../../src/hmpps/@types'
 import {
   consecutiveToDetailsToDescription,
   dayMonthYearForwardSlashSeparator,
@@ -9,6 +9,7 @@ import {
   lastNameCommaFirstName,
   nameCase,
   sentenceCase,
+  sortPeriodLengths,
 } from '../../../src/hmpps/utils/utils'
 
 describe('sentence case', () => {
@@ -276,5 +277,32 @@ describe('format count number', () => {
   it('show count number when entered', () => {
     const result = formatCountNumber('66', '2')
     expect(result).toEqual('Count 66')
+  })
+})
+
+describe('sort period lengths', () => {
+  const createSentenceLength = (type: PeriodLengthType, description: string): SentenceLength => ({
+    periodLengthType: type,
+    periodOrder: [],
+    description,
+  })
+
+  it('sorts a mixed list by priority', () => {
+    const items: SentenceLength[] = [
+      createSentenceLength('LICENCE_PERIOD', 'licence'),
+      createSentenceLength('SENTENCE_LENGTH', 'sentence'),
+      createSentenceLength('UNSUPPORTED', 'unsupported'),
+      createSentenceLength('TARIFF_LENGTH', 'tariff'),
+      createSentenceLength('CUSTODIAL_TERM', 'custodial'),
+    ]
+
+    const result = sortPeriodLengths(items)
+    expect(result.map(i => i.periodLengthType)).toEqual([
+      'TARIFF_LENGTH',
+      'SENTENCE_LENGTH',
+      'CUSTODIAL_TERM',
+      'LICENCE_PERIOD',
+      'UNSUPPORTED',
+    ])
   })
 })

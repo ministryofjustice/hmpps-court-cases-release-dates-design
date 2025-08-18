@@ -6,6 +6,7 @@ import {
   formatCountNumber,
   formatLengths,
   formatMergedFromCase,
+  sortPeriodLengths,
 } from '../../../../../src/hmpps/utils/utils'
 
 const njkEnv = nunjucks.configure([
@@ -18,6 +19,7 @@ njkEnv.addFilter('formatLengths', formatLengths)
 njkEnv.addFilter('consecutiveToDetailsToDescription', consecutiveToDetailsToDescription)
 njkEnv.addFilter('formatMergedFromCase', formatMergedFromCase)
 njkEnv.addFilter('formatCountNumber', formatCountNumber)
+njkEnv.addFilter('sortPeriodLengths', sortPeriodLengths)
 
 describe('Tests for offence card component', () => {
   it('can load offence code with correctly formatted fields', () => {
@@ -34,17 +36,25 @@ describe('Tests for offence card component', () => {
       isSentenced: true,
       periodLengths: [
         {
+          description: 'Licence period',
+          periodLengthType: 'LICENCE_PERIOD',
+          years: '5',
+          months: '6',
+          periodOrder: ['years', 'months', 'weeks', 'days'],
+        },
+        {
+          description: 'Custodial term',
+          periodLengthType: 'CUSTODIAL_TERM',
+          years: '1',
+          periodOrder: ['years', 'months', 'weeks', 'days'],
+        },
+        {
           description: 'Sentence length',
+          periodLengthType: 'SENTENCE_LENGTH',
           years: '1',
           months: '2',
           weeks: '3',
           days: '4',
-          periodOrder: ['years', 'months', 'weeks', 'days'],
-        },
-        {
-          description: 'Licence period',
-          years: '5',
-          months: '6',
           periodOrder: ['years', 'months', 'weeks', 'days'],
         },
       ],
@@ -100,6 +110,7 @@ describe('Tests for offence card component', () => {
         Outcome: 'Imprisonment Updated',
         'Sentence length': '1 years 2 months 3 weeks 4 days',
         'Licence period': '5 years 6 months 0 weeks 0 days',
+        'Custodial term': '1 years 0 months 0 weeks 0 days',
         'Sentence type': 'SDS (Standard Determinate Sentence)',
         'Sentence date': '2024-09-22',
         'Fine amount': '£17000',
