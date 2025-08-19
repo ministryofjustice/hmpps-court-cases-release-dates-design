@@ -182,6 +182,25 @@ export interface OffenceCardConfig {
   }
 }
 
+export type PeriodLengthType =
+    | 'SENTENCE_LENGTH'
+    | 'CUSTODIAL_TERM'
+    | 'LICENCE_PERIOD'
+    | 'TARIFF_LENGTH'
+    | 'TERM_LENGTH'
+    | 'OVERALL_SENTENCE_LENGTH'
+    | 'UNSUPPORTED'
+
+export const PERIOD_TYPE_PRIORITY: Record<PeriodLengthType, number> = {
+  TARIFF_LENGTH: 1,
+  SENTENCE_LENGTH: 2,
+  CUSTODIAL_TERM: 3,
+  LICENCE_PERIOD: 4,
+  TERM_LENGTH: 99,
+  OVERALL_SENTENCE_LENGTH: 99,
+  UNSUPPORTED: 99,
+}
+
 export interface SentenceLength {
   description?: string
   years?: string
@@ -189,6 +208,7 @@ export interface SentenceLength {
   weeks?: string
   days?: string
   periodOrder: string[]
+  periodLengthType: PeriodLengthType
 }
 
 export interface ConsecutiveToDetails {

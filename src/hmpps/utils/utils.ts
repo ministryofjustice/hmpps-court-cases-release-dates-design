@@ -1,5 +1,6 @@
 import { format, isValid, parse, parseISO } from 'date-fns'
 import type { ConsecutiveToDetails, MergedFromCaseDetails, SentenceLength } from '../@types'
+import { PERIOD_TYPE_PRIORITY } from "../@types";
 
 const uniformWhitespace = (word: string): string => (word ? word.trim().replace(/\s+/g, ' ') : '')
 
@@ -168,4 +169,12 @@ export const consecutiveToDetailsToDescription = (details: ConsecutiveToDetails)
   // Fallback — shouldn't happen
   return ' to unknown sentence'
 }
+
+export const sortPeriodLengths = (items: SentenceLength[]) =>
+  [...items].sort(
+    (a, b) =>
+      (PERIOD_TYPE_PRIORITY[a.periodLengthType] ?? PERIOD_TYPE_PRIORITY.UNSUPPORTED) -
+      (PERIOD_TYPE_PRIORITY[b.periodLengthType] ?? PERIOD_TYPE_PRIORITY.UNSUPPORTED)
+  )
+
 
