@@ -1,5 +1,13 @@
-FROM bitnami/nginx:1.25.3
+FROM nginxinc/nginx-unprivileged
 
-WORKDIR /app
+USER root
 
-COPY ./_site .
+ARG user=apppuser
+ARG uid=1001
+RUN addgroup --gid ${uid} ${user} && \
+    adduser --disabled-login --disabled-password --ingroup ${user} --home /${user} --gecos "${user} user" --shell /bin/bash --uid ${uid} ${user} && \
+    usermod -a -G ${user} nginx
+
+COPY ./_site /usr/share/nginx/html
+
+USER ${uid}
