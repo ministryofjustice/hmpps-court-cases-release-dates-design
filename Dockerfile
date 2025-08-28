@@ -1,4 +1,4 @@
-FROM nginxinc/nginx-unprivileged
+FROM nginxinc/nginx-unprivileged:1.29.1-bookworm
 
 USER root
 
