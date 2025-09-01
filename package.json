@@ -110,7 +110,7 @@
     "jest": "^30.0.5",
     "jest-html-reporter": "^4.3.0",
     "jest-junit": "^16.0.0",
-    "lint-staged": "^15.5.2",
+    "lint-staged": "^16.1.6",
     "nodemon": "^3.1.10",
     "nunjucks": "^3.2.4",
     "open": "^10.2.0",
