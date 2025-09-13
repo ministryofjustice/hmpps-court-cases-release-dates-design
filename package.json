@@ -97,7 +97,7 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
-    "@ministryofjustice/eslint-config-hmpps": "^0.0.3",
+    "@ministryofjustice/eslint-config-hmpps": "^0.0.4",
     "@ministryofjustice/frontend": "^5.1.5",
     "@types/jest": "^30.0.0",
     "@types/nunjucks": "^3.2.6",
@@ -114,7 +114,7 @@
     "nodemon": "^3.1.10",
     "nunjucks": "^3.2.4",
     "open": "^10.2.0",
-    "sass": "^1.92.0",
+    "sass": "^1.92.1",
     "ts-jest": "^29.4.1",
     "typescript": "^5.9.2"
   }
