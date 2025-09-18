@@ -4,6 +4,9 @@
   "description": "A shared UI component library for the HMPPS Court cases and release dates services",
   "author": "HMPPS Digital Studio",
   "license": "MIT",
+  "repository": {
+    "url": "https://github.com/ministryofjustice/hmpps-court-cases-release-dates-design"
+  },
   "scripts": {
     "prepare": "husky",
     "copy:static": "cp src/package/*.* dist && cp src/hmpps/*.* dist/hmpps && cp -r src/hmpps/assets src/hmpps/components src/hmpps/filters dist/hmpps",
