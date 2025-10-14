@@ -74,14 +74,21 @@
 {% endif %}
 
 {% if params.periodLengths %}
-    {% set periods = params.periodLengths | sortPeriodLengths %}
+    {% set periods = params.periodLengths | groupAndSortPeriodLengths %}
     {% for periodLength in periods %}
+        {% set periodLengthValueHtml = '' %}
+        {% for specificLength in periodLength.lengths %}
+            {% set periodLengthValueHtml = periodLengthValueHtml + (specificLength | formatLengths) %}
+            {% if not loop.last %}
+              {% set periodLengthValueHtml = periodLengthValueHtml + '<br>' %}
+            {% endif %}
+        {% endfor %}
         {% set summaryListRows = (summaryListRows.push({
                     key: {
                     text: periodLength.description
                 },
                     value: {
-                    text: periodLength | formatLengths
+                    html: periodLengthValueHtml
                 }
                 }), summaryListRows)%}
     {% endfor %}

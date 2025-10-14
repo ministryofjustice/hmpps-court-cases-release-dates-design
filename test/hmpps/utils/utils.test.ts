@@ -5,6 +5,7 @@ import {
   firstNameSpaceLastName,
   formatCountNumber,
   formatMergedFromCase,
+  groupAndSortPeriodLengths,
   hmppsFormatDate,
   lastNameCommaFirstName,
   nameCase,
@@ -285,6 +286,7 @@ describe('sort period lengths', () => {
     periodLengthType: type,
     periodOrder: [],
     description,
+    legacyData: undefined,
   })
 
   it('sorts a mixed list by priority', () => {
@@ -304,5 +306,46 @@ describe('sort period lengths', () => {
       'LICENCE_PERIOD',
       'UNSUPPORTED',
     ])
+  })
+})
+
+describe('group and sort period lengths', () => {
+  const createSentenceLength = (type: PeriodLengthType, description: string, sentenceTermCode: string | undefined = undefined): SentenceLength => ({
+    periodLengthType: type,
+    periodOrder: [],
+    description,
+    legacyData: {
+      sentenceTermCode
+    }
+  })
+
+  it('group period lengths with same description and sort', () => {
+    const items: SentenceLength[] = [
+      createSentenceLength('LICENCE_PERIOD', 'licence'),
+      createSentenceLength('LICENCE_PERIOD', 'licence'),
+      createSentenceLength('SENTENCE_LENGTH', 'sentence'),
+      createSentenceLength('SENTENCE_LENGTH', 'sentence'),
+      createSentenceLength('UNSUPPORTED', 'unsupported', 'LEG1'),
+      createSentenceLength('UNSUPPORTED', 'unsupported', 'LEG2'),
+      createSentenceLength('TARIFF_LENGTH', 'tariff'),
+      createSentenceLength('CUSTODIAL_TERM', 'custodial'),
+    ]
+
+    const result = groupAndSortPeriodLengths(items)
+    const licencePeriods = result.find(groupedPeriodLength => groupedPeriodLength.key === 'LICENCE_PERIOD')
+    expect(licencePeriods!!.lengths.length).toEqual(2)
+    const unsupportedLeg1 = result.find(groupedPeriodLength => groupedPeriodLength.key === 'UNSUPPORTED-LEG1')
+    expect(unsupportedLeg1!!.lengths.length).toEqual(1)
+
+    expect(result.map(i => i.type)).toEqual([
+      'TARIFF_LENGTH',
+      'SENTENCE_LENGTH',
+      'CUSTODIAL_TERM',
+      'LICENCE_PERIOD',
+      'UNSUPPORTED',
+      'UNSUPPORTED',
+    ])
+    
+
   })
 })

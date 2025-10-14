@@ -209,6 +209,24 @@ export interface SentenceLength {
   days?: string
   periodOrder: string[]
   periodLengthType: PeriodLengthType
+  legacyData?: {
+    sentenceTermCode?: string
+  }
+}
+
+export interface GroupedPeriodLengths {
+  key: string
+  legacyCode?: string
+  description?: string
+  type:
+    | 'SENTENCE_LENGTH'
+    | 'CUSTODIAL_TERM'
+    | 'LICENCE_PERIOD'
+    | 'TARIFF_LENGTH'
+    | 'TERM_LENGTH'
+    | 'OVERALL_SENTENCE_LENGTH'
+    | 'UNSUPPORTED'
+  lengths: SentenceLength[]
 }
 
 export interface ConsecutiveToDetails {

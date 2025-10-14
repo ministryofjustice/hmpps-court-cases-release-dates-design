@@ -6,7 +6,7 @@ import {
   formatCountNumber,
   formatLengths,
   formatMergedFromCase,
-  sortPeriodLengths,
+  groupAndSortPeriodLengths,
 } from '../../../../../src/hmpps/utils/utils'
 
 const njkEnv = nunjucks.configure([
@@ -19,7 +19,7 @@ njkEnv.addFilter('formatLengths', formatLengths)
 njkEnv.addFilter('consecutiveToDetailsToDescription', consecutiveToDetailsToDescription)
 njkEnv.addFilter('formatMergedFromCase', formatMergedFromCase)
 njkEnv.addFilter('formatCountNumber', formatCountNumber)
-njkEnv.addFilter('sortPeriodLengths', sortPeriodLengths)
+njkEnv.addFilter('groupAndSortPeriodLengths', groupAndSortPeriodLengths)
 
 describe('Tests for offence card component', () => {
   it('can load offence code with correctly formatted fields', () => {
@@ -41,12 +41,14 @@ describe('Tests for offence card component', () => {
           years: '5',
           months: '6',
           periodOrder: ['years', 'months', 'weeks', 'days'],
+          legacyData: undefined,
         },
         {
           description: 'Custodial term',
           periodLengthType: 'CUSTODIAL_TERM',
           years: '1',
           periodOrder: ['years', 'months', 'weeks', 'days'],
+          legacyData: undefined,
         },
         {
           description: 'Sentence length',
@@ -56,6 +58,7 @@ describe('Tests for offence card component', () => {
           weeks: '3',
           days: '4',
           periodOrder: ['years', 'months', 'weeks', 'days'],
+          legacyData: undefined,
         },
       ],
       sentenceServeType: 'CONSECUTIVE',
@@ -144,6 +147,8 @@ describe('Tests for offence card component', () => {
           weeks: '3',
           days: '4',
           periodOrder: ['years', 'months', 'weeks', 'days'],
+          legacyData: undefined,
+          periodLengthType: 'SENTENCE_LENGTH',
         },
       ],
       sentenceServeType: 'CONSECUTIVE',
@@ -212,6 +217,8 @@ describe('Tests for offence card component', () => {
           weeks: '3',
           days: '4',
           periodOrder: ['years', 'months', 'weeks', 'days'],
+          legacyData: undefined,
+          periodLengthType: 'SENTENCE_LENGTH',
         },
       ],
       sentenceType: 'SDS (Standard Determinate Sentence)',
@@ -259,12 +266,16 @@ describe('Tests for offence card component', () => {
           weeks: '3',
           days: '4',
           periodOrder: ['years', 'months', 'weeks', 'days'],
+          legacyData: undefined,
+          periodLengthType: 'SENTENCE_LENGTH',
         },
         {
           description: 'Licence period',
           years: '5',
           months: '6',
           periodOrder: ['years', 'months', 'weeks', 'days'],
+          legacyData: undefined,
+          periodLengthType: 'LICENCE_PERIOD',
         },
       ],
       sentenceServeType: 'CONSECUTIVE',
