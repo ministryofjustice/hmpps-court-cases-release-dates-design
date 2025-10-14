@@ -29,13 +29,17 @@
                     months: '2',
                     weeks: '3',
                     days: '4',
-                    periodOrder: ['years', 'months', 'weeks', 'days']
+                    periodOrder: ['years', 'months', 'weeks', 'days'],
+                    legacyData: undefined,
+                    periodLengthType: 'SENTENCE_LENGTH'
                 },
                 {
                     description: 'Licence period',
                     years: '5',
                     months: '6',
-                    periodOrder: ['years', 'months']
+                    periodOrder: ['years', 'months'],
+                    legacyData: undefined,
+                    periodLengthType: 'LICENCE_PERIOD'
                 }
             ],
             sentenceServeType: 'CONSECUTIVE',
@@ -111,13 +115,17 @@
                         months: '2',
                         weeks: '3',
                         days: '4',
-                        periodOrder: ['years', 'months', 'weeks', 'days']
+                        periodOrder: ['years', 'months', 'weeks', 'days'],
+                        legacyData: undefined,
+                        periodLengthType: 'SENTENCE_LENGTH'
                     },
                     {
                         description: 'Licence period',
                         years: '5',
                         months: '6',
-                        periodOrder: ['years', 'months']
+                        periodOrder: ['years', 'months'],
+                        legacyData: undefined,
+                        periodLengthType: 'LICENCE_PERIOD'
                     }
                 ],
                 sentenceServeType: 'CONSECUTIVE',
@@ -176,14 +184,14 @@
                 formatCountNumber,
                 formatLengths,
                 formatMergedFromCase,
-                sortPeriodLengths,
+                groupAndSortPeriodLengths,
              } from '@ministryofjustice/hmpps-court-cases-release-dates-design/hmpps/utils/utils'
 
             njkEnv.addFilter('formatLengths', formatLengths)
             njkEnv.addFilter('consecutiveToDetailsToDescription', consecutiveToDetailsToDescription)
             njkEnv.addFilter('formatMergedFromCase', formatMergedFromCase)
             njkEnv.addFilter('formatCountNumber', formatCountNumber)
-            njkEnv.addFilter('sortPeriodLengths', sortPeriodLengths)
+            njkEnv.addFilter('groupAndSortPeriodLengths', groupAndSortPeriodLengths)
         {% endraw %}
     {% endhighlight %}
 {% endset %}
@@ -210,13 +218,17 @@
                     months: '2',
                     weeks: '3',
                     days: '4',
-                    periodOrder: ['years', 'months', 'weeks', 'days']
+                    periodOrder: ['years', 'months', 'weeks', 'days'],
+                    legacyData: undefined,
+                    periodLengthType: 'SENTENCE_LENGTH'
                 },
                 {
                     description: 'Licence period',
                     years: '5',
                     months: '6',
-                    periodOrder: ['years', 'months']
+                    periodOrder: ['years', 'months'],
+                    legacyData: undefined,
+                    periodLengthType: 'LICENCE_PERIOD'
                 }
             ],
             sentenceServeType: 'CONSECUTIVE',

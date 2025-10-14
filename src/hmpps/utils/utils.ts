@@ -1,5 +1,5 @@
 import { format, isValid, parse, parseISO } from 'date-fns'
-import type { ConsecutiveToDetails, MergedFromCaseDetails, SentenceLength } from '../@types'
+import type { ConsecutiveToDetails, GroupedPeriodLengths, MergedFromCaseDetails, SentenceLength } from '../@types'
 import { PERIOD_TYPE_PRIORITY } from "../@types";
 
 const uniformWhitespace = (word: string): string => (word ? word.trim().replace(/\s+/g, ' ') : '')
@@ -177,4 +177,28 @@ export const sortPeriodLengths = (items: SentenceLength[]) =>
       (PERIOD_TYPE_PRIORITY[b.periodLengthType] ?? PERIOD_TYPE_PRIORITY.UNSUPPORTED)
   )
 
+  export const groupAndSortPeriodLengths = (items: SentenceLength[]): GroupedPeriodLengths[] => {
+    const periodLengthsByType = [...items].reduce((periodLengthTypes: {[key: string]: GroupedPeriodLengths}, periodLength) => {
+    let key = periodLength.periodLengthType
+    if(periodLength.periodLengthType === 'UNSUPPORTED') {
+      key = key + `-${periodLength.legacyData?.sentenceTermCode}`
+    }
+    const existingPeriodLengths = periodLengthTypes[key] ?? {
+      key,
+      type: periodLength.periodLengthType,
+      description: periodLength.description,
+      legacyData: {
+        sentenceTermCode: periodLength.legacyData?.sentenceTermCode
+      },
+      lengths: []
+    } as GroupedPeriodLengths
+    existingPeriodLengths.lengths.push(periodLength)
+    return { ...periodLengthTypes, [key]: existingPeriodLengths}
+  }, {}) ?? {}
+  return Object.values(periodLengthsByType).sort(
+    (a, b) =>
+      (PERIOD_TYPE_PRIORITY[a.type] ?? PERIOD_TYPE_PRIORITY.UNSUPPORTED) -
+      (PERIOD_TYPE_PRIORITY[b.type] ?? PERIOD_TYPE_PRIORITY.UNSUPPORTED)
+  )
+  }
 
