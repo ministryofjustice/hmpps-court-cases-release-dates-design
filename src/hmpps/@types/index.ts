@@ -139,7 +139,7 @@ export interface OffenceCardConfig {
   id?: string
   offenceCode: string
   offenceName: string
-  offenceStartDate: string
+  offenceStartDate?: string
   offenceEndDate?: string
   outcome: string
   hideOutcome?: boolean
