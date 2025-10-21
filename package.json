@@ -94,31 +94,31 @@
   "types": "./dist/@types/hmpps/index.d.ts",
   "dependencies": {
     "date-fns": "^4.1.0",
-    "govuk-prototype-kit": "^13.18.0",
-    "govuk-frontend": "^5.11.2"
+    "govuk-prototype-kit": "^13.18.1",
+    "govuk-frontend": "^5.13.0"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
-    "@ministryofjustice/eslint-config-hmpps": "^0.0.4",
-    "@ministryofjustice/frontend": "^5.1.5",
+    "@ministryofjustice/eslint-config-hmpps": "^0.0.5",
+    "@ministryofjustice/frontend": "^5.2.1",
     "@types/jest": "^30.0.0",
     "@types/nunjucks": "^3.2.6",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "cheerio": "^1.1.2",
     "concurrently": "^9.2.1",
-    "govuk-frontend": "^5.11.2",
+    "govuk-frontend": "^5.13.0",
     "husky": "^9.1.7",
-    "jest": "^30.1.3",
+    "jest": "^30.2.0",
     "jest-html-reporter": "^4.3.0",
     "jest-junit": "^16.0.0",
-    "lint-staged": "^16.1.6",
+    "lint-staged": "^16.2.4",
     "nodemon": "^3.1.10",
     "nunjucks": "^3.2.4",
     "open": "^10.2.0",
-    "sass": "^1.92.1",
-    "ts-jest": "^29.4.1",
-    "typescript": "^5.9.2"
+    "sass": "^1.93.2",
+    "ts-jest": "^29.4.5",
+    "typescript": "^5.9.3"
   }
 }
