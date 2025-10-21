@@ -12,7 +12,7 @@
                         text: "Committed on"
                     },
                     value: {
-                        text: params.offenceStartDate + (" to " + params.offenceEndDate if params.offenceEndDate else '')
+                        text: params.offenceStartDate + (" to " + params.offenceEndDate if params.offenceEndDate else '') if params.offenceStartDate else 'Not entered'
                     }
                 }
             ]-%}

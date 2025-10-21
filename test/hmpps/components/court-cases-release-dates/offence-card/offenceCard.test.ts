@@ -327,6 +327,27 @@ describe('Tests for offence card component', () => {
     expect(errorMessage).toStrictEqual(`Error: ${offenceCodeConfig.errorMessage?.text}`)
   })
 
+  it('show offence date as not entered when no start or end date', () => {
+    const offenceCodeConfig: OffenceCardConfig = {
+      offenceCode: 'OFFENCECODE',
+      offenceName: 'An Offence Name',
+      outcome: 'Remand',
+      isSentenced: false,
+      id: 'offenceId1',
+    }
+    const content = nunjucks.render('index.njk', { offenceCodeConfig })
+    const expectedOffenceCard: ExpectedOffenceCard = {
+      offenceCardHeader: 'OFFENCECODE An Offence Name',
+      offenceSummary: {
+        'Committed on': 'Not entered',
+        Outcome: 'Remand',
+      },
+      actions: [],
+      listItems: [],
+    }
+    expect(extractOffenceCard(content)).toStrictEqual(expectedOffenceCard)
+  })
+
   interface ExpectedOffenceCard {
     offenceCardHeader: string
     offenceSummary: {
