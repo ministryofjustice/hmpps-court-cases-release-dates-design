@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: lts/*
-      - run: npm ci
+      - run: npm run setup
       - run: npm run build
       - uses: aws-actions/configure-aws-credentials@v5
         with:
