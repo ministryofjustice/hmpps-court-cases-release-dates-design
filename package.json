@@ -117,7 +117,7 @@
     "lint-staged": "^16.1.6",
     "nodemon": "^3.1.10",
     "nunjucks": "^3.2.4",
-    "open": "^10.2.0",
+    "open": "^11.0.0",
     "sass": "^1.92.1",
     "ts-jest": "^29.4.1",
     "typescript": "^5.9.2"
