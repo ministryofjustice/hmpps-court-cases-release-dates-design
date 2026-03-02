@@ -95,7 +95,7 @@
   "types": "./dist/@types/hmpps/index.d.ts",
   "dependencies": {
     "date-fns": "^4.1.0",
-    "govuk-frontend": "^5.14.0",
+    "govuk-frontend": "^6.1.0",
     "govuk-prototype-kit": "^13.18.1"
   },
   "devDependencies": {
