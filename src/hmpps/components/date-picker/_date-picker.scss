@@ -14,7 +14,7 @@
     clear: both;
     display: none;
     padding: 8px;
-    outline: 1px solid $govuk-border-colour;
+    outline: 1px solid govuk-functional-colour(border);
     outline-offset: -1px;
     position: static;
     top: 0;
@@ -57,7 +57,7 @@
     &__navbuttons {
       button {
         background-color: transparent;
-        color: $govuk-text-colour !important;
+        color: govuk-functional-colour(text) !important;
         min-height: 40px;
         margin: 0;
         padding: 4px 4px 0 4px;
@@ -79,7 +79,7 @@
         }
 
         &:focus {
-          background-color: $govuk-focus-colour;
+          background-color: govuk-functional-colour(focus);
           border-bottom: 4px solid govuk-colour('black');
         }
       }
@@ -89,7 +89,7 @@
       border-collapse: collapse;
 
       tbody:focus-within {
-        outline: 2px solid $govuk-focus-colour;
+        outline: 2px solid govuk-functional-colour(focus);
       }
 
       td {
@@ -101,13 +101,13 @@
 
       th {
         font-size: 16px;
-        color: $govuk-text-colour;
+        color: govuk-functional-colour(text);
       }
 
       button {
         background-color: transparent;
         border-width: 0;
-        color: $govuk-text-colour;
+        color: govuk-functional-colour(text);
         min-height: 40px;
         margin: 0;
         padding: 0;
@@ -117,7 +117,7 @@
 
         &:hover {
           outline: 3px solid rgba(0,0,0,0);
-          color: $govuk-text-colour;
+          color: govuk-functional-colour(text);
           background-color: rgba(govuk-colour('yellow'), .5);
           box-shadow: none;
           text-decoration: none;
@@ -128,8 +128,8 @@
 
         &:focus {
           outline: 3px solid rgba(0,0,0,0);
-          color: $govuk-focus-text-colour;
-          background-color: $govuk-focus-colour;
+          color: govuk-functional-colour(focus-text);
+          background-color: govuk-functional-colour(focus);
           border-bottom: 4px solid govuk-colour('black');
           padding-top: 4px;
           text-decoration: none;
@@ -138,8 +138,8 @@
         }
 
         &[disabled="true"] {
-          background-color: govuk-colour('light-grey');
-          color: $govuk-text-colour;
+          background-color: govuk-colour('black', $variant: 'tint-95');
+          color: govuk-functional-colour(text);
         }
 
         &.hmpps-datepicker__current {
@@ -261,14 +261,14 @@
   cursor: pointer;
 
   &:hover {
-    background-color: govuk-colour('mid-grey');
+    background-color: govuk-colour('black', $variant: 'tint-80');
     fill: govuk-colour('black');
-    border-bottom: 4px solid govuk-colour('mid-grey');
+    border-bottom: 4px solid govuk-colour('black', $variant: 'tint-80');
   }
 
   &:focus {
-    background-color: $govuk-focus-colour;
-    fill: $govuk-focus-text-colour;
+    background-color: govuk-functional-colour(focus);
+    fill: govuk-functional-colour(focus-text);
     border-bottom: 4px solid govuk-colour('black');
   }
 
