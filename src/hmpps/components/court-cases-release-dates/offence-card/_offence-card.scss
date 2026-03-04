@@ -97,7 +97,7 @@
 	padding: 0 10px;
 	float: left;
 	display: inline-block !important;
-	border-right: 1px solid $govuk-border-colour;
+	border-right: 1px solid govuk-functional-colour(border);
 }
 
 .offence-card-action-link:last-of-type {
@@ -108,5 +108,5 @@
 
 .offence-card-action-link a:visited {
 	font-size: 19px;
-	color: $govuk-link-colour !important;
+	color: govuk-functional-colour(link) !important;
 }
