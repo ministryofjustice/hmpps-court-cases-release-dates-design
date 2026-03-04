@@ -25,11 +25,12 @@
     "test": "jest",
     "test:ci": "jest --runInBand",
     "clean": "rm -rf _site dist docs-assets node_modules",
-    "publish": "npm publish ./dist --access public"
+    "publish": "npm publish ./dist --access public",
+    "setup": "npm ci && hmpps-npm-script-run-allowlist"
   },
   "engines": {
-    "node": "^22",
-    "npm": "^10"
+    "node": "^24",
+    "npm": "^11"
   },
   "jest": {
     "transform": {
@@ -94,21 +95,21 @@
   "types": "./dist/@types/hmpps/index.d.ts",
   "dependencies": {
     "date-fns": "^4.1.0",
-    "govuk-prototype-kit": "^13.18.0",
-    "govuk-frontend": "^5.11.2"
+    "govuk-frontend": "^5.14.0",
+    "govuk-prototype-kit": "^13.18.1"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
-    "@ministryofjustice/eslint-config-hmpps": "^0.0.4",
-    "@ministryofjustice/frontend": "^5.1.5",
+    "@ministryofjustice/eslint-config-hmpps": "^1.0.2",
+    "@ministryofjustice/frontend": "^8.0.0",
+    "@ministryofjustice/hmpps-npm-script-allowlist": "0.0.3",
     "@types/jest": "^30.0.0",
     "@types/nunjucks": "^3.2.6",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.21.0",
+    "@typescript-eslint/eslint-plugin": "^8.53.0",
+    "@typescript-eslint/parser": "^8.53.0",
     "cheerio": "^1.1.2",
     "concurrently": "^9.2.1",
-    "govuk-frontend": "^5.11.2",
     "husky": "^9.1.7",
     "jest": "^30.1.3",
     "jest-html-reporter": "^4.3.0",

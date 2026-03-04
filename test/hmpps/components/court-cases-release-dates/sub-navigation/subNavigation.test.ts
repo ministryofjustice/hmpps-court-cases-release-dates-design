@@ -20,7 +20,7 @@ describe('Tests for sub navigation component', () => {
     expect(links.Overview.attr('aria-current')).toStrictEqual('page')
     expect(links['Court cases'].attr('href')).toStrictEqual('http://localhost:8001/person/AB1234AB')
     expect(links.Adjustments.attr('href')).toStrictEqual('http://localhost:8002/AB1234AB')
-    expect(links.Adjustments.find('.moj-notification-badge').text()).toStrictEqual('1')
+    expect(links.Adjustments.find('.moj-notification-badge').children().first().text()).toStrictEqual('1')
     expect(links.Recalls.attr('href')).toStrictEqual('http://localhost:8003/person/AB1234AB')
     expect(links['Release dates and calculations'].attr('href')).toStrictEqual(
       'http://localhost:8004?prisonId=AB1234AB',
