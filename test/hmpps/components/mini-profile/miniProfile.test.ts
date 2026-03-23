@@ -38,7 +38,7 @@ describe('Tests for mini profile component', () => {
       cellLocation: 'A-1-002',
       profileUrl: '/person-profile/ABC123',
       imageUrl: '/person-image/ABC123',
-      imageAltText: 'Image of Matthams, Denzel',
+      imageAltText: 'Matthams, Denzel',
     }
     expect(extractMiniProfile(content)).toStrictEqual(expectedMiniProfile)
   })
@@ -65,7 +65,7 @@ describe('Tests for mini profile component', () => {
       cellLocation: '',
       profileUrl: '/person-profile/ABC123',
       imageUrl: '/person-image/ABC123',
-      imageAltText: 'Image of Matthams, Denzel',
+      imageAltText: 'Matthams, Denzel',
     }
     expect(extractMiniProfile(content)).toStrictEqual(expectedMiniProfile)
   })
