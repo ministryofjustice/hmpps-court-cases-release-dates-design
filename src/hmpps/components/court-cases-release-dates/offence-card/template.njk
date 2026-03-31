@@ -73,6 +73,17 @@
                 }), summaryListRows)%}
 {% endif %}
 
+{% if params.aggravatingFactors %}
+  {% set summaryListRows = (summaryListRows.push({
+                    key: {
+                    text: "Aggravating factors"
+                },
+                    value: {
+                    html: params.aggravatingFactors | join('<br>') if params.aggravatingFactors.length
+                }
+                }), summaryListRows)%}
+{% endif %}
+
 {% if params.periodLengths %}
     {% set periods = params.periodLengths | groupAndSortPeriodLengths %}
     {% for periodLength in periods %}

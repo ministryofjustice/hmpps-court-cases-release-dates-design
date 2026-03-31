@@ -70,6 +70,7 @@ describe('Tests for offence card component', () => {
       sentenceType: 'SDS (Standard Determinate Sentence)',
       sentenceDate: '2024-09-22',
       fineAmount: '17000',
+      aggravatingFactors: ['Factor 1'],
       detailsClasses: 'govuk-!-padding-4',
       actions: {
         items: [
@@ -117,6 +118,7 @@ describe('Tests for offence card component', () => {
         'Sentence type': 'SDS (Standard Determinate Sentence)',
         'Sentencing warrant date': '2024-09-22',
         'Fine amount': '£17000',
+        'Aggravating factors': 'Factor 1',
         'Consecutive or concurrent': 'Consecutive to count 3',
         'Merged from': 'C123 at Court 1 description',
       },
