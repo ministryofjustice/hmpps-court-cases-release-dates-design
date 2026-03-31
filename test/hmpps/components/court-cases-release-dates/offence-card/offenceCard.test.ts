@@ -70,6 +70,7 @@ describe('Tests for offence card component', () => {
       sentenceType: 'SDS (Standard Determinate Sentence)',
       sentenceDate: '2024-09-22',
       fineAmount: '17000',
+      aggravatingFactors: ['Factor 1'],
       detailsClasses: 'govuk-!-padding-4',
       actions: {
         items: [
@@ -117,6 +118,7 @@ describe('Tests for offence card component', () => {
         'Sentence type': 'SDS (Standard Determinate Sentence)',
         'Sentencing warrant date': '2024-09-22',
         'Fine amount': '£17000',
+        'Aggravating factors': 'Factor 1',
         'Consecutive or concurrent': 'Consecutive to count 3',
         'Merged from': 'C123 at Court 1 description',
       },
@@ -124,6 +126,87 @@ describe('Tests for offence card component', () => {
       listItems: ['Update outcome'],
     }
     expect(extractOffenceCard(content)).toStrictEqual(expectedOffenceCard)
+  })
+
+  it('does not show aggravating factors when not provided', () => {
+    const offenceCodeConfig: OffenceCardConfig = {
+      offenceCode: 'OFFENCECODE',
+      offenceName: 'An Offence Name',
+      offenceStartDate: '27 06 2024',
+      offenceEndDate: '27 08 2024',
+      outcome: 'Imprisonment',
+      countNumber: '1',
+      convictionDate: '12 09 2024',
+      terrorRelated: false,
+      isSentenced: true,
+      periodLengths: [
+        {
+          description: 'Sentence length',
+          years: '1',
+          months: '2',
+          weeks: '3',
+          days: '4',
+          periodOrder: ['years', 'months', 'weeks', 'days'],
+          legacyData: undefined,
+          periodLengthType: 'SENTENCE_LENGTH',
+        },
+      ],
+      sentenceType: 'SDS (Standard Determinate Sentence)',
+      actions: {
+        items: [
+          {
+            text: 'Edit',
+            href: '/edit',
+          },
+        ],
+      },
+    }
+
+    const content = nunjucks.render('index.njk', { offenceCodeConfig })
+    const offenceCard = extractOffenceCard(content)
+
+    expect(offenceCard.offenceSummary).not.toHaveProperty('Aggravating factors')
+  })
+
+  it('does not show aggravating factors when an empty array is provided', () => {
+    const offenceCodeConfig: OffenceCardConfig = {
+      offenceCode: 'OFFENCECODE',
+      offenceName: 'An Offence Name',
+      offenceStartDate: '27 06 2024',
+      offenceEndDate: '27 08 2024',
+      outcome: 'Imprisonment',
+      countNumber: '1',
+      convictionDate: '12 09 2024',
+      terrorRelated: false,
+      isSentenced: true,
+      periodLengths: [
+        {
+          description: 'Sentence length',
+          years: '1',
+          months: '2',
+          weeks: '3',
+          days: '4',
+          periodOrder: ['years', 'months', 'weeks', 'days'],
+          legacyData: undefined,
+          periodLengthType: 'SENTENCE_LENGTH',
+        },
+      ],
+      sentenceType: 'SDS (Standard Determinate Sentence)',
+      aggravatingFactors: [],
+      actions: {
+        items: [
+          {
+            text: 'Edit',
+            href: '/edit',
+          },
+        ],
+      },
+    }
+
+    const content = nunjucks.render('index.njk', { offenceCodeConfig })
+    const offenceCard = extractOffenceCard(content)
+
+    expect(offenceCard.offenceSummary).not.toHaveProperty('Aggravating factors')
   })
 
   it('can load offence code with correctly formatted fields where all optional ones do not show', () => {
