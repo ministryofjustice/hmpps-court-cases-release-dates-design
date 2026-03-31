@@ -73,7 +73,7 @@
                 }), summaryListRows)%}
 {% endif %}
 
-{% if params.aggravatingFactors %}
+{% if params.aggravatingFactors and params.aggravatingFactors.length %}
   {% set summaryListRows = (summaryListRows.push({
                     key: {
                     text: "Aggravating factors"
