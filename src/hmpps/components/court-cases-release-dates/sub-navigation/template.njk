@@ -9,7 +9,8 @@
     {% set ttdIcon = '' %}
     {% if navigationValue.thingsToDo.count > 0 %}
         {% set ttdIcon = mojNotificationBadge({
-            text: navigationValue.thingsToDo.count.toString()
+            text: navigationValue.thingsToDo.count.toString(), 
+            classes: (' ' + navigationValue.thingsToDo.severity | lower) if navigationValue.thingsToDo.severity else ''
         }) %}
     {% endif %}
 
