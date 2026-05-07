@@ -51,6 +51,7 @@ export interface ThingsToDoConfig {
 export interface ThingsToDo {
   count: number
   things: ThingToDo[]
+  severity?: string
 }
 
 export interface ThingToDo {

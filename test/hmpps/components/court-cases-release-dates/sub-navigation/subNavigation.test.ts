@@ -20,11 +20,15 @@ describe('Tests for sub navigation component', () => {
     expect(links.Overview.attr('aria-current')).toStrictEqual('page')
     expect(links['Court cases'].attr('href')).toStrictEqual('http://localhost:8001/person/AB1234AB')
     expect(links.Adjustments.attr('href')).toStrictEqual('http://localhost:8002/AB1234AB')
-    expect(links.Adjustments.find('.moj-notification-badge').children().first().text()).toStrictEqual('1')
     expect(links.Recalls.attr('href')).toStrictEqual('http://localhost:8003/person/AB1234AB')
     expect(links['Release dates and calculations'].attr('href')).toStrictEqual(
       'http://localhost:8004?prisonId=AB1234AB',
     )
+    expect(links['Release dates and calculations'].find('.moj-notification-badge').children().first().text()).toStrictEqual('1')
+    expect(links['Release dates and calculations'].find('.moj-notification-badge').attr('class')).toContain('required_before_calculation')
+    expect(links.Documents.find('.moj-notification-badge').children().first().text()).toStrictEqual('1')
+    expect(links.Documents.find('.moj-notification-badge').attr('class')).toContain('notification')
+
   })
   it('should be for minimal tabs', () => {
     const config: SubNavigationConfig = {
@@ -76,7 +80,7 @@ describe('Tests for sub navigation component', () => {
         text: 'Release dates and calculations',
         thingsToDo: {
           count: 0,
-          things: [],
+          things: []
         },
       },
     }
@@ -104,7 +108,7 @@ describe('Tests for sub navigation component', () => {
         href: 'http://localhost:8002/AB1234AB',
         text: 'Adjustments',
         thingsToDo: {
-          count: 1,
+          count: 0,
           things: [],
         },
       },
@@ -120,8 +124,30 @@ describe('Tests for sub navigation component', () => {
         href: 'http://localhost:8004?prisonId=AB1234AB',
         text: 'Release dates and calculations',
         thingsToDo: {
-          count: 0,
-          things: [],
+          count: 1,
+          severity: 'REQUIRED_BEFORE_CALCULATION',
+          things: [{
+            title: 'Title',
+            message: 'Message',
+            type: 'CALCULATION_REQUIRED',
+            buttonText: 'Calculations',
+            buttonHref: 'http://localhost:3000/calculations',
+          }],
+        },
+      },
+      documents: {
+        href: 'http://localhost:8000/prisoner/AB1234AB/documents',
+        text: 'Documents',
+        thingsToDo: {
+          count: 1,
+          severity: 'NOTIFICATION',
+          things: [{
+            title: '',
+            message: '',
+            type: 'HMCTS_API_DOCUMENT_RECEIVED',
+            buttonText: '',
+            buttonHref: ''
+          }],
         },
       },
     }
