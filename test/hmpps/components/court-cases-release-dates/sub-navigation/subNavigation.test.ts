@@ -24,11 +24,14 @@ describe('Tests for sub navigation component', () => {
     expect(links['Release dates and calculations'].attr('href')).toStrictEqual(
       'http://localhost:8004?prisonId=AB1234AB',
     )
-    expect(links['Release dates and calculations'].find('.moj-notification-badge').children().first().text()).toStrictEqual('1')
-    expect(links['Release dates and calculations'].find('.moj-notification-badge').attr('class')).toContain('required_before_calculation')
+    expect(
+      links['Release dates and calculations'].find('.moj-notification-badge').children().first().text(),
+    ).toStrictEqual('1')
+    expect(links['Release dates and calculations'].find('.moj-notification-badge').attr('class')).toContain(
+      'required_before_calculation',
+    )
     expect(links.Documents.find('.moj-notification-badge').children().first().text()).toStrictEqual('1')
     expect(links.Documents.find('.moj-notification-badge').attr('class')).toContain('notification')
-
   })
   it('should be for minimal tabs', () => {
     const config: SubNavigationConfig = {
@@ -80,7 +83,7 @@ describe('Tests for sub navigation component', () => {
         text: 'Release dates and calculations',
         thingsToDo: {
           count: 0,
-          things: []
+          things: [],
         },
       },
     }
@@ -126,13 +129,15 @@ describe('Tests for sub navigation component', () => {
         thingsToDo: {
           count: 1,
           severity: 'REQUIRED_BEFORE_CALCULATION',
-          things: [{
-            title: 'Title',
-            message: 'Message',
-            type: 'CALCULATION_REQUIRED',
-            buttonText: 'Calculations',
-            buttonHref: 'http://localhost:3000/calculations',
-          }],
+          things: [
+            {
+              title: 'Title',
+              message: 'Message',
+              type: 'CALCULATION_REQUIRED',
+              buttonText: 'Calculations',
+              buttonHref: 'http://localhost:3000/calculations',
+            },
+          ],
         },
       },
       documents: {
@@ -141,13 +146,15 @@ describe('Tests for sub navigation component', () => {
         thingsToDo: {
           count: 1,
           severity: 'NOTIFICATION',
-          things: [{
-            title: '',
-            message: '',
-            type: 'HMCTS_API_DOCUMENT_RECEIVED',
-            buttonText: '',
-            buttonHref: ''
-          }],
+          things: [
+            {
+              title: '',
+              message: '',
+              type: 'HMCTS_API_DOCUMENT_RECEIVED',
+              buttonText: '',
+              buttonHref: '',
+            },
+          ],
         },
       },
     }
