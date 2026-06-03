@@ -54,12 +54,25 @@ describe('Tests for things to do component', () => {
     expect($('h2:contains(releaseDates-title)').toArray().length).toBe(0)
   })
 
+  it('should not display thing to do for notification severity', () => {
+    const config: ThingsToDoConfig = {
+      serviceDefinitions: {
+        services: services(),
+      },
+      service: 'documents',
+    }
+    const content = nunjucks.render('index.njk', config)
+    const $ = cheerio.load(content)
+    expect($.text().trim()).toBe('')
+  })
+
   function services(): SubNavigationServices {
     return {
       overview: {
         href: 'http://localhost:8000/prisoner/AB1234AB/overview',
         text: 'Overview',
         thingsToDo: {
+          severity: 'REQUIRED_BEFORE_CALCULATION',
           count: 1,
           things: [
             {
@@ -76,6 +89,7 @@ describe('Tests for things to do component', () => {
         href: 'http://localhost:8001/person/AB1234AB',
         text: 'Court cases',
         thingsToDo: {
+          severity: 'REQUIRED_BEFORE_CALCULATION',
           count: 1,
           things: [
             {
@@ -92,6 +106,7 @@ describe('Tests for things to do component', () => {
         href: 'http://localhost:8002/AB1234AB',
         text: 'Adjustments',
         thingsToDo: {
+          severity: 'REQUIRED_BEFORE_CALCULATION',
           count: 1,
           things: [
             {
@@ -108,6 +123,7 @@ describe('Tests for things to do component', () => {
         href: 'http://localhost:8003/person/AB1234AB',
         text: 'Recalls',
         thingsToDo: {
+          severity: 'REQUIRED_BEFORE_CALCULATION',
           count: 1,
           things: [
             {
@@ -124,7 +140,8 @@ describe('Tests for things to do component', () => {
         href: 'http://localhost:8004?prisonId=AB1234AB',
         text: 'Release dates and calculations',
         thingsToDo: {
-          count: 0,
+          severity: 'REQUIRED_BEFORE_CALCULATION',
+          count: 1,
           things: [
             {
               title: 'releaseDates-title',
@@ -132,6 +149,23 @@ describe('Tests for things to do component', () => {
               buttonHref: '/releaseDates-link',
               buttonText: 'releaseDates-button',
               type: 'releaseDates-type',
+            },
+          ],
+        },
+      },
+      documents: {
+        href: 'http://localhost:8000/prisoner/AB1234AB/documents',
+        text: 'Overview',
+        thingsToDo: {
+          severity: 'NOTIFICATION',
+          count: 1,
+          things: [
+            {
+              title: '',
+              message: '',
+              buttonHref: '',
+              buttonText: '',
+              type: '',
             },
           ],
         },

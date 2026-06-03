@@ -51,7 +51,7 @@ export interface ThingsToDoConfig {
 export interface ThingsToDo {
   count: number
   things: ThingToDo[]
-  severity?: string
+  severity?: 'NOTIFICATION' | 'REQUIRED_BEFORE_CALCULATION' | null
 }
 
 export interface ThingToDo {
@@ -185,13 +185,13 @@ export interface OffenceCardConfig {
 }
 
 export type PeriodLengthType =
-    | 'SENTENCE_LENGTH'
-    | 'CUSTODIAL_TERM'
-    | 'LICENCE_PERIOD'
-    | 'TARIFF_LENGTH'
-    | 'TERM_LENGTH'
-    | 'OVERALL_SENTENCE_LENGTH'
-    | 'UNSUPPORTED'
+  | 'SENTENCE_LENGTH'
+  | 'CUSTODIAL_TERM'
+  | 'LICENCE_PERIOD'
+  | 'TARIFF_LENGTH'
+  | 'TERM_LENGTH'
+  | 'OVERALL_SENTENCE_LENGTH'
+  | 'UNSUPPORTED'
 
 export const PERIOD_TYPE_PRIORITY: Record<PeriodLengthType, number> = {
   TARIFF_LENGTH: 1,
