@@ -1,0 +1,25 @@
+
+@use "sass:color";
+
+$moj-outage-banner-background: color.mix(govuk-colour('red'), #fff, $weight: 20%) !default;
+$moj-outage-banner-colour: $govuk-text-colour !default;
+
+.moj-outage-banner {
+  min-height: 70px;
+  background-color: $moj-outage-banner-background;
+}
+
+.moj-outage-banner__inner {
+  @include govuk-font($size: 19);
+  padding: 22px 0;
+  color: $moj-outage-banner-colour;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  a:link, a:visited {
+    color: $moj-outage-banner-colour;
+  }
+}
+    

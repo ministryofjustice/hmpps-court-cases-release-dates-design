@@ -248,3 +248,9 @@ export interface MergedFromCaseDetails {
   warrantDate: string
   mergedFromDate: string
 }
+
+export interface OutageBannerConfig {
+  html?: string
+  text?: string
+  attributes?: Record<string, never>
+}
