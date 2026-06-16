@@ -1,5 +1,6 @@
 import nunjucks from 'nunjucks'
 import * as cheerio from 'cheerio'
+import { CheerioAPI } from 'cheerio'
 import { SubNavigationConfig, SubNavigationServices } from '../../../../../src/hmpps/@types'
 
 nunjucks.configure([
@@ -15,7 +16,8 @@ describe('Tests for sub navigation component', () => {
       activeSubNav: 'overview',
     }
     const content = nunjucks.render('index.njk', config)
-    const links = extractLinks(content)
+    const $ = cheerio.load(content)
+    const links = extractLinks($)
     expect(links.Overview.attr('href')).toStrictEqual('http://localhost:8000/prisoner/AB1234AB/overview')
     expect(links.Overview.attr('aria-current')).toStrictEqual('page')
     expect(links['Court cases'].attr('href')).toStrictEqual('http://localhost:8001/person/AB1234AB')
@@ -32,6 +34,7 @@ describe('Tests for sub navigation component', () => {
     )
     expect(links.Documents.find('.moj-notification-badge').children().first().text()).toStrictEqual('1')
     expect(links.Documents.find('.moj-notification-badge').attr('class')).toContain('notification')
+    expect($('.moj-outage-banner').text().trim()).toStrictEqual(config.navigation.overview.maintenanceAlert.message)
   })
   it('should be for minimal tabs', () => {
     const config: SubNavigationConfig = {
@@ -39,7 +42,8 @@ describe('Tests for sub navigation component', () => {
       activeSubNav: 'adjustments',
     }
     const content = nunjucks.render('index.njk', config)
-    const links = extractLinks(content)
+    const $ = cheerio.load(content)
+    const links = extractLinks($)
     expect(links.Overview.attr('href')).toStrictEqual('http://localhost:8000/prisoner/AB1234AB/overview')
     expect(links['Court cases']).toBeUndefined()
     expect(links.Adjustments.attr('href')).toStrictEqual('http://localhost:8002/AB1234AB')
@@ -48,10 +52,10 @@ describe('Tests for sub navigation component', () => {
     expect(links['Release dates and calculations'].attr('href')).toStrictEqual(
       'http://localhost:8004?prisonId=AB1234AB',
     )
+    expect($('.moj-outage-banner').length).toStrictEqual(0)
   })
 
-  function extractLinks(content: string) {
-    const $ = cheerio.load(content)
+  function extractLinks($: CheerioAPI) {
     const links = $('a')
       .map((i, element) => {
         return { key: $(element).contents().first().text().trim(), value: $(element) }
@@ -69,6 +73,10 @@ describe('Tests for sub navigation component', () => {
           count: 0,
           things: [],
         },
+        maintenanceAlert: {
+          enabled: true,
+          message: 'There is due to be an outage in the future',
+        },
       },
       adjustments: {
         href: 'http://localhost:8002/AB1234AB',
@@ -77,6 +85,10 @@ describe('Tests for sub navigation component', () => {
           count: 0,
           things: [],
         },
+        maintenanceAlert: {
+          enabled: false,
+          message: 'placeholder',
+        },
       },
       releaseDates: {
         href: 'http://localhost:8004?prisonId=AB1234AB',
@@ -84,6 +96,10 @@ describe('Tests for sub navigation component', () => {
         thingsToDo: {
           count: 0,
           things: [],
+        },
+        maintenanceAlert: {
+          enabled: false,
+          message: 'placeholder',
         },
       },
     }
@@ -98,6 +114,10 @@ describe('Tests for sub navigation component', () => {
           count: 0,
           things: [],
         },
+        maintenanceAlert: {
+          enabled: true,
+          message: 'There is due to be an outage in the future',
+        },
       },
       courtCases: {
         href: 'http://localhost:8001/person/AB1234AB',
@@ -105,6 +125,10 @@ describe('Tests for sub navigation component', () => {
         thingsToDo: {
           count: 0,
           things: [],
+        },
+        maintenanceAlert: {
+          enabled: false,
+          message: 'placeholder',
         },
       },
       adjustments: {
@@ -114,6 +138,10 @@ describe('Tests for sub navigation component', () => {
           count: 0,
           things: [],
         },
+        maintenanceAlert: {
+          enabled: false,
+          message: 'placeholder',
+        },
       },
       recalls: {
         href: 'http://localhost:8003/person/AB1234AB',
@@ -121,6 +149,10 @@ describe('Tests for sub navigation component', () => {
         thingsToDo: {
           count: 0,
           things: [],
+        },
+        maintenanceAlert: {
+          enabled: false,
+          message: 'placeholder',
         },
       },
       releaseDates: {
@@ -139,6 +171,10 @@ describe('Tests for sub navigation component', () => {
             },
           ],
         },
+        maintenanceAlert: {
+          enabled: false,
+          message: 'placeholder',
+        },
       },
       documents: {
         href: 'http://localhost:8000/prisoner/AB1234AB/documents',
@@ -155,6 +191,10 @@ describe('Tests for sub navigation component', () => {
               buttonHref: '',
             },
           ],
+        },
+        maintenanceAlert: {
+          enabled: false,
+          message: 'placeholder',
         },
       },
     }

@@ -66,6 +66,10 @@ export interface SubNavigationService {
   href: string
   text: string
   thingsToDo: ThingsToDo
+  maintenanceAlert: {
+    enabled: boolean
+    message: string
+  }
 }
 
 export interface SubNavigationServices {
