@@ -1,9 +1,11 @@
 {% from "moj/components/sub-navigation/macro.njk" import mojSubNavigation %}
 {%- from "moj/components/notification-badge/macro.njk" import mojNotificationBadge -%}
+{% from "../../outage-banner/macro.njk" import outageBanner %}
 
 
 {% set activeSubNav = activeSubNav if activeSubNav else 'overview' %}
 {% set navigationItems = [] %}
+{% set outageConfig = { display: false, message: ''}%}
 
 {% for navigationKey, navigationValue in navigation %}
     {% set ttdIcon = '' %}
@@ -19,9 +21,21 @@
         active: navigationKey === activeSubNav,
         html: navigationValue.text + ttdIcon
     })%}
+
+    {% if navigationKey === activeSubNav and navigationValue.maintenanceAlert.enabled %}
+        {% set outageConfig = {
+            display: true,
+            message: navigationValue.maintenanceAlert.message
+        }%}
+    {% endif %}
 {% endfor %}
 
 {{ mojSubNavigation({
     label: 'Court cases and release dates sub navigation',
     items: navigationItems
 }) }}
+{% if outageConfig.display %}
+    <div class="govuk-!-margin-top-7">
+        {{ outageBanner({ text: outageConfig.message}) }}
+    </div>
+{% endif %}
