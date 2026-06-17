@@ -1,7 +1,7 @@
 {%- from "govuk/macros/attributes.njk" import govukAttributes -%}
     
 <div class="moj-outage-banner" {{ govukAttributes(params.attributes) }}>
-    <div class="govuk-width-container moj-outage-banner__inner">
+    <div class="govuk-width-container moj-outage-banner__inner{% if params.innerClasses %} {{ params.innerClasses }}{% endif %}">
     {{- params.html | safe if params.html else params.text -}}
     </div>
 </div>
