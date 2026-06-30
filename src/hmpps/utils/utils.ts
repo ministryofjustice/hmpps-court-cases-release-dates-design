@@ -1,6 +1,6 @@
 import { format, isValid, parse, parseISO } from 'date-fns'
 import type { ConsecutiveToDetails, GroupedPeriodLengths, MergedFromCaseDetails, SentenceLength } from '../@types'
-import { PERIOD_TYPE_PRIORITY } from "../@types";
+import { PERIOD_TYPE_PRIORITY } from '../@types'
 
 const uniformWhitespace = (word: string): string => (word ? word.trim().replace(/\s+/g, ' ') : '')
 
@@ -131,8 +131,8 @@ export const consecutiveToDetailsToDescription = (details: ConsecutiveToDetails)
   if (!isValidCount && isSameCase) {
     const offencePart = ` to ${offenceCode} - ${offenceDescription}`
     const datePart = offenceStartDate
-        ? ` committed on ${offenceStartDate}${offenceEndDate ? ` to ${offenceEndDate}` : ''}`
-        : ''
+      ? ` committed on ${offenceStartDate}${offenceEndDate ? ` to ${offenceEndDate}` : ''}`
+      : ''
     return offencePart + datePart
   }
 
@@ -150,18 +150,18 @@ export const consecutiveToDetailsToDescription = (details: ConsecutiveToDetails)
   if (!isValidCount && !isSameCase && courtCaseReference) {
     const offencePart = ` to ${offenceCode} - ${offenceDescription}`
     const datePart = offenceStartDate
-        ? ` committed on ${offenceStartDate}${offenceEndDate ? ` to ${offenceEndDate}` : ''}`
-        : ''
+      ? ` committed on ${offenceStartDate}${offenceEndDate ? ` to ${offenceEndDate}` : ''}`
+      : ''
     const locationPart = ` on case ${courtCaseReference} at ${courtName} on ${warrantDate}`
     return offencePart + datePart + locationPart
   }
 
   // Case 6: No valid count, not same case, no case ref
-  if (!isValidCount  && !isSameCase && !courtCaseReference) {
+  if (!isValidCount && !isSameCase && !courtCaseReference) {
     const offencePart = ` to ${offenceCode} - ${offenceDescription}`
     const datePart = offenceStartDate
-        ? ` committed on ${offenceStartDate}${offenceEndDate ? ` to ${offenceEndDate}` : ''}`
-        : ''
+      ? ` committed on ${offenceStartDate}${offenceEndDate ? ` to ${offenceEndDate}` : ''}`
+      : ''
     const locationPart = ` at ${courtName} on ${warrantDate}`
     return offencePart + datePart + locationPart
   }
@@ -174,31 +174,33 @@ export const sortPeriodLengths = (items: SentenceLength[]) =>
   [...items].sort(
     (a, b) =>
       (PERIOD_TYPE_PRIORITY[a.periodLengthType] ?? PERIOD_TYPE_PRIORITY.UNSUPPORTED) -
-      (PERIOD_TYPE_PRIORITY[b.periodLengthType] ?? PERIOD_TYPE_PRIORITY.UNSUPPORTED)
+      (PERIOD_TYPE_PRIORITY[b.periodLengthType] ?? PERIOD_TYPE_PRIORITY.UNSUPPORTED),
   )
 
-  export const groupAndSortPeriodLengths = (items: SentenceLength[]): GroupedPeriodLengths[] => {
-    const periodLengthsByType = [...items].reduce((periodLengthTypes: {[key: string]: GroupedPeriodLengths}, periodLength) => {
-    let key = periodLength.periodLengthType
-    if(periodLength.periodLengthType === 'UNSUPPORTED') {
-      key = key + `-${periodLength.legacyData?.sentenceTermCode}`
-    }
-    const existingPeriodLengths = periodLengthTypes[key] ?? {
-      key,
-      type: periodLength.periodLengthType,
-      description: periodLength.description,
-      legacyData: {
-        sentenceTermCode: periodLength.legacyData?.sentenceTermCode
-      },
-      lengths: []
-    } as GroupedPeriodLengths
-    existingPeriodLengths.lengths.push(periodLength)
-    return { ...periodLengthTypes, [key]: existingPeriodLengths}
-  }, {}) ?? {}
+export const groupAndSortPeriodLengths = (items: SentenceLength[]): GroupedPeriodLengths[] => {
+  const periodLengthsByType =
+    [...items].reduce((periodLengthTypes: { [key: string]: GroupedPeriodLengths }, periodLength) => {
+      let key = periodLength.periodLengthType
+      if (periodLength.periodLengthType === 'UNSUPPORTED') {
+        key += `-${periodLength.legacyData?.sentenceTermCode}`
+      }
+      const existingPeriodLengths =
+        periodLengthTypes[key] ??
+        ({
+          key,
+          type: periodLength.periodLengthType,
+          description: periodLength.description,
+          legacyData: {
+            sentenceTermCode: periodLength.legacyData?.sentenceTermCode,
+          },
+          lengths: [],
+        } as GroupedPeriodLengths)
+      existingPeriodLengths.lengths.push(periodLength)
+      return { ...periodLengthTypes, [key]: existingPeriodLengths }
+    }, {}) ?? {}
   return Object.values(periodLengthsByType).sort(
     (a, b) =>
       (PERIOD_TYPE_PRIORITY[a.type] ?? PERIOD_TYPE_PRIORITY.UNSUPPORTED) -
-      (PERIOD_TYPE_PRIORITY[b.type] ?? PERIOD_TYPE_PRIORITY.UNSUPPORTED)
+      (PERIOD_TYPE_PRIORITY[b.type] ?? PERIOD_TYPE_PRIORITY.UNSUPPORTED),
   )
-  }
-
+}

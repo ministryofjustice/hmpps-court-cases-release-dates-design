@@ -195,6 +195,7 @@ export type PeriodLengthType =
   | 'TARIFF_LENGTH'
   | 'TERM_LENGTH'
   | 'OVERALL_SENTENCE_LENGTH'
+  | 'BREACH_OF_SUPERVISION_REQUIREMENTS'
   | 'UNSUPPORTED'
 
 export const PERIOD_TYPE_PRIORITY: Record<PeriodLengthType, number> = {
@@ -202,7 +203,8 @@ export const PERIOD_TYPE_PRIORITY: Record<PeriodLengthType, number> = {
   SENTENCE_LENGTH: 2,
   CUSTODIAL_TERM: 3,
   LICENCE_PERIOD: 4,
-  TERM_LENGTH: 99,
+  TERM_LENGTH: 10,
+  BREACH_OF_SUPERVISION_REQUIREMENTS: 20,
   OVERALL_SENTENCE_LENGTH: 99,
   UNSUPPORTED: 99,
 }
@@ -231,6 +233,7 @@ export interface GroupedPeriodLengths {
     | 'TARIFF_LENGTH'
     | 'TERM_LENGTH'
     | 'OVERALL_SENTENCE_LENGTH'
+    | 'BREACH_OF_SUPERVISION_REQUIREMENTS'
     | 'UNSUPPORTED'
   lengths: SentenceLength[]
 }
