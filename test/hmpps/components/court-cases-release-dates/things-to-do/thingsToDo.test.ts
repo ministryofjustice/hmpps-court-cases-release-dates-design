@@ -66,6 +66,24 @@ describe('Tests for things to do component', () => {
     expect($.text().trim()).toBe('')
   })
 
+  it('should be for a given service with html in message text', () => {
+    const config: ThingsToDoConfig = {
+      serviceDefinitions: {
+        services: services(),
+      },
+      service: 'courtCases',
+    }
+    const content = nunjucks.render('index.njk', config)
+    const $ = cheerio.load(content)
+
+    expect($('h2:contains(courtCases-title)').toArray().length).toBe(1)
+
+    const message = $('div:contains(courtCases-message)')
+    expect(message).not.toBeUndefined()
+    expect(message.children().length).toBe(2)
+    expect(message.children().eq(1).text()).toBe('This is important.')
+  })
+
   function services(): SubNavigationServices {
     return {
       overview: {
@@ -81,6 +99,7 @@ describe('Tests for things to do component', () => {
               buttonHref: '/overview-link',
               buttonText: 'overview-button',
               type: 'overview-type',
+              messageIsHtml: false,
             },
           ],
         },
@@ -94,10 +113,11 @@ describe('Tests for things to do component', () => {
           things: [
             {
               title: 'courtCases-title',
-              message: 'courtCases-message',
+              message: '<p>courtCases-message</p><p><strong>This is important.</strong></p>',
               buttonHref: '/courtCases-link',
               buttonText: 'courtCases-button',
               type: 'courtCases-type',
+              messageIsHtml: true,
             },
           ],
         },
@@ -115,6 +135,7 @@ describe('Tests for things to do component', () => {
               buttonHref: '/adjustments-link',
               buttonText: 'adjustments-button',
               type: 'adjustments-type',
+              messageIsHtml: false,
             },
           ],
         },
@@ -132,6 +153,7 @@ describe('Tests for things to do component', () => {
               buttonHref: '/recalls-link',
               buttonText: 'recalls-button',
               type: 'recalls-type',
+              messageIsHtml: false,
             },
           ],
         },
@@ -149,6 +171,7 @@ describe('Tests for things to do component', () => {
               buttonHref: '/releaseDates-link',
               buttonText: 'releaseDates-button',
               type: 'releaseDates-type',
+              messageIsHtml: false,
             },
           ],
         },
@@ -166,6 +189,7 @@ describe('Tests for things to do component', () => {
               buttonHref: '',
               buttonText: '',
               type: '',
+              messageIsHtml: false,
             },
           ],
         },

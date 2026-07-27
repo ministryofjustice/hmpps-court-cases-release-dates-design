@@ -60,6 +60,7 @@ export interface ThingToDo {
   buttonText: string
   buttonHref: string
   type: string
+  messageIsHtml: boolean
 }
 
 export interface SubNavigationService {

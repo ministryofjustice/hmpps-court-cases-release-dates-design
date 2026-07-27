@@ -5,7 +5,11 @@
             {% for thingToDo in serviceConfiguration.thingsToDo.things %}
                 <section class="moj-ticket-panel__content moj-ticket-panel__content--grey govuk-!-margin-bottom-8" aria-label="{{ thingToDo.title }}">
                     <h2 class="govuk-heading-m govuk-!-margin-bottom-2">{{ thingToDo.title }}</h2>
-                    <p class="govuk-body">{{ thingToDo.message }}</p>
+                    {% if thingToDo.messageIsHtml %}
+                        <div class="govuk-body">{{ thingToDo.message | safe}}</div>
+                    {% else %}
+                        <p class="govuk-body">{{ thingToDo.message }}</p>
+                    {% endif %}
                     <a href="{{ thingToDo.buttonHref }}" class="govuk-button govuk-!-margin-bottom-1" data-module="govuk-button">
                     {{ thingToDo.buttonText }}
                     </a>
