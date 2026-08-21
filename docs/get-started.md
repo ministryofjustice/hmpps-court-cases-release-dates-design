@@ -35,4 +35,4 @@ There are a few additional steps when installing the Node.js package into HMPPS 
 
 ## Contributing to the component library
 
-The [code repository](https://github.com/ministryofjustice/@ministryofjustice/hmpps-court-cases-release-dates-design) for the frontend kit guides you through the steps to improve existing components and add new ones.
+The [code repository](https://github.com/ministryofjustice/hmpps-court-cases-release-dates-design) for the frontend kit guides you through the steps to improve existing components and add new ones.
