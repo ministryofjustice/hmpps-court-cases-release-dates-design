@@ -21,7 +21,7 @@
             lineNumber: '5',
             convictionDate: '12 09 2024',
             terrorRelated: true,
-            sentenceInactive: true,
+            sentenceStatus: 'INACTIVE',
             isSentenced: true,
             periodLengths: [
                 {
@@ -109,7 +109,7 @@
                 lineNumber: '5',
                 convictionDate: '12 09 2024',
                 terrorRelated: true,
-                sentenceInactive: true,
+                sentenceStatus: 'INACTIVE',
                 isSentenced: true,
                 periodLengths: [
                     {
@@ -189,6 +189,7 @@
                 formatLengths,
                 formatMergedFromCase,
                 groupAndSortPeriodLengths,
+                sentenceStatusTagText,
              } from '@ministryofjustice/hmpps-court-cases-release-dates-design/hmpps/utils/utils'
 
             njkEnv.addFilter('formatLengths', formatLengths)
@@ -196,6 +197,7 @@
             njkEnv.addFilter('formatMergedFromCase', formatMergedFromCase)
             njkEnv.addFilter('formatCountNumber', formatCountNumber)
             njkEnv.addFilter('groupAndSortPeriodLengths', groupAndSortPeriodLengths)
+            njkEnv.addFilter('sentenceStatusTagText', sentenceStatusTagText)
         {% endraw %}
     {% endhighlight %}
 {% endset %}
@@ -214,7 +216,7 @@
             lineNumber: '5',
             convictionDate: '12 09 2024',
             terrorRelated: true,
-            sentenceInactive: true,
+            sentenceStatus: 'INACTIVE',
             isSentenced: true,
             periodLengths: [
                 {

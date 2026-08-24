@@ -141,6 +141,15 @@ export interface FooterConfig {
   attributes?: Record<string, never>
 }
 
+export type SentenceStatus = 'INACTIVE' | 'DUPLICATE' | 'DELETED' | 'MANY_CHARGES_DATA_FIX'
+
+export const SENTENCE_STATUS_TAG_TEXT: Record<SentenceStatus, string> = {
+  INACTIVE: 'Inactive',
+  DUPLICATE: 'Duplicate',
+  DELETED: 'Deleted',
+  MANY_CHARGES_DATA_FIX: 'Many Charges Data Fix',
+}
+
 export interface OffenceCardConfig {
   id?: string
   offenceCode: string
@@ -155,7 +164,7 @@ export interface OffenceCardConfig {
   lineNumber?: string
   convictionDate?: string
   terrorRelated?: boolean
-  sentenceInactive?: boolean
+  sentenceStatus?: SentenceStatus
   isSentenced: boolean
   periodLengths?: SentenceLength[]
   sentenceServeType?: string

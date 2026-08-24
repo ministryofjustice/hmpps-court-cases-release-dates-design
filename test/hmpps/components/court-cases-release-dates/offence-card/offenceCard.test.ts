@@ -7,6 +7,7 @@ import {
   formatLengths,
   formatMergedFromCase,
   groupAndSortPeriodLengths,
+  sentenceStatusTagText,
 } from '../../../../../src/hmpps/utils/utils'
 
 const njkEnv = nunjucks.configure([
@@ -20,6 +21,7 @@ njkEnv.addFilter('consecutiveToDetailsToDescription', consecutiveToDetailsToDesc
 njkEnv.addFilter('formatMergedFromCase', formatMergedFromCase)
 njkEnv.addFilter('formatCountNumber', formatCountNumber)
 njkEnv.addFilter('groupAndSortPeriodLengths', groupAndSortPeriodLengths)
+njkEnv.addFilter('sentenceStatusTagText', sentenceStatusTagText)
 
 describe('Tests for offence card component', () => {
   it('can load offence code with correctly formatted fields', () => {
@@ -431,24 +433,32 @@ describe('Tests for offence card component', () => {
     expect(extractOffenceCard(content)).toStrictEqual(expectedOffenceCard)
   })
 
-  it('shows an Inactive tag when sentenceInactive is true', () => {
-    const offenceCodeConfig: OffenceCardConfig = {
-      offenceCode: 'OFFENCECODE',
-      offenceName: 'An Offence Name',
-      offenceStartDate: '27 06 2024',
-      offenceEndDate: '27 08 2024',
-      outcome: 'Imprisonment',
-      countNumber: '1',
-      isSentenced: true,
-      sentenceInactive: true,
-    }
-    const content = nunjucks.render('index.njk', { offenceCodeConfig })
-    const $ = cheerio.load(content)
-    const tagText = removeNewLinesTrim($('.offence-card-offence-details .govuk-tag').first().text())
-    expect(tagText).toStrictEqual('Inactive')
-  })
+  it.each([
+    ['INACTIVE', 'Inactive'],
+    ['DUPLICATE', 'Duplicate'],
+    ['DELETED', 'Deleted'],
+    ['MANY_CHARGES_DATA_FIX', 'Many Charges Data Fix'],
+  ] as [OffenceCardConfig['sentenceStatus'], string][])(
+    'shows a %s tag reading "%s"',
+    (sentenceStatus, expectedText) => {
+      const offenceCodeConfig: OffenceCardConfig = {
+        offenceCode: 'OFFENCECODE',
+        offenceName: 'An Offence Name',
+        offenceStartDate: '27 06 2024',
+        offenceEndDate: '27 08 2024',
+        outcome: 'Imprisonment',
+        countNumber: '1',
+        isSentenced: true,
+        sentenceStatus,
+      }
+      const content = nunjucks.render('index.njk', { offenceCodeConfig })
+      const $ = cheerio.load(content)
+      const tagText = removeNewLinesTrim($('.offence-card-offence-details .govuk-tag').first().text())
+      expect(tagText).toStrictEqual(expectedText)
+    },
+  )
 
-  it('does not show an Inactive tag when sentenceInactive is not provided', () => {
+  it('does not show an Inactive tag when sentenceStatus is not provided', () => {
     const offenceCodeConfig: OffenceCardConfig = {
       offenceCode: 'OFFENCECODE',
       offenceName: 'An Offence Name',

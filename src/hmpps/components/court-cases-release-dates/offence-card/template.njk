@@ -175,8 +175,9 @@
             {% endif %}
         </h4>
 
-        {% if params.sentenceInactive %}
-            {{ govukTag({ text: "Inactive", classes: "govuk-!-margin-bottom-2" }) }}
+        {% set sentenceStatusText = params.sentenceStatus | sentenceStatusTagText %}
+        {% if sentenceStatusText %}
+            {{ govukTag({ text: sentenceStatusText, classes: "govuk-!-margin-bottom-2" }) }}
         {% endif %}
 
         {{ govukSummaryList({
