@@ -143,11 +143,8 @@ export interface FooterConfig {
 
 export type SentenceStatus = 'INACTIVE' | 'DUPLICATE' | 'DELETED' | 'MANY_CHARGES_DATA_FIX'
 
-export const SENTENCE_STATUS_TAG_TEXT: Record<SentenceStatus, string> = {
+export const SENTENCE_STATUS_TAG_TEXT: Partial<Record<SentenceStatus, string>> = {
   INACTIVE: 'Inactive',
-  DUPLICATE: 'Duplicate',
-  DELETED: 'Deleted',
-  MANY_CHARGES_DATA_FIX: 'Many Charges Data Fix',
 }
 
 export interface OffenceCardConfig {

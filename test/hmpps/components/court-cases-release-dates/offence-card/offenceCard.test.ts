@@ -433,30 +433,22 @@ describe('Tests for offence card component', () => {
     expect(extractOffenceCard(content)).toStrictEqual(expectedOffenceCard)
   })
 
-  it.each([
-    ['INACTIVE', 'Inactive'],
-    ['DUPLICATE', 'Duplicate'],
-    ['DELETED', 'Deleted'],
-    ['MANY_CHARGES_DATA_FIX', 'Many Charges Data Fix'],
-  ] as [OffenceCardConfig['sentenceStatus'], string][])(
-    'shows a %s tag reading "%s"',
-    (sentenceStatus, expectedText) => {
-      const offenceCodeConfig: OffenceCardConfig = {
-        offenceCode: 'OFFENCECODE',
-        offenceName: 'An Offence Name',
-        offenceStartDate: '27 06 2024',
-        offenceEndDate: '27 08 2024',
-        outcome: 'Imprisonment',
-        countNumber: '1',
-        isSentenced: true,
-        sentenceStatus,
-      }
-      const content = nunjucks.render('index.njk', { offenceCodeConfig })
-      const $ = cheerio.load(content)
-      const tagText = removeNewLinesTrim($('.offence-card-offence-details .govuk-tag').first().text())
-      expect(tagText).toStrictEqual(expectedText)
-    },
-  )
+  it('shows an Inactive tag when sentenceStatus is INACTIVE', () => {
+    const offenceCodeConfig: OffenceCardConfig = {
+      offenceCode: 'OFFENCECODE',
+      offenceName: 'An Offence Name',
+      offenceStartDate: '27 06 2024',
+      offenceEndDate: '27 08 2024',
+      outcome: 'Imprisonment',
+      countNumber: '1',
+      isSentenced: true,
+      sentenceStatus: 'INACTIVE',
+    }
+    const content = nunjucks.render('index.njk', { offenceCodeConfig })
+    const $ = cheerio.load(content)
+    const tagText = removeNewLinesTrim($('.offence-card-offence-details .govuk-tag').first().text())
+    expect(tagText).toStrictEqual('Inactive')
+  })
 
   it('does not show an Inactive tag when sentenceStatus is not provided', () => {
     const offenceCodeConfig: OffenceCardConfig = {

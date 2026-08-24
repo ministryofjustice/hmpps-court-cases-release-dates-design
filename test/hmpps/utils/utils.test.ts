@@ -283,13 +283,8 @@ describe('format count number', () => {
 })
 
 describe('sentence status tag text', () => {
-  it.each([
-    ['INACTIVE', 'Inactive'],
-    ['DUPLICATE', 'Duplicate'],
-    ['DELETED', 'Deleted'],
-    ['MANY_CHARGES_DATA_FIX', 'Many Charges Data Fix'],
-  ] as [Parameters<typeof sentenceStatusTagText>[0], string][])('maps %s to "%s"', (sentenceStatus, expectedText) => {
-    expect(sentenceStatusTagText(sentenceStatus)).toEqual(expectedText)
+  it('maps INACTIVE to "Inactive"', () => {
+    expect(sentenceStatusTagText('INACTIVE')).toEqual('Inactive')
   })
 
   it('returns undefined when no status is provided', () => {
