@@ -1,6 +1,12 @@
 import { format, isValid, parse, parseISO } from 'date-fns'
-import type { ConsecutiveToDetails, GroupedPeriodLengths, MergedFromCaseDetails, SentenceLength } from '../@types'
-import { PERIOD_TYPE_PRIORITY } from '../@types'
+import type {
+  ConsecutiveToDetails,
+  GroupedPeriodLengths,
+  MergedFromCaseDetails,
+  SentenceLength,
+  SentenceStatus,
+} from '../@types'
+import { PERIOD_TYPE_PRIORITY, SENTENCE_STATUS_TAG_TEXT } from '../@types'
 
 const uniformWhitespace = (word: string): string => (word ? word.trim().replace(/\s+/g, ' ') : '')
 
@@ -86,6 +92,9 @@ export const formatCountNumber = (countNumber?: string | null, lineNumber?: stri
   }
   return null
 }
+
+export const sentenceStatusTagText = (sentenceStatus?: SentenceStatus): string | undefined =>
+  sentenceStatus ? SENTENCE_STATUS_TAG_TEXT[sentenceStatus] : undefined
 
 export type EmailLinkOptions = {
   emailAddress?: string

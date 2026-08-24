@@ -10,6 +10,7 @@ import {
   lastNameCommaFirstName,
   nameCase,
   sentenceCase,
+  sentenceStatusTagText,
   sortPeriodLengths,
 } from '../../../src/hmpps/utils/utils'
 
@@ -278,6 +279,16 @@ describe('format count number', () => {
   it('show count number when entered', () => {
     const result = formatCountNumber('66', '2')
     expect(result).toEqual('Count 66')
+  })
+})
+
+describe('sentence status tag text', () => {
+  it('maps INACTIVE to "Inactive"', () => {
+    expect(sentenceStatusTagText('INACTIVE')).toEqual('Inactive')
+  })
+
+  it('returns undefined when no status is provided', () => {
+    expect(sentenceStatusTagText(undefined)).toBeUndefined()
   })
 })
 

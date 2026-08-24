@@ -141,6 +141,12 @@ export interface FooterConfig {
   attributes?: Record<string, never>
 }
 
+export type SentenceStatus = 'INACTIVE'
+
+export const SENTENCE_STATUS_TAG_TEXT: Record<SentenceStatus, string> = {
+  INACTIVE: 'Inactive',
+}
+
 export interface OffenceCardConfig {
   id?: string
   offenceCode: string
@@ -155,6 +161,7 @@ export interface OffenceCardConfig {
   lineNumber?: string
   convictionDate?: string
   terrorRelated?: boolean
+  sentenceStatus?: SentenceStatus
   isSentenced: boolean
   periodLengths?: SentenceLength[]
   sentenceServeType?: string

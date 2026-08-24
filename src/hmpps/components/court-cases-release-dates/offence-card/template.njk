@@ -175,6 +175,11 @@
             {% endif %}
         </h4>
 
+        {% set sentenceStatusText = params.sentenceStatus | sentenceStatusTagText %}
+        {% if sentenceStatusText %}
+            {{ govukTag({ text: sentenceStatusText, classes: "govuk-!-margin-bottom-2" }) }}
+        {% endif %}
+
         {{ govukSummaryList({
             classes: "govuk-summary-list--no-border",
             rows: summaryListRows,
