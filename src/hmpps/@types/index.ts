@@ -141,9 +141,9 @@ export interface FooterConfig {
   attributes?: Record<string, never>
 }
 
-export type SentenceStatus = 'INACTIVE' | 'DUPLICATE' | 'DELETED' | 'MANY_CHARGES_DATA_FIX'
+export type SentenceStatus = 'INACTIVE'
 
-export const SENTENCE_STATUS_TAG_TEXT: Partial<Record<SentenceStatus, string>> = {
+export const SENTENCE_STATUS_TAG_TEXT: Record<SentenceStatus, string> = {
   INACTIVE: 'Inactive',
 }
 
