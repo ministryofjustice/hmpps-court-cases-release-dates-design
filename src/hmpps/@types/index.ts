@@ -155,6 +155,7 @@ export interface OffenceCardConfig {
   lineNumber?: string
   convictionDate?: string
   terrorRelated?: boolean
+  sentenceInactive?: boolean
   isSentenced: boolean
   periodLengths?: SentenceLength[]
   sentenceServeType?: string

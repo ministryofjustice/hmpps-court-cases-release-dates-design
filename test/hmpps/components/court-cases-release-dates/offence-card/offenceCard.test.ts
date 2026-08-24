@@ -78,8 +78,8 @@ describe('Tests for offence card component', () => {
             text: 'Edit',
             href: '/edit',
             attributes: {
-              'data-qa': 'edit-link'
-            }
+              'data-qa': 'edit-link',
+            },
           },
           {
             text: 'Delete',
@@ -429,6 +429,38 @@ describe('Tests for offence card component', () => {
       listItems: [],
     }
     expect(extractOffenceCard(content)).toStrictEqual(expectedOffenceCard)
+  })
+
+  it('shows an Inactive tag when sentenceInactive is true', () => {
+    const offenceCodeConfig: OffenceCardConfig = {
+      offenceCode: 'OFFENCECODE',
+      offenceName: 'An Offence Name',
+      offenceStartDate: '27 06 2024',
+      offenceEndDate: '27 08 2024',
+      outcome: 'Imprisonment',
+      countNumber: '1',
+      isSentenced: true,
+      sentenceInactive: true,
+    }
+    const content = nunjucks.render('index.njk', { offenceCodeConfig })
+    const $ = cheerio.load(content)
+    const tagText = removeNewLinesTrim($('.offence-card-offence-details .govuk-tag').first().text())
+    expect(tagText).toStrictEqual('Inactive')
+  })
+
+  it('does not show an Inactive tag when sentenceInactive is not provided', () => {
+    const offenceCodeConfig: OffenceCardConfig = {
+      offenceCode: 'OFFENCECODE',
+      offenceName: 'An Offence Name',
+      offenceStartDate: '27 06 2024',
+      offenceEndDate: '27 08 2024',
+      outcome: 'Imprisonment',
+      countNumber: '1',
+      isSentenced: true,
+    }
+    const content = nunjucks.render('index.njk', { offenceCodeConfig })
+    const $ = cheerio.load(content)
+    expect($('.offence-card-offence-details .govuk-tag').length).toStrictEqual(0)
   })
 
   interface ExpectedOffenceCard {
