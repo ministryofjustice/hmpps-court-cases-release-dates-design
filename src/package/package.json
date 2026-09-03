@@ -8,6 +8,6 @@
     "url": "https://github.com/ministryofjustice/hmpps-court-cases-release-dates-design"
   },
   "dependencies": {
-    "date-fns": "^4.1.0"
+    "date-fns": "^4.4.0"
   }
 }
