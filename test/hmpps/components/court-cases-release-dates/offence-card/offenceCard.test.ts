@@ -465,6 +465,57 @@ describe('Tests for offence card component', () => {
     expect($('.offence-card-offence-details .govuk-tag').length).toStrictEqual(0)
   })
 
+  it('shows a Mark as active link when sentenceStatus is INACTIVE', () => {
+    const offenceCodeConfig: OffenceCardConfig = {
+      offenceCode: 'OFFENCECODE',
+      offenceName: 'An Offence Name',
+      offenceStartDate: '27 06 2024',
+      offenceEndDate: '27 08 2024',
+      outcome: 'Imprisonment',
+      countNumber: '1',
+      isSentenced: true,
+      sentenceStatus: 'INACTIVE',
+      markAsActiveHref: '/check-mark-sentence-as-active',
+    }
+    const content = nunjucks.render('index.njk', { offenceCodeConfig })
+    const $ = cheerio.load(content)
+    const link = $('[data-qa=markAsActiveLink] a')
+    expect(removeNewLinesTrim(link.text())).toStrictEqual('Mark as active')
+    expect(link.attr('href')).toStrictEqual('/check-mark-sentence-as-active')
+  })
+
+  it('does not show a Mark as active link when sentenceStatus is not INACTIVE, even if markAsActiveHref is provided', () => {
+    const offenceCodeConfig: OffenceCardConfig = {
+      offenceCode: 'OFFENCECODE',
+      offenceName: 'An Offence Name',
+      offenceStartDate: '27 06 2024',
+      offenceEndDate: '27 08 2024',
+      outcome: 'Imprisonment',
+      countNumber: '1',
+      isSentenced: true,
+      markAsActiveHref: '/check-mark-sentence-as-active',
+    }
+    const content = nunjucks.render('index.njk', { offenceCodeConfig })
+    const $ = cheerio.load(content)
+    expect($('[data-qa=markAsActiveLink]').length).toStrictEqual(0)
+  })
+
+  it('shows a Mark as active link when sentenceStatus is INACTIVE even without markAsActiveHref', () => {
+    const offenceCodeConfig: OffenceCardConfig = {
+      offenceCode: 'OFFENCECODE',
+      offenceName: 'An Offence Name',
+      offenceStartDate: '27 06 2024',
+      offenceEndDate: '27 08 2024',
+      outcome: 'Imprisonment',
+      countNumber: '1',
+      isSentenced: true,
+      sentenceStatus: 'INACTIVE',
+    }
+    const content = nunjucks.render('index.njk', { offenceCodeConfig })
+    const $ = cheerio.load(content)
+    expect(removeNewLinesTrim($('[data-qa=markAsActiveLink] a').text())).toStrictEqual('Mark as active')
+  })
+
   interface ExpectedOffenceCard {
     offenceCardHeader: string
     offenceSummary: {

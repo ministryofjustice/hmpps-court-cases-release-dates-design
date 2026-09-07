@@ -195,6 +195,11 @@
                 {% endfor %}
             </ul>
         {% endif %}
+        {% if params.sentenceStatus === 'INACTIVE' %}
+            <p class="govuk-body" data-qa="markAsActiveLink">
+                <a class="govuk-link--no-visited-state" href="{{ params.markAsActiveHref }}">Mark as active</a>
+            </p>
+        {% endif %}
     </div>
     {% if params.actions %}
        <div class="offence-card-actions">

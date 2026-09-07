@@ -191,6 +191,7 @@ export interface OffenceCardConfig {
     href?: string
     text?: string
   }
+  markAsActiveHref?: string
   errorMessage?: {
     text: string
   }
