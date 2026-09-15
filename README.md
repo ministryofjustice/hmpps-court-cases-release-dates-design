@@ -100,7 +100,7 @@ Before creating a new release, manually bump the version number in both:
 1. `package.json`
 2. `src/package/package.json`
 
-Both should match the semantic version you intend to use for the upcoming GitHub release tag (e.g. `5.2.7`), following the major/minor/patch rules above. Commit and push this change to `main` before publishing the release.
+Both should match the semantic version you intend to use for the upcoming GitHub release tag (e.g. `5.2.7`), following the major/minor/patch rules above.
 
 > Note: the publish workflow patches `dist/package.json`'s version using the **release tag name**, not the committed `package.json` value. Keeping both files in sync with the tag ensures the repo's version metadata accurately reflects what's published to npm.
 
