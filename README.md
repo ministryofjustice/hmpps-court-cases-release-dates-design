@@ -91,7 +91,20 @@ The publish workflow is triggered when a new [release](https://github.com/minist
 | minor   | New components or new features added to existing components                                                                      |
 | patch   | Bug fixes or minor changes to existing components                                                                                |
 
-The publish workflow will automatically update the version number in the package.json file and publish the package to npm.
+The publish workflow uses the release tag name to set the version number for the published npm package (in a generated `dist/package.json`), then publishes it. It does **not** update the version in the repository's `package.json` or `src/package/package.json` files — these must be updated manually before creating a release (see below).
+
+### Updating the version number
+
+Before creating a new release, manually bump the version number in both:
+
+1. `package.json`
+2. `src/package/package.json`
+
+Both should match the semantic version you intend to use for the upcoming GitHub release tag (e.g. `5.2.7`), following the major/minor/patch rules above. Commit and push this change to `main` before publishing the release.
+
+> Note: the publish workflow patches `dist/package.json`'s version using the **release tag name**, not the committed `package.json` value. Keeping both files in sync with the tag ensures the repo's version metadata accurately reflects what's published to npm.
+
+> TODO as a future suggestion update the .github/workflows/release.yml to auto bump the package.json files
 
 ## Publishing documentation site
 
