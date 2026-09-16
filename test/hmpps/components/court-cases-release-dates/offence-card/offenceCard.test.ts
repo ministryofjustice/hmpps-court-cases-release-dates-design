@@ -72,7 +72,7 @@ describe('Tests for offence card component', () => {
       sentenceDate: '2024-09-22',
       fineAmount: '17000',
       aggravatingFactors: ['Factor 1'],
-      findingsOfDomesticAbuse: true,
+      findingOfDomesticAbuse: true,
       detailsClasses: 'govuk-!-padding-4',
       actions: {
         items: [

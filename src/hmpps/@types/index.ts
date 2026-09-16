@@ -169,7 +169,7 @@ export interface OffenceCardConfig {
   sentenceDate?: string
   fineAmount?: string
   aggravatingFactors?: string[]
-  findingsOfDomesticAbuse?: boolean
+  findingOfDomesticAbuse?: boolean
   detailsClasses?: string
   actions?: {
     items: {
