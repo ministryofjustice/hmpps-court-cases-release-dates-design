@@ -84,6 +84,17 @@
                 }), summaryListRows)%}
 {% endif %}
 
+{% if params.findingsOfDomesticAbuse %}
+    {% set summaryListRows = (summaryListRows.push({
+                key: {
+                    text: "Judicial findings"
+                },
+                value: {
+                    text: "Finding of domestic abuse"
+                }
+    }), summaryListRows)%}
+{% endif %}
+
 {% if params.periodLengths %}
     {% set periods = params.periodLengths | groupAndSortPeriodLengths %}
     {% for periodLength in periods %}
@@ -167,12 +178,6 @@
         {% endif %}
         <h4 class="govuk-heading-s">
             {{ params.offenceCode }} {{ params.offenceName }}
-            {% if params.terrorRelated %}
-                <br>
-                <strong class="govuk-tag govuk-!-margin-top-2">
-                    Terror-related
-                </strong>
-            {% endif %}
         </h4>
 
         {% set sentenceStatusText = params.sentenceStatus | sentenceStatusTagText %}

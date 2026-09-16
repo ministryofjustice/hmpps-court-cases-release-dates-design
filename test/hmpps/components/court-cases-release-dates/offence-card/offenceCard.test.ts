@@ -34,7 +34,6 @@ describe('Tests for offence card component', () => {
       outcomeUpdated: true,
       countNumber: '1',
       convictionDate: '12 09 2024',
-      terrorRelated: true,
       isSentenced: true,
       periodLengths: [
         {
@@ -73,6 +72,7 @@ describe('Tests for offence card component', () => {
       sentenceDate: '2024-09-22',
       fineAmount: '17000',
       aggravatingFactors: ['Factor 1'],
+      findingsOfDomesticAbuse: true,
       detailsClasses: 'govuk-!-padding-4',
       actions: {
         items: [
@@ -109,7 +109,7 @@ describe('Tests for offence card component', () => {
     }
     const content = nunjucks.render('index.njk', { offenceCodeConfig })
     const expectedOffenceCard: ExpectedOffenceCard = {
-      offenceCardHeader: 'OFFENCECODE An Offence Name Terror-related',
+      offenceCardHeader: 'OFFENCECODE An Offence Name',
       offenceSummary: {
         'Committed on': '27 06 2024 to 27 08 2024',
         'Conviction date': '12 09 2024',
@@ -121,6 +121,7 @@ describe('Tests for offence card component', () => {
         'Sentence date': '2024-09-22',
         'Fine amount': '£17000',
         'Aggravating factors': 'Factor 1',
+        'Judicial findings': 'Finding of domestic abuse',
         'Consecutive or concurrent': 'Consecutive to count 3',
         'Merged from': 'C123 at Court 1 description',
       },
@@ -139,7 +140,6 @@ describe('Tests for offence card component', () => {
       outcome: 'Imprisonment',
       countNumber: '1',
       convictionDate: '12 09 2024',
-      terrorRelated: false,
       isSentenced: true,
       periodLengths: [
         {
@@ -179,7 +179,6 @@ describe('Tests for offence card component', () => {
       outcome: 'Imprisonment',
       countNumber: '1',
       convictionDate: '12 09 2024',
-      terrorRelated: false,
       isSentenced: true,
       periodLengths: [
         {
@@ -222,7 +221,6 @@ describe('Tests for offence card component', () => {
       hideLicencePeriod: true,
       countNumber: '1',
       convictionDate: '12 09 2024',
-      terrorRelated: false,
       isSentenced: true,
       periodLengths: [
         {
@@ -341,7 +339,6 @@ describe('Tests for offence card component', () => {
       outcomeUpdated: true,
       countNumber: '1',
       convictionDate: '12 09 2024',
-      terrorRelated: true,
       isSentenced: true,
       periodLengths: [
         {
