@@ -160,7 +160,6 @@ export interface OffenceCardConfig {
   countNumber?: string
   lineNumber?: string
   convictionDate?: string
-  terrorRelated?: boolean
   sentenceStatus?: SentenceStatus
   isSentenced: boolean
   periodLengths?: SentenceLength[]
@@ -170,6 +169,7 @@ export interface OffenceCardConfig {
   sentenceDate?: string
   fineAmount?: string
   aggravatingFactors?: string[]
+  findingOfDomesticAbuse?: boolean
   detailsClasses?: string
   actions?: {
     items: {

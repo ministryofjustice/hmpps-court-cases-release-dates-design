@@ -1,7 +1,7 @@
 {
   "name": "@ministryofjustice/hmpps-court-cases-release-dates-design",
   "description": "A shared frontend library for HMPPS Court cases and release dates product set services",
-  "version": "5.2.7",
+  "version": "5.3.0",
   "author": "HMPPS Digital Studio",
   "license": "MIT",
   "repository": {
