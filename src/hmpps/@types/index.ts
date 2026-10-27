@@ -168,6 +168,7 @@ export interface OffenceCardConfig {
   sentenceType?: string
   sentenceDate?: string
   fineAmount?: string
+  value?: string
   aggravatingFactors?: string[]
   findingOfDomesticAbuse?: boolean
   detailsClasses?: string

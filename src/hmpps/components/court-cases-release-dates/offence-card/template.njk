@@ -73,6 +73,17 @@
                 }), summaryListRows)%}
 {% endif %}
 
+{% if params.value %}
+  {% set summaryListRows = (summaryListRows.push({
+                    key: {
+                    text: "Value"
+                },
+                    value: {
+                    text: "£" + params.value
+                }
+                }), summaryListRows)%}
+{% endif %}
+
 {% if params.aggravatingFactors and params.aggravatingFactors.length %}
   {% set summaryListRows = (summaryListRows.push({
                     key: {
