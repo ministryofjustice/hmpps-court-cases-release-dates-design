@@ -121,6 +121,7 @@ describe('Tests for offence card component', () => {
         'Sentence type': 'SDS (Standard Determinate Sentence)',
         'Sentence date': '2024-09-22',
         'Fine amount': '£17000',
+        'Value': '£1000',
         'Aggravating factors': 'Factor 1',
         'Judicial findings': 'Finding of domestic abuse',
         'Consecutive or concurrent': 'Consecutive to count 3',
