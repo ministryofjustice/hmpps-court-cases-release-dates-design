@@ -71,6 +71,7 @@ describe('Tests for offence card component', () => {
       sentenceType: 'SDS (Standard Determinate Sentence)',
       sentenceDate: '2024-09-22',
       fineAmount: '17000',
+      value: '1000',
       aggravatingFactors: ['Factor 1'],
       findingOfDomesticAbuse: true,
       detailsClasses: 'govuk-!-padding-4',
