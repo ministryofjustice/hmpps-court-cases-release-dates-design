@@ -273,7 +273,7 @@ describe('format count number', () => {
 
   it('return no count entered when count number is -1', () => {
     const result = formatCountNumber('-1', '5')
-    expect(result).toEqual('No count entered')
+    expect(result).toBeNull()
   })
 
   it('show count number when entered', () => {
