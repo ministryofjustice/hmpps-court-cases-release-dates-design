@@ -271,9 +271,9 @@ describe('format count number', () => {
     expect(result).toEqual('NOMIS line number 1')
   })
 
-  it('return null when count number is -1', () => {
+  it('return no count entered when count number is -1', () => {
     const result = formatCountNumber('-1', '5')
-    expect(result).toBeNull()
+    expect(result).toEqual('No count entered')
   })
 
   it('show count number when entered', () => {

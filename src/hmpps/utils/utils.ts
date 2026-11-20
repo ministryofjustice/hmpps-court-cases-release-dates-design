@@ -83,7 +83,7 @@ export const formatMergedFromCase = (
 export const formatCountNumber = (countNumber?: string | null, lineNumber?: string | null): string | undefined => {
   if (countNumber) {
     if (countNumber === '-1') {
-      return null
+      return 'No count entered'
     }
     return `Count ${countNumber}`
   }
