@@ -110,6 +110,7 @@ describe('Tests for offence card component', () => {
     }
     const content = nunjucks.render('index.njk', { offenceCodeConfig })
     const expectedOffenceCard: ExpectedOffenceCard = {
+      offenceCardCount: 'Count 1',
       offenceCardHeader: 'OFFENCECODE An Offence Name',
       offenceSummary: {
         'Committed on': '27 06 2024 to 27 08 2024',
@@ -121,7 +122,7 @@ describe('Tests for offence card component', () => {
         'Sentence type': 'SDS (Standard Determinate Sentence)',
         'Sentence date': '2024-09-22',
         'Fine amount': '£17000',
-        'Value': '£1000',
+        Value: '£1000',
         'Aggravating factors': 'Factor 1',
         'Judicial findings': 'Finding of domestic abuse',
         'Consecutive or concurrent': 'Consecutive to count 3',
@@ -270,6 +271,7 @@ describe('Tests for offence card component', () => {
     }
     const content = nunjucks.render('index.njk', { offenceCodeConfig })
     const expectedOffenceCard: ExpectedOffenceCard = {
+      offenceCardCount: 'Count 1',
       offenceCardHeader: 'OFFENCECODE An Offence Name',
       offenceSummary: {
         'Committed on': '27 06 2024 to 27 08 2024',
@@ -315,6 +317,7 @@ describe('Tests for offence card component', () => {
     }
     const content = nunjucks.render('index.njk', { offenceCodeConfig })
     const expectedOffenceCard: ExpectedOffenceCard = {
+      offenceCardCount: 'Count 1',
       offenceCardHeader: 'OFFENCECODE An Offence Name',
       offenceSummary: {
         'Committed on': '27 06 2024 to 27 08 2024',
@@ -464,7 +467,87 @@ describe('Tests for offence card component', () => {
     expect($('.offence-card-offence-details .govuk-tag').length).toStrictEqual(0)
   })
 
+  it('shows not enterred if count is -1', () => {
+    const offenceCodeConfig: OffenceCardConfig = {
+      offenceCode: 'OFFENCECODE',
+      offenceName: 'An Offence Name',
+      offenceStartDate: '27 06 2024',
+      offenceEndDate: '27 08 2024',
+      outcome: 'Imprisonment',
+      countNumber: '-1',
+      isSentenced: true,
+    }
+    const content = nunjucks.render('index.njk', { offenceCodeConfig })
+    const expectedOffenceCard: ExpectedOffenceCard = {
+      offenceCardCount: 'No count entered',
+      offenceCardHeader: 'OFFENCECODE An Offence Name',
+      offenceSummary: {
+        'Committed on': '27 06 2024 to 27 08 2024',
+        Outcome: 'Imprisonment',
+      },
+      actions: [],
+      listItems: [],
+    }
+    expect(extractOffenceCard(content)).toStrictEqual(expectedOffenceCard)
+  })
+
+  it('show consecutive info not provided, when sentence is consec with no consecutive to selected', () => {
+    const offenceCodeConfig: OffenceCardConfig = {
+      offenceCode: 'OFFENCECODE',
+      offenceName: 'An Offence Name',
+      offenceStartDate: '27 06 2024',
+      offenceEndDate: '27 08 2024',
+      outcome: 'Imprisonment',
+      countNumber: '-1',
+      isSentenced: true,
+      sentenceServeType: 'CONSECUTIVE',
+      consecutiveTo: undefined
+    }
+    const content = nunjucks.render('index.njk', { offenceCodeConfig })
+    const expectedOffenceCard: ExpectedOffenceCard = {
+      offenceCardCount: 'No count entered',
+      offenceCardHeader: 'OFFENCECODE An Offence Name',
+      offenceSummary: {
+        'Committed on': '27 06 2024 to 27 08 2024',
+        Outcome: 'Imprisonment',
+        'Consecutive or concurrent': 'Consecutive information not entered',
+      },
+      actions: [],
+      listItems: [],
+    }
+    expect(extractOffenceCard(content)).toStrictEqual(expectedOffenceCard)
+  })
+
+  it('show concurrent sentence', () => {
+    const offenceCodeConfig: OffenceCardConfig = {
+      offenceCode: 'OFFENCECODE',
+      offenceName: 'An Offence Name',
+      offenceStartDate: '27 06 2024',
+      offenceEndDate: '27 08 2024',
+      outcome: 'Imprisonment',
+      countNumber: '-1',
+      isSentenced: true,
+      sentenceServeType: 'CONCURRENT',
+      consecutiveTo: undefined
+    }
+    const content = nunjucks.render('index.njk', { offenceCodeConfig })
+    const expectedOffenceCard: ExpectedOffenceCard = {
+      offenceCardCount: 'No count entered',
+      offenceCardHeader: 'OFFENCECODE An Offence Name',
+      offenceSummary: {
+        'Committed on': '27 06 2024 to 27 08 2024',
+        Outcome: 'Imprisonment',
+        'Consecutive or concurrent': 'Concurrent',
+      },
+      actions: [],
+      listItems: [],
+    }
+    expect(extractOffenceCard(content)).toStrictEqual(expectedOffenceCard)
+  })
+
+
   interface ExpectedOffenceCard {
+    offenceCardCount?: string
     offenceCardHeader: string
     offenceSummary: {
       [x: string]: string
@@ -477,6 +560,7 @@ describe('Tests for offence card component', () => {
     const $ = cheerio.load(html)
     const $offenceCard = $('.offence-card')
     const $offenceCardDetails = $offenceCard.find('.offence-card-offence-details')
+    const offenceCardCount = removeNewLinesTrim($offenceCardDetails.find('[data-qa=offence-count]').text())
     const offenceCardHeader = removeNewLinesTrim($offenceCardDetails.find('.govuk-heading-s').text())
     const offenceSummary = $offenceCardDetails
       .find('[data-qa=offenceSummaryList]')
@@ -511,6 +595,7 @@ describe('Tests for offence card component', () => {
       offenceSummary,
       actions,
       listItems,
+      ...(offenceCardCount && { offenceCardCount }),
     }
   }
 

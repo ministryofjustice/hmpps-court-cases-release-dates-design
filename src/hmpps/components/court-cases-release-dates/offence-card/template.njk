@@ -129,9 +129,11 @@
 
 {% if params.sentenceServeType or params.consecutiveConcurrentLink %}
     {% if params.sentenceServeType%}
-    {% set consecutiveOrConcurrentValue = params.sentenceServeType | capitalize %}
+       {% set consecutiveOrConcurrentValue = params.sentenceServeType | capitalize %}
     {% if params.consecutiveTo %}
        {% set consecutiveOrConcurrentValue = consecutiveOrConcurrentValue + (params.consecutiveTo | consecutiveToDetailsToDescription) %} 
+    {% elif params.sentenceServeType == 'CONSECUTIVE' %}
+       {% set consecutiveOrConcurrentValue = consecutiveOrConcurrentValue + ' information not entered' %} 
     {% endif %}
     {% set summaryListRows = (summaryListRows.push({
                     key: {
@@ -185,7 +187,7 @@
     <div class="offence-card-offence-details{% if params.detailsClasses %} {{ params.detailsClasses }} {% endif %}">
         {% set countNumberDescription = params.countNumber | formatCountNumber(params.lineNumber) %}
         {% if countNumberDescription %}
-            <span class="govuk-body">{{ countNumberDescription }}</span>
+            <span class="govuk-body" data-qa="offence-count">{{ countNumberDescription }}</span>
         {% endif %}
         <h4 class="govuk-heading-s">
             {{ params.offenceCode }} {{ params.offenceName }}

@@ -29,7 +29,7 @@
     "setup": "npm ci && hmpps-npm-script-run-allowlist"
   },
   "engines": {
-    "node": "^24",
+    "node": "^26",
     "npm": ">=11 <13"
   },
   "jest": {
@@ -101,9 +101,9 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.1.5",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
-    "@ministryofjustice/eslint-config-hmpps": "^1.0.3",
+    "@ministryofjustice/eslint-config-hmpps": "2.0.0-alpha.3",
     "@ministryofjustice/frontend": "^9.0.0",
-    "@ministryofjustice/hmpps-npm-script-allowlist": "0.0.4",
+    "@ministryofjustice/hmpps-npm-script-allowlist": "0.0.6",
     "@types/jest": "^30.0.0",
     "@types/nunjucks": "^3.2.6",
     "@typescript-eslint/eslint-plugin": "^8.59.1",
