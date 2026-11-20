@@ -185,9 +185,9 @@
 
 <div class="offence-card{% if params.isSentenced %} sentence-card {% endif %}" {% if id %}id="{{ id }}"{% endif %}>
     <div class="offence-card-offence-details{% if params.detailsClasses %} {{ params.detailsClasses }} {% endif %}">
-        {% set countNumberDescription = params.countNumber | formatCountNumber(params.lineNumber) %}
-        {% if countNumberDescription %}
-            <span class="govuk-body" data-qa="offence-count">{{ countNumberDescription }}</span>
+        {% if params.isSentenced %}
+            {% set countNumberDescription = params.countNumber | formatCountNumber(params.lineNumber) %}
+            <span class="govuk-body" data-qa="offence-count">{% if countNumberDescription %}{{ countNumberDescription}}{% else %}No count entered{% endif %}</span>
         {% endif %}
         <h4 class="govuk-heading-s">
             {{ params.offenceCode }} {{ params.offenceName }}
