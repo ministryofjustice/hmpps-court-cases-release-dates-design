@@ -7,6 +7,7 @@ import {
   formatLengths,
   formatMergedFromCase,
   groupAndSortPeriodLengths,
+  isMonetaryValueOffence,
   sentenceStatusTagText,
 } from '../../../../../src/hmpps/utils/utils'
 
@@ -22,6 +23,7 @@ njkEnv.addFilter('formatMergedFromCase', formatMergedFromCase)
 njkEnv.addFilter('formatCountNumber', formatCountNumber)
 njkEnv.addFilter('groupAndSortPeriodLengths', groupAndSortPeriodLengths)
 njkEnv.addFilter('sentenceStatusTagText', sentenceStatusTagText)
+njkEnv.addFilter('isMonetaryValueOffence', isMonetaryValueOffence)
 
 describe('Tests for offence card component', () => {
   it('can load offence code with correctly formatted fields', () => {
@@ -122,7 +124,6 @@ describe('Tests for offence card component', () => {
         'Sentence type': 'SDS (Standard Determinate Sentence)',
         'Sentence date': '2024-09-22',
         'Fine amount': '£17000',
-        Value: '£1000',
         'Aggravating factors': 'Factor 1',
         'Judicial findings': 'Finding of domestic abuse',
         'Consecutive or concurrent': 'Consecutive to count 3',
@@ -501,7 +502,7 @@ describe('Tests for offence card component', () => {
       countNumber: '-1',
       isSentenced: true,
       sentenceServeType: 'CONSECUTIVE',
-      consecutiveTo: undefined
+      consecutiveTo: undefined,
     }
     const content = nunjucks.render('index.njk', { offenceCodeConfig })
     const expectedOffenceCard: ExpectedOffenceCard = {
@@ -528,7 +529,7 @@ describe('Tests for offence card component', () => {
       countNumber: '-1',
       isSentenced: true,
       sentenceServeType: 'CONCURRENT',
-      consecutiveTo: undefined
+      consecutiveTo: undefined,
     }
     const content = nunjucks.render('index.njk', { offenceCodeConfig })
     const expectedOffenceCard: ExpectedOffenceCard = {
@@ -545,6 +546,28 @@ describe('Tests for offence card component', () => {
     expect(extractOffenceCard(content)).toStrictEqual(expectedOffenceCard)
   })
 
+  it('only show value when offence code is monetary value offence', () => {
+    const offenceCodeConfig: OffenceCardConfig = {
+      offenceCode: 'TH68010',
+      offenceName: 'Theft',
+      value: '500',
+      offenceStartDate: '27 06 2024',
+      outcome: 'Remanded in custody',
+      isSentenced: false,
+    }
+    const content = nunjucks.render('index.njk', { offenceCodeConfig })
+    const expectedOffenceCard: ExpectedOffenceCard = {
+      offenceCardHeader: 'TH68010 Theft',
+      offenceSummary: {
+        'Committed on': '27 06 2024',
+        Outcome: 'Remanded in custody',
+        Value: '£500',
+      },
+      actions: [],
+      listItems: [],
+    }
+    expect(extractOffenceCard(content)).toStrictEqual(expectedOffenceCard)
+  })
 
   interface ExpectedOffenceCard {
     offenceCardCount?: string

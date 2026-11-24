@@ -273,3 +273,5 @@ export interface OutageBannerConfig {
   text?: string
   attributes?: Record<string, never>
 }
+
+export const monetaryValueOffences: string[] = ['TH68010', 'CD71039']

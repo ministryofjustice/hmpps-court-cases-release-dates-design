@@ -73,7 +73,7 @@
                 }), summaryListRows)%}
 {% endif %}
 
-{% if params.value %}
+{% if params.value and params.offenceCode | isMonetaryValueOffence %}
   {% set summaryListRows = (summaryListRows.push({
                     key: {
                     text: "Value"
