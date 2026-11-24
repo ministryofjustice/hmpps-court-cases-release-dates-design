@@ -10,6 +10,7 @@ const {
   formatCountNumber,
   formatMergedFromCase,
   groupAndSortPeriodLengths,
+  isMonetaryValueOffence,
   sentenceStatusTagText,
 } = require('./dist/hmpps/utils/utils')
 
@@ -34,6 +35,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('formatMergedFromCase', formatMergedFromCase)
   eleventyConfig.addFilter('groupAndSortPeriodLengths', groupAndSortPeriodLengths)
   eleventyConfig.addFilter('sentenceStatusTagText', sentenceStatusTagText)
+  eleventyConfig.addFilter('isMonetaryValueOffence', isMonetaryValueOffence)
 
   const njkEnv = nunjucks.configure([
     'docs/_includes/',

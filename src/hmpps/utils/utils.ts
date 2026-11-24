@@ -6,7 +6,7 @@ import type {
   SentenceLength,
   SentenceStatus,
 } from '../@types'
-import { PERIOD_TYPE_PRIORITY, SENTENCE_STATUS_TAG_TEXT } from '../@types'
+import { monetaryValueOffences, PERIOD_TYPE_PRIORITY, SENTENCE_STATUS_TAG_TEXT } from '../@types'
 
 const uniformWhitespace = (word: string): string => (word ? word.trim().replace(/\s+/g, ' ') : '')
 
@@ -213,3 +213,5 @@ export const groupAndSortPeriodLengths = (items: SentenceLength[]): GroupedPerio
       (PERIOD_TYPE_PRIORITY[b.type] ?? PERIOD_TYPE_PRIORITY.UNSUPPORTED),
   )
 }
+
+export const isMonetaryValueOffence = (offenceCode: string): boolean => monetaryValueOffences.includes(offenceCode)

@@ -191,6 +191,7 @@
                 formatLengths,
                 formatMergedFromCase,
                 groupAndSortPeriodLengths,
+                isMonetaryValueOffence,
                 sentenceStatusTagText,
              } from '@ministryofjustice/hmpps-court-cases-release-dates-design/hmpps/utils/utils'
 
@@ -200,6 +201,7 @@
             njkEnv.addFilter('formatCountNumber', formatCountNumber)
             njkEnv.addFilter('groupAndSortPeriodLengths', groupAndSortPeriodLengths)
             njkEnv.addFilter('sentenceStatusTagText', sentenceStatusTagText)
+            njkEnv.addFilter('isMonetaryValueOffence', isMonetaryValueOffence)
         {% endraw %}
     {% endhighlight %}
 {% endset %}
