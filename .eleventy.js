@@ -10,8 +10,8 @@ const {
   formatCountNumber,
   formatMergedFromCase,
   groupAndSortPeriodLengths,
-  sentenceStatusTagText,
   isMonetaryValueOffence,
+  sentenceStatusTagText,
 } = require('./dist/hmpps/utils/utils')
 
 module.exports = function (eleventyConfig) {
